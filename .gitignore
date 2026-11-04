@@ -1,0 +1,7 @@
+# Dữ liệu: bản Ê Đê 2015 còn bản quyền, không đẩy lên repo công khai
+data/
+runs/
+
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

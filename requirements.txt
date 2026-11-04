@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+torch
+transformers==5.22.1
+sentencepiece
+protobuf
+sacrebleu==2.6.0
