@@ -10,15 +10,12 @@ import hashlib
 import json
 import re
 import unicodedata
-import zipfile
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "interim"
 OUT = ROOT / "data" / "dataset"
-COLAB_ZIP = ROOT / "data" / "dataset_colab.zip"
-COLAB_SPLITS = ("train", "dev_bible", "dev_dict", "test_bible", "test_dict")
 LANGS = ("ede", "vi")
 BIBLE_DEV, BIBLE_TEST = 0.025, 0.025
 DICT_DEV, DICT_TEST = 0.05, 0.10
@@ -154,9 +151,6 @@ def main() -> None:
         json.dumps(dict(applied.most_common()), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     stats["spelling_normalized"] = {"types": len(applied), "tokens": sum(applied.values())}
     (OUT / "stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    with zipfile.ZipFile(COLAB_ZIP, "w", zipfile.ZIP_DEFLATED) as archive:
-        for split in COLAB_SPLITS:
-            archive.write(OUT / f"{split}.jsonl", f"{split}.jsonl")
     print(json.dumps(stats, ensure_ascii=False, indent=2))
 
 

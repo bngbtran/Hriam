@@ -14,8 +14,6 @@ pip install -r requirements.txt
 
 Bộ dữ liệu đã có sẵn nên có thể train ngay.
 
-**Trên máy:**
-
 ```bash
 python scripts/train.py --check
 caffeinate -i python scripts/train.py
@@ -25,14 +23,6 @@ caffeinate -i python scripts/train.py
 - Muốn train hướng ngược lại, thêm `--direction vi2ede`.
 - Kết quả nằm trong `runs/<hướng>/`.
 
-**Trên Colab:**
-
-1. Tải `data/dataset_colab.zip` vào thư mục `Hriam` trên Google Drive.
-2. Mở `notebooks/train_colab.ipynb` trên Colab và bật GPU.
-3. Chọn **Run all**. Khi phiên bị ngắt, chỉ cần **Run all** lại.
-
-Kết quả nằm trong `Drive/Hriam/runs/<hướng>/`. Nếu dữ liệu thay đổi, hãy tải lại file zip.
-
 ## 2. Dựng lại dữ liệu
 
 | Bước | Lệnh | Vào | Ra |
@@ -40,7 +30,7 @@ Kết quả nằm trong `Drive/Hriam/runs/<hướng>/`. Nếu dữ liệu thay �
 | 1. Cào Kinh Thánh | `python scripts/bible_scraper.py crawl` | Trang web | `data/raw/bible_html/`, `data/interim/{vi,ede}.jsonl`, `books.json` |
 | 2. Căn câu | `python scripts/realign.py` | `vi.jsonl`, `ede.jsonl` | `parallel_aligned.jsonl`, `unmatched.jsonl` |
 | 3. Phân tích từ điển | `python scripts/dict_parse.py` | `data/raw/dict_transcribed/` | `dictionary.jsonl` |
-| 4. Tạo bộ dữ liệu | `python scripts/build_dataset.py` | Các file ở `data/interim/` | `data/dataset/`, `data/dataset_colab.zip` |
+| 4. Tạo bộ dữ liệu | `python scripts/build_dataset.py` | Các file ở `data/interim/` | `data/dataset/` |
 
 HTML đã cào được lưu lại nên chạy lại bước 1 không tải lại trang. Bước 2–4 chạy gộp được bằng `python scripts/train.py --rebuild-data`, lệnh này sẽ train tiếp ngay sau đó.
 
@@ -87,7 +77,7 @@ Hai bản đánh số câu khác nhau ở một số chương, ví dụ Gióp 38
 | Hiện tượng | Cách xử lý |
 |---|---|
 | Train báo thiếu dữ liệu | Chạy `python scripts/train.py --rebuild-data` |
-| Colab báo tràn bộ nhớ nhiều lần | Giảm các số trong `BATCH_BY_LENGTH` |
+| Máy chậm hẳn hoặc tràn bộ nhớ khi train | Giảm các số trong `BATCH_BY_LENGTH` ở `scripts/train.py` |
 | Cào xong bị thiếu câu hoặc lẫn rác | HTML của trang có thể đã đổi. Xem `data/raw/bible_html/RRB/sa/1.html` và chỉnh `parse_chapter` |
 | Cảnh báo "dò được X sách (kỳ vọng 66)" | Kiểm tra `data/interim/books.json` |
 | Muốn cào lại từ đầu | Xoá `data/raw/bible_html/`. **Đừng xoá cả `data/`**, vì bản chép tay và PDF gốc nằm ở đó |

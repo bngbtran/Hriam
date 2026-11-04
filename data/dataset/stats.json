@@ -1,0 +1,32 @@
+{
+  "splits": {
+    "dev_bible": {
+      "pairs": 793,
+      "bible": 793
+    },
+    "dev_dict": {
+      "pairs": 192,
+      "dict_example": 192
+    },
+    "test_bible": {
+      "pairs": 665,
+      "bible": 665
+    },
+    "test_dict": {
+      "pairs": 292,
+      "dict_example": 292
+    },
+    "train": {
+      "pairs": 35352,
+      "bible": 28444,
+      "dict_word": 4312,
+      "dict_example": 2591,
+      "paper": 5
+    }
+  },
+  "rejected": 1010,
+  "spelling_normalized": {
+    "types": 51,
+    "tokens": 315
+  }
+}

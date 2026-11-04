@@ -9,17 +9,14 @@ scripts/
   bible_scraper.py   Cào Kinh Thánh hai bản
   realign.py         Căn câu theo nội dung
   dict_parse.py      Phân tích bản chép tay từ điển
-  build_dataset.py   Gộp nguồn, chia train/dev/test, tạo file zip cho Colab
+  build_dataset.py   Gộp nguồn, chia train/dev/test
   train.py           Train và đánh giá trên máy
-notebooks/
-  train_colab.ipynb  Train và đánh giá trên Google Colab
 docs/
   HUONG_DAN.md       Hướng dẫn chi tiết
-data/                Không đưa lên git
+data/
   raw/               PDF gốc, HTML đã cào, bản chép tay từ điển
   interim/           Dữ liệu trung gian
   dataset/           Bộ dữ liệu cuối
-  dataset_colab.zip  Bộ dữ liệu cuối để tải lên Drive
 runs/                Mô hình và kết quả, không đưa lên git
 ```
 
@@ -32,7 +29,7 @@ python scripts/train.py --check
 caffeinate -i python scripts/train.py
 ```
 
-Để chạy trên Colab và dựng lại dữ liệu, xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md).
+Để dựng lại dữ liệu, xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md).
 
 ## Dữ liệu
 
@@ -48,5 +45,5 @@ Nguồn gồm Kinh Thánh hai bản, Từ điển Ê Đê – Việt và vài c�
 
 - Khoảng 80% tập train là văn Kinh Thánh, phần tiếng Việt là bản dịch năm 1925.
 - Bản scan từ điển thiếu trang 146–147 của sách, và bản chép tay chưa được người bản ngữ rà soát.
-- Bản Ê Đê 2015 nhiều khả năng còn bản quyền, nên `data/` không được đưa lên git. Muốn công bố dữ liệu, cần xin phép bên giữ bản quyền.
+- Bản Ê Đê 2015 nhiều khả năng còn bản quyền, nên repo này cần để private. Muốn công bố dữ liệu, cần xin phép bên giữ bản quyền.
 - NLLB có giấy phép CC-BY-NC, chỉ dùng phi thương mại.
