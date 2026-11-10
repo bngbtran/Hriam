@@ -1,0 +1,583 @@
+[
+ {
+  "pdf_page": 7,
+  "book_page": 5,
+  "headword": "Adrơ̆k (dt)",
+  "old": "Adrơ̆k",
+  "new": "Adrŏk"
+ },
+ {
+  "pdf_page": 7,
+  "book_page": 5,
+  "headword": "Agam (tt)",
+  "old": "hơ̆ng",
+  "new": "hŏng"
+ },
+ {
+  "pdf_page": 8,
+  "book_page": 6,
+  "headword": "Ai êwa (dt) (tt)",
+  "old": "hơ̆ng",
+  "new": "hŏng"
+ },
+ {
+  "pdf_page": 8,
+  "book_page": 6,
+  "headword": "Alê̆, Aluê̆ (đgt)",
+  "old": "Alê̆,",
+  "new": "Alĕ,"
+ },
+ {
+  "pdf_page": 8,
+  "book_page": 6,
+  "headword": "Alê̆, Aluê̆ (đgt)",
+  "old": "Alê̆",
+  "new": "Alĕ"
+ },
+ {
+  "pdf_page": 8,
+  "book_page": 6,
+  "headword": "Alŭ ƀuôn prơ̆ng",
+  "old": "prơ̆ng",
+  "new": "prŏng"
+ },
+ {
+  "pdf_page": 9,
+  "book_page": 7,
+  "headword": "Amâo djŏ knơ̆ng (trgt)",
+  "old": "knơ̆ng",
+  "new": "knŏng"
+ },
+ {
+  "pdf_page": 9,
+  "book_page": 7,
+  "headword": "Amâo djŏ knơ̆ng (trgt)",
+  "old": "knơ̆ng",
+  "new": "knŏng"
+ },
+ {
+  "pdf_page": 10,
+  "book_page": 8,
+  "headword": "Amuôn (dt)",
+  "old": "hơ̆ng",
+  "new": "hŏng"
+ },
+ {
+  "pdf_page": 10,
+  "book_page": 8,
+  "headword": "Anăn",
+  "old": "Mơ̆ng",
+  "new": "Mŏng"
+ },
+ {
+  "pdf_page": 10,
+  "book_page": 8,
+  "headword": "Anôk dôk (dt)",
+  "old": "chổ",
+  "new": "chỗ"
+ },
+ {
+  "pdf_page": 11,
+  "book_page": 9,
+  "headword": "Añhuôr (đgt)",
+  "old": "jơ̆ng",
+  "new": "jŏng"
+ },
+ {
+  "pdf_page": 11,
+  "book_page": 9,
+  "headword": "Aprơ̆ng (dt)",
+  "old": "Aprơ̆ng",
+  "new": "Aprŏng"
+ },
+ {
+  "pdf_page": 11,
+  "book_page": 9,
+  "headword": "Arăng (đt)",
+  "old": "ayơ̆ng:",
+  "new": "ayŏng:"
+ },
+ {
+  "pdf_page": 11,
+  "book_page": 9,
+  "headword": "Atăt (đgt)",
+  "old": "ayơ̆ng",
+  "new": "ayŏng"
+ },
+ {
+  "pdf_page": 12,
+  "book_page": 10,
+  "headword": "Awan (dt)",
+  "old": "Ayơ̆ng",
+  "new": "Ayŏng"
+ },
+ {
+  "pdf_page": 12,
+  "book_page": 10,
+  "headword": "Ayơ̆ng (dt)",
+  "old": "Ayơ̆ng",
+  "new": "Ayŏng"
+ },
+ {
+  "pdf_page": 12,
+  "book_page": 10,
+  "headword": "Ayơ̆ng (dt)",
+  "old": "Ayơ̆ng",
+  "new": "Ayŏng"
+ },
+ {
+  "pdf_page": 12,
+  "book_page": 10,
+  "headword": "Ayơ̆ng khua (dt)",
+  "old": "Ayơ̆ng",
+  "new": "Ayŏng"
+ },
+ {
+  "pdf_page": 13,
+  "book_page": 11,
+  "headword": "Bhơ̆ng bhơ̆ng (đgt)",
+  "old": "Bhơ̆ng bhơ̆ng",
+  "new": "Bhŏng bhŏng"
+ },
+ {
+  "pdf_page": 13,
+  "book_page": 11,
+  "headword": "Bhơ̆ng bhơ̆ng (đgt)",
+  "old": "bhơ̆ng bhơ̆ng",
+  "new": "bhŏng bhŏng"
+ },
+ {
+  "pdf_page": 13,
+  "book_page": 11,
+  "headword": "Bhung aguah (trt)",
+  "old": "hlơ̆ng",
+  "new": "hlŏng"
+ },
+ {
+  "pdf_page": 13,
+  "book_page": 11,
+  "headword": "Bi dơ̆k bi dria (tt)",
+  "old": "dơ̆k",
+  "new": "dŏk"
+ },
+ {
+  "pdf_page": 16,
+  "book_page": 14,
+  "headword": "Boh kŏ (dt)",
+  "old": "knơ̆ng",
+  "new": "knŏng"
+ },
+ {
+  "pdf_page": 16,
+  "book_page": 14,
+  "headword": "Boh m'ŏ (dt)",
+  "old": "m'ŏ",
+  "new": "m'ô̆"
+ },
+ {
+  "pdf_page": 16,
+  "book_page": 14,
+  "headword": "Boh păm (dt)",
+  "old": "hơ̆ng",
+  "new": "hŏng"
+ },
+ {
+  "pdf_page": 16,
+  "book_page": 14,
+  "headword": "Bŏk (đgt)",
+  "old": "jơ̆ng:",
+  "new": "jŏng:"
+ },
+ {
+  "pdf_page": 16,
+  "book_page": 14,
+  "headword": "Bơ̆ng bŭ (dt)",
+  "old": "Bơ̆ng",
+  "new": "Bŏng"
+ },
+ {
+  "pdf_page": 17,
+  "book_page": 15,
+  "headword": "Bruă kmrơ̆ng dhông (dt)",
+  "old": "kmrơ̆ng",
+  "new": "kmrŏng"
+ },
+ {
+  "pdf_page": 17,
+  "book_page": 15,
+  "headword": "Bruă mdrao mgŭn (dt)",
+  "old": "Knơ̆ng",
+  "new": "Knŏng"
+ },
+ {
+  "pdf_page": 17,
+  "book_page": 15,
+  "headword": "Bruă mdrao mgŭn (dt)",
+  "old": "prơ̆ng",
+  "new": "prŏng"
+ },
+ {
+  "pdf_page": 17,
+  "book_page": 15,
+  "headword": "Bur (dt)",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 18,
+  "book_page": 16,
+  "headword": "Bŭč (đgt)",
+  "old": "rơ̆k",
+  "new": "rŏk"
+ },
+ {
+  "pdf_page": 18,
+  "book_page": 16,
+  "headword": "Ƀah dah...ƀah dah",
+  "old": "Ayơ̆ng",
+  "new": "Ayŏng"
+ },
+ {
+  "pdf_page": 18,
+  "book_page": 16,
+  "headword": "Ƀăng (dt)",
+  "old": "êrơ̆ng",
+  "new": "êrŏng"
+ },
+ {
+  "pdf_page": 18,
+  "book_page": 16,
+  "headword": "Ƀăng bhă prơ̆ng (dt)",
+  "old": "prơ̆ng",
+  "new": "prŏng"
+ },
+ {
+  "pdf_page": 19,
+  "book_page": 17,
+  "headword": "Ƀap (dt)",
+  "old": "kngan",
+  "new": "kngan:"
+ },
+ {
+  "pdf_page": 20,
+  "book_page": 18,
+  "headword": "Ƀlĭt (tt)",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 20,
+  "book_page": 18,
+  "headword": "Ƀlơ̆ng ƀlơ̆ng (tt)",
+  "old": "Ƀlơ̆ng ƀlơ̆ng",
+  "new": "Ƀlŏng ƀlŏng"
+ },
+ {
+  "pdf_page": 20,
+  "book_page": 18,
+  "headword": "Ƀlơ̆ng ƀlut (tt)",
+  "old": "Ƀlơ̆ng",
+  "new": "Ƀlŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀô (đgt)",
+  "old": "Mê .",
+  "new": "Mê."
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng",
+  "old": "ƀơ̆ng",
+  "new": "ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng",
+  "old": "Dhơ̆ng ƀơ̆ng:",
+  "new": "Dhŏng ƀŏng:"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng dôč (tt)",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng hơ̆ng kngan",
+  "old": "Ƀơ̆ng hơ̆ng",
+  "new": "Ƀŏng hŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀơ̆ng ngăn (tt)",
+  "old": "Ƀơ̆ng",
+  "new": "Ƀŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀrơ̆ng (dt)",
+  "old": "Ƀrơ̆ng",
+  "new": "Ƀrŏng"
+ },
+ {
+  "pdf_page": 21,
+  "book_page": 19,
+  "headword": "Ƀrŭk ƀrŭk (tt)",
+  "old": "ktơ̆ng",
+  "new": "ktŏng"
+ },
+ {
+  "pdf_page": 22,
+  "book_page": 20,
+  "headword": "Ƀuôn prơ̆ng (dt)",
+  "old": "prơ̆ng",
+  "new": "prŏng"
+ },
+ {
+  "pdf_page": 22,
+  "book_page": 20,
+  "headword": "Čar",
+  "old": "Tỉnh",
+  "new": "Tỉnh."
+ },
+ {
+  "pdf_page": 23,
+  "book_page": 21,
+  "headword": "Čă (dt)",
+  "old": "ƀơ̆ng jơ̆ng:",
+  "new": "ƀŏng jŏng:"
+ },
+ {
+  "pdf_page": 23,
+  "book_page": 21,
+  "headword": "Čhao (đgt)",
+  "old": "Đánh.Čhao",
+  "new": "Đánh. Čhao"
+ },
+ {
+  "pdf_page": 23,
+  "book_page": 21,
+  "headword": "Čhao (đgt)",
+  "old": "jơ̆ng:",
+  "new": "jŏng:"
+ },
+ {
+  "pdf_page": 23,
+  "book_page": 21,
+  "headword": "Čhŏ mrŏ (tt)",
+  "old": "Jơ̆ng",
+  "new": "Jŏng"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhơ̆ng mran (dt)",
+  "old": "Čhơ̆ng",
+  "new": "Čhŏng"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhơ̆ng mran (dt)",
+  "old": "čhơ̆ng",
+  "new": "čhŏng"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhum (dt)",
+  "old": "dài;Čhum",
+  "new": "dài; Čhum"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhŭñ (đgt)",
+  "old": "kpiê;",
+  "new": "kpiê:"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhưn (đgt)",
+  "old": "chơi;",
+  "new": "chơi."
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čhưn ênguê đt)",
+  "old": "đt)",
+  "new": "(đt)"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čih(đgt)",
+  "old": "Čih(đgt)",
+  "new": "Čih (đgt)"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čih(đgt)",
+  "old": "viết.Čih",
+  "new": "viết. Čih"
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čih(đgt)",
+  "old": "chỉ;",
+  "new": "chỉ."
+ },
+ {
+  "pdf_page": 24,
+  "book_page": 22,
+  "headword": "Čĭm (dt)",
+  "old": "aruăt:Thịt",
+  "new": "aruăt: Thịt"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "(dòng nối tiếp của mục trước)",
+  "old": "ƀơ̆ng",
+  "new": "ƀŏng"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čoh (đgt)",
+  "old": "jơ̆ng",
+  "new": "jŏng"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čơ̆ng (dt)",
+  "old": "Čơ̆ng",
+  "new": "Čŏng"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čơ̆ng (dt)",
+  "old": "Čơ̆ng čư̆ :",
+  "new": "Čŏng čư̆:"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čơ̆ng thơ̆ng (dt)",
+  "old": "Čơ̆ng thơ̆ng",
+  "new": "Čŏng thŏng"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čơ̆ng mâo (dt)",
+  "old": "Čơ̆ng",
+  "new": "Čŏng"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čô",
+  "old": "anak;",
+  "new": "anak:"
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čô đơ điêt, čô ƀia ƀiă",
+  "old": "ít .",
+  "new": "ít."
+ },
+ {
+  "pdf_page": 25,
+  "book_page": 23,
+  "headword": "Čuh (đgt)",
+  "old": "thắp.Čuh",
+  "new": "thắp. Čuh"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čuôr (dt)",
+  "old": "suôi",
+  "new": "suối"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čuôr (dt)",
+  "old": "rơ̆k:",
+  "new": "rŏk:"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čuôr hip mdơ̆ng",
+  "old": "mdơ̆ng",
+  "new": "mdŏng"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čŭr (dt)",
+  "old": "ƀơ̆ng",
+  "new": "ƀŏng"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čŭr (dt)",
+  "old": "trầu.Čŭr",
+  "new": "trầu. Čŭr"
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čŭt (đgt)",
+  "old": "quần)",
+  "new": "quần)."
+ },
+ {
+  "pdf_page": 26,
+  "book_page": 24,
+  "headword": "Čŭt mnơ̆ng",
+  "old": "mnơ̆ng",
+  "new": "mnŏng"
+ }
+]
