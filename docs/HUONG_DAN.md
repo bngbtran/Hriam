@@ -26,7 +26,26 @@ caffeinate -i python scripts/train.py
 
 ## Web dịch
 
-Chạy `python app/server.py` rồi mở http://127.0.0.1:8000, thêm `--port` để đổi cổng. Web đọc `data/dictionary/dictionary_full.json` và `data/dataset/`, nên sau khi dựng lại dữ liệu cần khởi động lại web. Mô hình trong `runs/<hướng>/best` được nạp ở lần dịch đầu tiên, mất vài giây.
+Thư mục `web/` là một web tĩnh: HTML, CSS và JavaScript thuần, không framework, không bước build. Mọi xử lý chạy trên trình duyệt.
+
+| Việc | Lệnh |
+|---|---|
+| Xem thử trên máy | `python -m http.server 8000 -d web`, mở http://127.0.0.1:8000 |
+| Cập nhật dữ liệu web sau khi sửa từ điển hoặc dataset | `python scripts/export_web_data.py` |
+| Bỏ Kinh Thánh khỏi web | `python scripts/export_web_data.py --no-bible` |
+| Sinh lại logo và hoa văn | `python scripts/make_brand.py` (xem [BRAND.md](BRAND.md)) |
+
+Không mở thẳng file `index.html` bằng trình duyệt: trình duyệt chặn đọc file dữ liệu, nên phải chạy qua web server như trên.
+
+**Deploy:** đưa nguyên thư mục `web/` lên host tĩnh bất kỳ.
+
+- **Netlify hoặc Cloudflare Pages:** kéo thả thư mục `web/` vào trang tạo site.
+- **GitHub Pages:** chọn deploy từ nhánh, hoặc dùng GitHub Actions với thư mục `web/`. Repo private cần gói GitHub trả phí mới bật được Pages.
+- **Vercel:** tạo project, đặt Root Directory là `web`, Framework là Other, để trống lệnh build.
+
+**Bản quyền:** web tĩnh cho phép ai cũng tải nguyên `web/data/pairs.json`, gồm cả câu Kinh Thánh Ê Đê 2015 nhiều khả năng còn bản quyền. Nếu web công khai, nên xuất lại bằng `--no-bible`.
+
+Link có thể điền sẵn câu: `?dir=ede2vi&text=Jŭ msĕ si ak` hoặc `?q=hriăm#tra-tu`.
 
 ## 2. Dựng lại dữ liệu
 

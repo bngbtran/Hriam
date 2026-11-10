@@ -13,11 +13,13 @@ scripts/
   build_dataset.py   Gộp nguồn, chia train/dev/test
   train.py           Train và đánh giá trên máy
   translate.py       Dịch bằng mô hình đã train
-app/
-  server.py          Web dịch Việt ↔ Ê Đê (python app/server.py)
-  static/index.html  Giao diện web
+  export_web_data.py Xuất dữ liệu cho web
+  make_brand.py      Sinh logo và hoa văn theo lối dệt thổ cẩm
+web/                 Web tĩnh dịch Việt ↔ Ê Đê, deploy nguyên thư mục này
+  index.html, assets/ (style.css, app.js, brand/), data/ (do export_web_data.py tạo)
 docs/
   HUONG_DAN.md       Hướng dẫn chi tiết
+  BRAND.md           Bộ nhận diện Hriăm: logo, màu, chữ, hoa văn
 data/
   raw/               PDF gốc, HTML đã cào, bản chép tay từ điển lần đầu
   verified/          Bản chép từ điển đã đối chiếu với scan (nguồn chính)
@@ -29,18 +31,19 @@ runs/                Mô hình và kết quả, không đưa lên git
 
 ## Web dịch
 
+Web tĩnh, chạy hoàn toàn trên trình duyệt, không cần server hay train. Xem thử trên máy:
+
 ```bash
-conda activate msa
-python app/server.py
+python -m http.server 8000 -d web
 ```
 
-Mở http://127.0.0.1:8000. Web chạy được ngay, không cần train:
+Mở http://127.0.0.1:8000. Deploy: đưa nguyên thư mục `web/` lên GitHub Pages, Netlify, Cloudflare Pages hoặc Vercel (xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md#web-dịch)).
 
 - **Dịch từng từ:** ghép nghĩa theo từ điển, nhận cả chữ Ê Đê gõ thiếu dấu.
 - **Câu song ngữ tương tự:** tìm trong khoảng 33.000 cặp câu Kinh Thánh và ví dụ từ điển.
-- **Từ điển:** nghĩa và ví dụ của từng mục từ có trong câu.
+- **Tra từ điển:** theo từ Ê Đê hoặc nghĩa tiếng Việt.
 
-Bản ghép từ chưa đúng ngữ pháp. Muốn dịch cả câu cần train mô hình như bên dưới; khi có `runs/<hướng>/best`, web tự hiện thêm bản dịch máy.
+Bản ghép từ chưa đúng ngữ pháp Ê Đê. Web tĩnh không chạy được mô hình dịch máy; dùng `scripts/translate.py` sau khi train.
 
 ## Bắt đầu nhanh
 

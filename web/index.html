@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hriăm · Dịch Việt – Ê Đê</title>
+<meta name="description" content="Hriăm: dịch Việt – Ê Đê, tra từ điển và tìm câu song ngữ ngay trên trình duyệt.">
+<meta name="theme-color" content="#161722">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hriăm">
+<meta property="og:title" content="Hriăm · Dịch Việt – Ê Đê">
+<meta property="og:description" content="Tra từ điển và tìm câu song ngữ Việt – Ê Đê ngay trên trình duyệt.">
+<!-- Khi deploy, đổi thành đường dẫn đầy đủ, ví dụ https://ten-mien/assets/brand/og.png -->
+<meta property="og:image" content="assets/brand/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand/colors.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap nav-row">
+    <a class="brand" href="./" aria-label="Hriăm, trang dịch">
+      <img src="assets/brand/mark.svg" alt="" width="40" height="40">
+      <span class="brand-text"><span class="brand-name">Hriăm</span><span class="brand-tag">Dịch Việt – Ê Đê</span></span>
+    </a>
+    <nav aria-label="Mục chính">
+      <a href="./" aria-current="page">Dịch</a>
+      <a href="./#tra-tu">Từ điển</a>
+      <a href="./#gioi-thieu">Giới thiệu</a>
+      <a href="brand.html">Nhận diện</a>
+    </nav>
+  </div>
+
+  <div class="wrap hero-copy" id="dich">
+    <p class="eyebrow"><span class="pip" aria-hidden="true"></span>Hriăm · tiếng Ê Đê nghĩa là <em>học</em></p>
+    <h1>Dịch Việt –&nbsp;Ê&nbsp;Đê</h1>
+    <p class="lead" id="lead">Tra từ điển và tìm câu song ngữ, ngay trên trình duyệt của bạn.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="translator">
+      <div class="lang-bar">
+        <span class="lang-tab" id="srcName">Tiếng Việt</span>
+        <button class="swap" id="swap" type="button" title="Đổi chiều dịch" aria-label="Đổi chiều dịch">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 8h13l-4-4M17 16H4l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="lang-tab" id="tgtName">Tiếng Ê Đê</span>
+      </div>
+      <div class="panes">
+        <div class="pane">
+          <label class="sr-only" for="input">Nội dung cần dịch</label>
+          <textarea id="input" maxlength="2000" placeholder="Nhập câu cần dịch…" autofocus></textarea>
+          <div class="keys" id="keys" hidden aria-label="Bàn phím chữ Ê Đê"></div>
+          <div class="pane-foot">
+            <button id="kbd" type="button" class="link" aria-expanded="false" aria-controls="keys">Bàn phím Ê Đê</button>
+            <span class="spacer"></span>
+            <small class="muted" id="count">0/2000</small>
+            <button id="clear" type="button" class="icon" title="Xoá" aria-label="Xoá">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="pane result-pane">
+          <div class="result placeholder" id="output" aria-live="polite">Bản dịch sẽ hiện ở đây.</div>
+          <p class="note" id="note" hidden></p>
+          <div class="pane-foot">
+            <small class="muted" id="kind"></small>
+            <span class="spacer"></span>
+            <small class="muted" id="timing"></small>
+            <button id="copy" type="button" class="icon" title="Sao chép" aria-label="Sao chép" disabled>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 15V5a1 1 0 0 1 1-1h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="samples" id="samples"></div>
+  </div>
+  <div class="hem" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+  <div class="results">
+    <div class="col">
+      <section class="block">
+        <h2>Dịch từng từ</h2>
+        <p class="hint">Mỗi ô là một từ hoặc cụm từ có trong từ điển. Viền vàng: khớp khi bỏ dấu. Viền đứt: chưa có trong từ điển.</p>
+        <div class="gloss" id="gloss"><p class="empty-state"><img src="assets/brand/icon-chuon-chuon.svg" alt="" width="44" height="36">Nhập một câu để bắt đầu.</p></div>
+      </section>
+      <section class="block">
+        <h2>Câu song ngữ tương tự</h2>
+        <p class="hint">Câu gần giống nhất trong kho câu song ngữ. Câu khớp hoàn toàn được tô nổi.</p>
+        <div class="pairs" id="pairs"><span class="empty">Chưa có.</span></div>
+      </section>
+    </div>
+    <aside class="col side">
+      <section class="block">
+        <h2>Mục từ trong câu</h2>
+        <div class="cards" id="cards"><span class="empty">Chưa có.</span></div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section class="block lookup" id="tra-tu">
+    <p class="eyebrow dark"><span class="pip" aria-hidden="true"></span>Từ điển Ê Đê – Việt</p>
+    <h2 class="big">Tra từ</h2>
+    <p class="hint">Gõ từ Ê Đê, có hoặc không dấu, hay nghĩa tiếng Việt.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <label class="sr-only" for="q">Từ cần tra</label>
+      <input id="q" type="search" placeholder="hriăm, dao, chiêng…" autocomplete="off">
+    </div>
+    <div class="cards grid" id="lookup"></div>
+  </section>
+
+  <section class="about" id="gioi-thieu">
+    <div class="about-text">
+      <p class="eyebrow light"><span class="pip" aria-hidden="true"></span>Giới thiệu</p>
+      <h2 class="big">Học tiếng Ê Đê, từng từ một</h2>
+      <p><b>Hriăm</b> trong tiếng Ê Đê nghĩa là <em>học</em>. Đây là đồ án môn Xử lý ngôn ngữ tự nhiên (NLP501): xây dựng dữ liệu song ngữ và công cụ dịch Việt – Ê Đê.</p>
+      <p>Mọi xử lý chạy trên trình duyệt: tra từ điển, ghép nghĩa từng từ và tìm câu song ngữ gần giống nhất. Bản ghép từ chưa theo ngữ pháp Ê Đê, nên hãy đối chiếu với các câu tương tự.</p>
+    </div>
+    <dl class="facts">
+      <div><dt id="factEntries">3.893</dt><dd>mục từ điển</dd></div>
+      <div><dt id="factPairs">—</dt><dd>cặp câu song ngữ</dd></div>
+      <div><dt>2</dt><dd>chiều dịch</dd></div>
+    </dl>
+    <p class="sources">Nguồn: Từ điển Ê Đê – Việt (bản scan, đã chép và đối chiếu), Kinh Thánh tiếng Ê Đê 2015 và tiếng Việt 1925, bài báo về tách từ tiếng Ê Đê. Dữ liệu chưa được người bản ngữ rà soát hết. Hoa văn trên trang vẽ theo lối dệt thổ cẩm Ê Đê, không sao chép một mẫu dệt cụ thể nào.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="hem" aria-hidden="true"></div>
+  <div class="wrap footer-row">
+    <a class="brand" href="./" aria-label="Hriăm, trang dịch">
+      <img src="assets/brand/mark.svg" alt="" width="32" height="32">
+      <span class="brand-text"><span class="brand-name small">Hriăm</span><span class="brand-tag">Dịch Việt – Ê Đê</span></span>
+    </a>
+    <span class="spacer"></span>
+    <nav class="foot-nav" aria-label="Liên kết cuối trang">
+      <a href="./">Dịch</a>
+      <a href="./#tra-tu">Từ điển</a>
+      <a href="brand.html">Nhận diện</a>
+    </nav>
+  </div>
+  <p class="wrap footer-note">Đồ án NLP501. Kết quả chỉ để tham khảo, dữ liệu chưa được người bản ngữ rà soát hết.</p>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
