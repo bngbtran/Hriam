@@ -26,11 +26,12 @@ caffeinate -i python scripts/train.py
 
 ### Train theo văn nói hằng ngày
 
-Khoảng 80% dữ liệu là Kinh Thánh, nên mô hình train thẳng sẽ dịch giọng Kinh Thánh ("Các ngươi…", "bèn…"). `scripts/train_daily.sh` train hai giai đoạn để dịch gần lời ăn tiếng nói hằng ngày:
+Khoảng 80% dữ liệu là Kinh Thánh, nên mô hình train thẳng sẽ dịch giọng Kinh Thánh ("Các ngươi…", "bèn…"). `scripts/train_daily.py` train hai giai đoạn để dịch gần lời ăn tiếng nói hằng ngày. Chạy được trên Windows và Linux:
 
 ```bash
-bash scripts/train_daily.sh ede2vi
-bash scripts/train_daily.sh vi2ede
+python scripts/train_daily.py ede2vi --smoke   # chạy thử vài phút, kết quả ở runs-smoke/
+python scripts/train_daily.py ede2vi
+python scripts/train_daily.py vi2ede
 ```
 
 | Bước | Việc | Kết quả |
@@ -41,9 +42,16 @@ bash scripts/train_daily.sh vi2ede
 | 4 | Giai đoạn văn nói: 4 epoch, learning rate nhỏ hơn, bắt đầu từ mô hình nền; chọn mô hình tốt nhất theo tập câu đời thường | `runs/<hướng>-noi/` |
 | 5 | Đặt mô hình văn nói làm mặc định cho `translate.py` | `runs/<hướng>/best` |
 
-- **Thời gian:** lần đầu cào bản Phổ Thông mất khoảng 30–60 phút. Giai đoạn nền khoảng 8–9 giờ, giai đoạn văn nói khoảng 1–2 giờ trên Apple M5 Pro.
+- **Thời gian:** lần đầu cào bản Phổ Thông mất khoảng 30–60 phút. Trên Apple M5 Pro, giai đoạn nền khoảng 8–9 giờ, giai đoạn văn nói khoảng 1–2 giờ. Trên card NVIDIA với mixed precision thường nhanh hơn vài lần, tuỳ card; xem tốc độ thật trong `train.log`.
 - **Tiếp tục:** chạy lại đúng lệnh là tiếp tục từ chỗ dừng; bước đã xong được bỏ qua. Muốn train lại một giai đoạn thì xoá thư mục `runs/<hướng>-nen` hoặc `runs/<hướng>-noi`.
-- **Tuỳ chỉnh:** `VI_VERSION=VI1934` dùng lại bản 1925 có sẵn, không cần cào. `EPOCHS_NEN`, `EPOCHS_NOI`, `LR_NOI` đổi số epoch và learning rate. `TRAIN_ARGS="--limit 32" EPOCHS_NEN=1 EPOCHS_NOI=1` chạy thử vài phút để kiểm tra; chạy thử xong nhớ xoá `runs/` trước khi train thật.
+- **Tuỳ chỉnh:** `--vi-version VI1934` dùng lại bản 1925 có sẵn, không cần cào. `--epochs-nen`, `--epochs-noi`, `--lr-noi` đổi số epoch và learning rate. `--batch-scale` đổi kích thước batch.
+
+**GPU:** `train.py` chỉ train trên GPU. Không thấy GPU thì dừng và báo cách sửa, không lặng lẽ chạy CPU. Với card NVIDIA:
+
+- **Cài torch bản CUDA** trước `pip install -r requirements.txt`. Xem phiên bản CUDA bằng `nvidia-smi`. RTX 20/30/40: `pip install torch --index-url https://download.pytorch.org/whl/cu124`. RTX 50: dùng `cu128` thay cho `cu124`.
+- **Kiểm tra:** `python scripts/train.py --check` phải in tên card. Nếu in "không thấy GPU", torch đang là bản CPU, cần cài lại.
+- **Mixed precision:** dùng bf16 trên card RTX 30 trở lên, fp16 trên card cũ hơn. Nhanh hơn và tốn ít bộ nhớ hơn fp32.
+- **Batch tự chỉnh theo bộ nhớ card:** 12 GB giữ mức gốc, 24 GB gấp đôi, 8 GB còn khoảng 2/3. Báo "CUDA out of memory" thì xoá thư mục `runs/` của giai đoạn đang chạy, rồi chạy lại với `--batch-scale 0.5`. Khi train tiếp, hệ số batch được giữ nguyên theo lần đầu.
 - **Đánh giá:** `runs/<hướng>-noi/test_results.json` có điểm trên `test_dict` và `test_hoithoai` (câu đời thường) và `test_bible` (để xem mô hình có quên Kinh Thánh không).
 
 **Câu hội thoại là yếu tố quan trọng nhất.** Ví dụ trong từ điển phần lớn là câu ngắn. Mỗi câu hội thoại do người bản ngữ dịch giúp mô hình nói tự nhiên hơn nhiều so với thêm Kinh Thánh. Danh sách câu cần dịch và cách đóng góp nằm ở [data/raw/hoi_thoai/README.md](../data/raw/hoi_thoai/README.md). Sau khi thêm câu, xoá `runs/<hướng>-noi` rồi chạy lại lệnh; giai đoạn nền không cần train lại.

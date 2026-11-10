@@ -7,7 +7,7 @@
     python scripts/translate.py                                # gõ từng câu, Enter để dịch, Ctrl+D để thoát
     python scripts/translate.py --model base "..."            # NLLB gốc chưa train, để so sánh
 
-Mặc định dùng runs/<hướng>/best do scripts/train.py tạo ra.
+Mặc định dùng runs/<hướng>-noi/best (scripts/train_daily.py), nếu không có thì runs/<hướng>/best (scripts/train.py).
 """
 from __future__ import annotations
 
@@ -67,10 +67,13 @@ class Translator:
 def resolve_model(args: argparse.Namespace) -> str:
     if args.model == "base":
         return MODEL_NAME
-    path = Path(args.model) if args.model else ROOT / "runs" / args.direction / "best"
+    if args.model:
+        path = Path(args.model)
+    else:  # ưu tiên mô hình văn nói của scripts/train_daily.py, rồi tới mô hình của scripts/train.py
+        candidates = [ROOT / "runs" / f"{args.direction}-noi" / "best", ROOT / "runs" / args.direction / "best"]
+        path = next((p for p in candidates if (p / "config.json").exists()), candidates[-1])
     if not (path / "config.json").exists():
-        sys.exit(f"LỖI: không thấy mô hình ở {path}. Hãy train trước: python scripts/train.py"
-                 + ("" if args.direction == "ede2vi" else f" --direction {args.direction}"))
+        sys.exit(f"LỖI: không thấy mô hình ở {path}. Hãy train trước: python scripts/train_daily.py {args.direction}")
     return str(path)
 
 

@@ -51,11 +51,11 @@ Bản ghép từ chưa đúng ngữ pháp Ê Đê. Web tĩnh không chạy đư�
 conda activate msa
 pip install -r requirements.txt
 python scripts/train.py --check
-bash scripts/train_daily.sh ede2vi     # train theo văn nói hằng ngày, hai giai đoạn
+python scripts/train_daily.py ede2vi   # train theo văn nói hằng ngày, hai giai đoạn, cần card NVIDIA
 python scripts/translate.py "Jŭ msĕ si ak"
 ```
 
-`train_daily.sh` train nền trên toàn bộ dữ liệu (Kinh Thánh dùng bản tiếng Việt hiện đại), rồi train tiếp trên câu đời thường để dịch tự nhiên hơn. Câu hội thoại do người bản ngữ dịch đặt trong `data/raw/hoi_thoai/`. Xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md#train-theo-văn-nói-hằng-ngày).
+`train_daily.py` train nền trên toàn bộ dữ liệu (Kinh Thánh dùng bản tiếng Việt hiện đại), rồi train tiếp trên câu đời thường để dịch tự nhiên hơn. Câu hội thoại do người bản ngữ dịch đặt trong `data/raw/hoi_thoai/`. Xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md#train-theo-văn-nói-hằng-ngày).
 
 Để dựng lại dữ liệu, xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md).
 
