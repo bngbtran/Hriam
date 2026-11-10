@@ -24,6 +24,30 @@ caffeinate -i python scripts/train.py
 - Kết quả nằm trong `runs/<hướng>/`.
 - Dịch thử bằng mô hình đã train: `python scripts/translate.py "câu Ê Đê"`. Thêm `--model base` để so với NLLB gốc, `--file` để dịch cả file.
 
+### Train theo văn nói hằng ngày
+
+Khoảng 80% dữ liệu là Kinh Thánh, nên mô hình train thẳng sẽ dịch giọng Kinh Thánh ("Các ngươi…", "bèn…"). `scripts/train_daily.sh` train hai giai đoạn để dịch gần lời ăn tiếng nói hằng ngày:
+
+```bash
+bash scripts/train_daily.sh ede2vi
+bash scripts/train_daily.sh vi2ede
+```
+
+| Bước | Việc | Kết quả |
+|---|---|---|
+| 1 | Cào Kinh Thánh tiếng Việt **Bản Phổ Thông** (tiếng Việt hiện đại), căn câu, dựng bộ dữ liệu | `data/interim/vi_bpt.jsonl`, `data/dataset_bpt/` |
+| 2 | Dựng bộ dữ liệu văn nói: ví dụ và nghĩa trong từ điển, câu hội thoại, cộng 3.000 câu Kinh Thánh ngắn để không quên | `data/dataset_noi/` |
+| 3 | Giai đoạn nền: 3 epoch trên toàn bộ dữ liệu | `runs/<hướng>-nen/` |
+| 4 | Giai đoạn văn nói: 4 epoch, learning rate nhỏ hơn, bắt đầu từ mô hình nền; chọn mô hình tốt nhất theo tập câu đời thường | `runs/<hướng>-noi/` |
+| 5 | Đặt mô hình văn nói làm mặc định cho `translate.py` | `runs/<hướng>/best` |
+
+- **Thời gian:** lần đầu cào bản Phổ Thông mất khoảng 30–60 phút. Giai đoạn nền khoảng 8–9 giờ, giai đoạn văn nói khoảng 1–2 giờ trên Apple M5 Pro.
+- **Tiếp tục:** chạy lại đúng lệnh là tiếp tục từ chỗ dừng; bước đã xong được bỏ qua. Muốn train lại một giai đoạn thì xoá thư mục `runs/<hướng>-nen` hoặc `runs/<hướng>-noi`.
+- **Tuỳ chỉnh:** `VI_VERSION=VI1934` dùng lại bản 1925 có sẵn, không cần cào. `EPOCHS_NEN`, `EPOCHS_NOI`, `LR_NOI` đổi số epoch và learning rate. `TRAIN_ARGS="--limit 32" EPOCHS_NEN=1 EPOCHS_NOI=1` chạy thử vài phút để kiểm tra; chạy thử xong nhớ xoá `runs/` trước khi train thật.
+- **Đánh giá:** `runs/<hướng>-noi/test_results.json` có điểm trên `test_dict` và `test_hoithoai` (câu đời thường) và `test_bible` (để xem mô hình có quên Kinh Thánh không).
+
+**Câu hội thoại là yếu tố quan trọng nhất.** Ví dụ trong từ điển phần lớn là câu ngắn. Mỗi câu hội thoại do người bản ngữ dịch giúp mô hình nói tự nhiên hơn nhiều so với thêm Kinh Thánh. Danh sách câu cần dịch và cách đóng góp nằm ở [data/raw/hoi_thoai/README.md](../data/raw/hoi_thoai/README.md). Sau khi thêm câu, xoá `runs/<hướng>-noi` rồi chạy lại lệnh; giai đoạn nền không cần train lại.
+
 ## Web dịch
 
 Thư mục `web/` là một web tĩnh: HTML, CSS và JavaScript thuần, không framework, không bước build. Mọi xử lý chạy trên trình duyệt.
@@ -111,4 +135,5 @@ Hai bản đánh số câu khác nhau ở một số chương, ví dụ Gióp 38
 
 - Bản tiếng Việt 1925 thuộc phạm vi công cộng.
 - Bản Ê Đê 2015 nhiều khả năng còn bản quyền, và trang web ghi bản quyền thuộc về kinhthanh.httlvn.org.
+- Bản Phổ Thông (BPT) dùng cho train văn nói là bản dịch hiện đại, nhiều khả năng cũng còn bản quyền. Chỉ dùng trong nhóm để nghiên cứu.
 - Dùng để nghiên cứu nội bộ thì rủi ro thấp. Muốn công bố dữ liệu hoặc làm sản phẩm, hãy xin phép HTTLVN hoặc Hội Thánh Ê Đê.

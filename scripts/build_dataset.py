@@ -4,9 +4,13 @@
 Chia dữ liệu theo nhóm để tránh rò rỉ: nguyên chương Kinh Thánh, nguyên mục từ điển.
 Mục từ và nghĩa của từ điển chỉ vào train. Từ điển lấy từ data/dictionary/dictionary_full.json (bản đã đối chiếu
 với scan) và được quy về chính tả Kinh Thánh (spelling_map.json).
+
+    python scripts/build_dataset.py                                                   # -> data/dataset
+    python scripts/build_dataset.py --bible parallel_aligned_bpt.jsonl --out data/dataset_bpt
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -17,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "interim"
 OUT = ROOT / "data" / "dataset"
+BIBLE_FILE = "parallel_aligned.jsonl"
 DICTIONARY = ROOT / "data" / "dictionary" / "dictionary_full.json"
 LANGS = ("ede", "vi")
 BIBLE_DEV, BIBLE_TEST = 0.025, 0.025
@@ -49,7 +54,7 @@ def clean(text: str) -> str:
 
 def bible_rows(rejected: list[dict]) -> list[dict]:
     rows = []
-    for row in read_jsonl(DATA / "parallel_aligned.jsonl"):
+    for row in read_jsonl(DATA / BIBLE_FILE):
         book, chapter = row["ref_ede"].split(".")[:2]
         ratio = len(row["ede"]) / max(1, len(row["vi"]))
         out = {"ede": clean(row["ede"]), "vi": clean(row["vi"]), "source": "bible",
@@ -123,6 +128,12 @@ def dictionary_rows(normalize) -> list[dict]:
 
 
 def main() -> None:
+    global OUT, BIBLE_FILE
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--bible", default=BIBLE_FILE, help="file Kinh Thánh đã căn trong data/interim")
+    parser.add_argument("--out", type=Path, default=OUT, help="thư mục ghi bộ dữ liệu")
+    args = parser.parse_args()
+    OUT, BIBLE_FILE = args.out.resolve(), args.bible
     OUT.mkdir(parents=True, exist_ok=True)
     rejected: list[dict] = []
     normalize, applied = spelling_normalizer(bible_vocabulary())

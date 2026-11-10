@@ -1,0 +1,121 @@
+# Câu tiếng Việt thường ngày cần người bản ngữ dịch sang tiếng Ê Đê.
+# Cách làm: chép câu vào cột "vi" của một file .tsv (xem README.md), điền bản dịch vào cột "ede".
+# Dịch theo cách nói tự nhiên hằng ngày, không cần sát từng chữ. Câu nào có nhiều cách nói thì ghi mỗi cách một dòng.
+
+## Chào hỏi
+Chào anh.
+Chào chị.
+Chào em.
+Chào bác.
+Anh có khoẻ không?
+Tôi khoẻ, cảm ơn anh.
+Lâu quá không gặp.
+Hẹn gặp lại.
+Chúc ngủ ngon.
+Cảm ơn nhiều.
+Không có gì.
+Xin lỗi.
+Không sao đâu.
+
+## Giới thiệu
+Tên tôi là H'Hen.
+Anh tên là gì?
+Năm nay em bao nhiêu tuổi?
+Tôi là sinh viên.
+Tôi đến từ Buôn Ma Thuột.
+Nhà anh ở đâu?
+Nhà tôi ở gần chợ.
+Anh làm nghề gì?
+Tôi làm rẫy.
+Tôi đang học tiếng Ê Đê.
+
+## Gia đình
+Đây là mẹ tôi.
+Bố tôi đi làm rẫy rồi.
+Nhà anh có mấy người?
+Nhà tôi có năm người.
+Tôi có hai anh trai và một em gái.
+Em bé đang ngủ.
+Bà ngoại tôi đã già rồi.
+Con đi học về chưa?
+
+## Ăn uống
+Tôi đói rồi.
+Tôi khát nước.
+Anh ăn cơm chưa?
+Tôi ăn rồi.
+Mời anh ăn cơm.
+Món này ngon quá.
+Cho tôi một ly nước.
+Anh uống cà phê không?
+Tôi không uống rượu.
+Hôm nay nấu canh gì?
+Ăn thêm đi.
+Tôi no rồi.
+
+## Mua bán
+Cái này bao nhiêu tiền?
+Đắt quá.
+Bớt cho tôi một chút.
+Tôi mua hai ký gạo.
+Chợ mở cửa lúc mấy giờ?
+Ở đây có bán cà phê không?
+Tôi không có tiền lẻ.
+
+## Hỏi đường, đi lại
+Đường đến chợ đi lối nào?
+Buôn này tên là gì?
+Từ đây đến đó có xa không?
+Đi thẳng rồi rẽ trái.
+Tôi bị lạc đường.
+Anh đi đâu đấy?
+Tôi đi chợ.
+Mai tôi về buôn.
+Đi xe máy mất bao lâu?
+
+## Thời gian, thời tiết
+Bây giờ là mấy giờ?
+Hôm nay là thứ mấy?
+Hôm qua trời mưa to.
+Hôm nay trời nắng.
+Trời sắp mưa rồi.
+Sáng mai tôi bận.
+Chiều nay anh rảnh không?
+Mùa này cà phê chín rồi.
+
+## Sức khoẻ
+Tôi bị đau đầu.
+Con tôi bị sốt.
+Anh nên đi khám bệnh.
+Trạm y tế ở đâu?
+Uống thuốc này ngày hai lần.
+Anh đã đỡ chưa?
+
+## Công việc, học tập
+Hôm nay tôi đi làm.
+Tôi phải đi học.
+Bài này khó quá.
+Anh nói chậm lại được không?
+Tôi không hiểu.
+Câu này tiếng Ê Đê nói thế nào?
+Anh giúp tôi với.
+Để tôi làm cho.
+
+## Cảm xúc, ý kiến
+Tôi vui lắm.
+Tôi buồn quá.
+Tôi thích cái này.
+Tôi không thích.
+Hay quá!
+Được rồi.
+Không được.
+Tôi nghĩ là đúng.
+Đừng lo.
+Cẩn thận nhé.
+
+## Lễ hội, văn hoá
+Tối nay buôn có lễ hội.
+Mời anh đến nhà tôi chơi.
+Mọi người cùng uống rượu cần.
+Tiếng chiêng nghe hay quá.
+Năm nay được mùa.

@@ -6,6 +6,9 @@
     caffeinate -i python scripts/train.py      # train đầy đủ, Ê Đê → Việt
     python scripts/train.py --direction vi2ede # hướng ngược lại, lưu ở thư mục riêng
     python scripts/train.py --rebuild-data     # dựng lại dữ liệu từ các file nguồn rồi train
+    python scripts/train.py --data-dir data/dataset_noi --init-from runs/ede2vi-nen/best --run-dir runs/ede2vi-noi
+                                               # train tiếp từ một mô hình đã có trên bộ dữ liệu khác
+Train theo văn nói hằng ngày: xem scripts/train_daily.sh.
 
 Chạy lại đúng lệnh sẽ tiếp tục từ checkpoint gần nhất. Bấm Ctrl+C một lần để lưu rồi dừng.
 Kết quả nằm trong runs/<hướng>/: best/, last/, train.log, test_results.json, predictions_*.jsonl.
@@ -57,6 +60,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-dir", type=Path, help="mặc định runs/<hướng>")
     parser.add_argument("--check", action="store_true", help="chỉ kiểm tra dữ liệu rồi thoát")
     parser.add_argument("--rebuild-data", action="store_true", help="dựng lại data/dataset trước khi train")
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR,
+                        help="thư mục có train.jsonl, dev_*.jsonl, test_*.jsonl (mặc định data/dataset)")
+    parser.add_argument("--init-from", help="bắt đầu từ mô hình này thay vì NLLB gốc, ví dụ runs/ede2vi-nen/best")
     parser.add_argument("--limit", type=int, help="chỉ dùng N cặp mỗi tập, để thử nhanh")
     parser.add_argument("--stop-after", type=int, help="dừng sau N bước tổng cộng, để thử nhanh")
     return parser.parse_args()
@@ -91,6 +97,13 @@ def load_split(name: str, src: str, tgt: str, limit: int | None) -> list[dict]:
     if limit and limit < len(rows):
         rows = random.Random(SEED).sample(rows, limit)
     return rows
+
+
+def split_names(prefix: str) -> list[str]:
+    names = sorted(p.stem for p in DATA_DIR.glob(f"{prefix}_*.jsonl"))
+    if not names:
+        sys.exit(f"LỖI: {DATA_DIR} không có file {prefix}_*.jsonl.")
+    return names
 
 
 def attach_lengths(rows: list[dict], tokenizer, src: str, tgt: str) -> None:
@@ -135,8 +148,10 @@ class Trainer:
     def load_data(self) -> None:
         limit = self.args.limit
         self.train = load_split("train", self.src, self.tgt, limit)
-        self.dev = {name: load_split(name, self.src, self.tgt, limit) for name in ("dev_bible", "dev_dict")}
-        self.test = {name: load_split(name, self.src, self.tgt, limit) for name in ("test_bible", "test_dict")}
+        # Mọi file dev_*.jsonl và test_*.jsonl trong thư mục dữ liệu; mô hình tốt nhất chọn theo chrF trung bình các tập dev.
+        self.dev = {name: load_split(name, self.src, self.tgt, limit) for name in split_names("dev")}
+        self.test = {name: load_split(name, self.src, self.tgt, limit) for name in split_names("test")}
+        self.log(f"Dữ liệu: {DATA_DIR}; dev: {', '.join(self.dev)}; test: {', '.join(self.test)}")
         attach_lengths(self.train, self.tokenizer, self.src, self.tgt)
         total = len(self.train)
         self.train = [row for row in self.train if row["length"] <= MAX_LENGTH]
@@ -156,7 +171,9 @@ class Trainer:
     def setup(self) -> None:
         total = self.args.epochs * self.steps_per_epoch
         saved = self.last_dir / "train_state.pt"
-        source = self.last_dir if saved.exists() else MODEL_NAME
+        source = self.last_dir if saved.exists() else (self.args.init_from or MODEL_NAME)
+        if source != self.last_dir:
+            self.log(f"Bắt đầu từ mô hình {source}")
         self.model = AutoModelForSeq2SeqLM.from_pretrained(source).to(self.device)
         self.model.generation_config.max_length = None
         self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=self.args.lr, weight_decay=0.01)
@@ -301,6 +318,10 @@ def main() -> None:
     args = parse_args()
     random.seed(SEED)
     torch.manual_seed(SEED)
+    global DATA_DIR
+    DATA_DIR = args.data_dir.resolve()
+    if args.init_from and not (Path(args.init_from) / "config.json").exists():
+        sys.exit(f"LỖI: không thấy mô hình ở {args.init_from}. Hãy train giai đoạn trước.")
     if args.rebuild_data or not (DATA_DIR / "train.jsonl").exists():
         build_data()
     if args.check:

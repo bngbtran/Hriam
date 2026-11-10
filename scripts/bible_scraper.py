@@ -3,6 +3,7 @@
 
     python scripts/bible_scraper.py inspect --book sa --chapter 1
     python scripts/bible_scraper.py crawl [--limit N]
+    python scripts/bible_scraper.py crawl --vi-version BPT   # bản tiếng Việt hiện đại -> vi_bpt.jsonl
 
 Xem docs/HUONG_DAN.md để biết chi tiết.
 """
@@ -25,6 +26,13 @@ from bs4.element import Tag  # noqa: E402
 
 BASE_URL = "https://kinhthanh.httlvn.org"
 VERSIONS = {"ede": "RRB", "vi": "VI1934"}
+# Các bản tiếng Việt có trên trang. VI1934 là bản 1925; BPT (Bản Phổ Thông) viết bằng tiếng Việt thường ngày.
+VI_VERSIONS = ("VI1934", "BPT", "BD2011", "NVB")
+
+
+def vi_file(version: str) -> str:
+    """Tên file câu tiếng Việt: giữ vi.jsonl cho bản 1925, các bản khác có hậu tố riêng."""
+    return "vi.jsonl" if version == "VI1934" else f"vi_{version.lower()}.jsonl"
 DELAY = 1.5  # giây giữa hai lần tải, để không làm quá tải server
 MAX_RETRIES = 5
 TIMEOUT = 30
@@ -177,7 +185,7 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
 
 def cmd_crawl(args) -> None:
     all_books: dict[str, str] = {}
-    for lang, version in VERSIONS.items():
+    for lang, version in {"ede": VERSIONS["ede"], "vi": args.vi_version}.items():
         books = book_index(version)
         mapping = book_mapping(books)
         all_books = all_books or mapping
@@ -196,14 +204,15 @@ def cmd_crawl(args) -> None:
                 rows.append({"book": mapping[book], "chapter": chapter, **verse})
             if i % 25 == 0 or i == len(jobs):
                 print(f"  {version}: {i}/{len(jobs)} ({book} {chapter})", flush=True)
-        write_jsonl(DATA_DIR / f"{lang}.jsonl", rows)
-        print(f"[{version}] {len(rows)} câu -> data/interim/{lang}.jsonl", flush=True)
+        name = "ede.jsonl" if lang == "ede" else vi_file(version)
+        write_jsonl(DATA_DIR / name, rows)
+        print(f"[{version}] {len(rows)} câu -> data/interim/{name}", flush=True)
     write_atomic(DATA_DIR / "books.json", json.dumps(all_books, ensure_ascii=False, indent=2) + "\n")
     print("Xong.", flush=True)
 
 
 def cmd_inspect(args) -> None:
-    for lang, version in VERSIONS.items():
+    for version in (VERSIONS["ede"], args.vi_version):
         cache_path = CACHE_DIR / version / args.book / f"{args.chapter}.html"
         url = f"{BASE_URL}/doc-kinh-thanh/{args.book}/{args.chapter}?v={version}"
         verses = parse_chapter(get_page(url, cache_path, version, True), args.book, args.chapter)
@@ -217,11 +226,13 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     crawl = sub.add_parser("crawl", help="tải và tách câu")
     crawl.add_argument("--limit", type=int, help="chỉ cào N chương đầu mỗi bản")
+    crawl.add_argument("--vi-version", choices=VI_VERSIONS, default="VI1934", help="bản tiếng Việt cần cào")
     crawl.set_defaults(func=cmd_crawl)
     inspect = sub.add_parser("inspect", help="xem thử cách tách câu của một chương")
     inspect.add_argument("--book", required=True)
     inspect.add_argument("--chapter", type=int, required=True)
     inspect.add_argument("--show", type=int, default=5)
+    inspect.add_argument("--vi-version", choices=VI_VERSIONS, default="VI1934")
     inspect.set_defaults(func=cmd_inspect)
     args = parser.parse_args()
     try:
