@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hriam · Dịch Việt – Ê Đê</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1d2328; --muted: #66707a; --line: #e2e0d8;
+    --accent: #9a3d1f; --accent-soft: #f6e6df; --ok: #2f6b3a; --ok-soft: #e3f1e5;
+    --warn: #8a5a00; --warn-soft: #fbf0d9; --chip: #f1efe9; --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15181b; --panel: #1d2125; --ink: #e8e6e1; --muted: #9aa3ab; --line: #30363c;
+      --accent: #e48a63; --accent-soft: #3a2820; --ok: #8fd19b; --ok-soft: #1f3324;
+      --warn: #f0c46a; --warn-soft: #3a3020; --chip: #262b30; --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.55 "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 20px; }
+  h1 { margin: 0; font-size: 28px; letter-spacing: -.01em; }
+  h1 span { color: var(--accent); }
+  .sub { color: var(--muted); }
+  .status { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px; }
+  .pill { padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); white-space: nowrap; }
+  .pill.ok { background: var(--ok-soft); color: var(--ok); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+
+  .translator { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+         display: flex; flex-direction: column; min-height: 230px; }
+  .box-head { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+              padding: 10px 14px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .box-head small { font-weight: 400; color: var(--muted); }
+  textarea { flex: 1; border: 0; resize: vertical; min-height: 150px; padding: 14px; background: transparent;
+             color: var(--ink); font: inherit; font-size: 18px; outline: none; }
+  .keys { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; border-top: 1px dashed var(--line); }
+  .keys button { min-width: 32px; padding: 3px 7px; font-size: 16px; }
+  .box-foot { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-top: 1px solid var(--line);
+              color: var(--muted); font-size: 13px; flex-wrap: wrap; }
+  .box-foot .spacer { flex: 1; }
+  .result { flex: 1; padding: 14px; font-size: 18px; white-space: pre-wrap; min-height: 150px; }
+  .result.placeholder { color: var(--muted); font-size: 16px; }
+  .note { margin: 0 14px 12px; padding: 8px 10px; border-radius: 8px; background: var(--warn-soft);
+          color: var(--warn); font-size: 13px; }
+  .swap { align-self: center; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; }
+
+  button { font: inherit; cursor: pointer; border: 1px solid var(--line); background: var(--panel);
+           color: var(--ink); border-radius: 8px; padding: 6px 12px; }
+  button:hover { border-color: var(--accent); }
+  button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  @media (prefers-color-scheme: dark) { button.primary { color: #1d2125; } }
+  .samples { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; align-items: center; font-size: 14px; }
+  .samples span { color: var(--muted); }
+  .samples button { font-size: 14px; padding: 3px 10px; border-radius: 999px; }
+
+  section { margin-top: 28px; }
+  h2 { font-size: 17px; margin: 0 0 4px; }
+  .hint { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+  .gloss { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tok { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; min-width: 64px; }
+  .tok b { display: block; font-size: 15px; }
+  .tok i { font-style: normal; color: var(--accent); font-size: 15px; }
+  .tok .alt { color: var(--muted); font-size: 13px; }
+  .tok.miss { border-style: dashed; color: var(--muted); }
+  .tok.fuzzy { border-color: var(--warn); }
+  .tok.cls { opacity: .55; }
+
+  .pairs { display: grid; gap: 8px; }
+  .pair { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+          display: grid; grid-template-columns: 1fr 1fr auto; gap: 4px 16px; align-items: start; }
+  .pair .meta { color: var(--muted); font-size: 12px; text-align: right; white-space: nowrap; }
+  .bar { height: 4px; border-radius: 2px; background: var(--chip); margin-top: 4px; width: 72px; margin-left: auto; }
+  .bar > div { height: 100%; border-radius: 2px; background: var(--accent); }
+  .lang { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; display: block; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .card h3 { margin: 0; font-size: 18px; }
+  .card .pos { color: var(--muted); font-size: 13px; }
+  .card ol { margin: 8px 0 0; padding-left: 20px; }
+  .card li { margin-bottom: 4px; }
+  .card .ex { color: var(--muted); font-size: 14px; }
+  .card .ex em { color: var(--ink); font-style: normal; }
+  .empty { color: var(--muted); font-size: 14px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+  .spin { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--line);
+          border-top-color: var(--accent); border-radius: 50%; animation: s .8s linear infinite; }
+  @keyframes s { to { transform: rotate(360deg); } }
+
+  @media (max-width: 760px) {
+    .translator { grid-template-columns: 1fr; }
+    .swap { justify-self: center; transform: rotate(90deg); }
+    .pair { grid-template-columns: 1fr; }
+    .pair .meta { text-align: left; }
+    .bar { margin-left: 0; }
+    .status { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Hriam <span>·</span> Dịch Việt – Ê Đê</h1>
+    <div class="status" id="status"><span class="pill">Đang kết nối…</span></div>
+  </header>
+
+  <div class="translator">
+    <div class="box">
+      <div class="box-head"><span id="srcName">Tiếng Việt</span><small id="count">0/2000</small></div>
+      <textarea id="input" maxlength="2000" placeholder="Nhập câu cần dịch…" autofocus></textarea>
+      <div class="keys" id="keys" hidden></div>
+      <div class="box-foot">
+        <span>Ctrl/⌘ + Enter để dịch</span><span class="spacer"></span>
+        <button id="clear" type="button">Xoá</button>
+        <button id="go" class="primary" type="button">Dịch</button>
+      </div>
+    </div>
+
+    <button class="swap" id="swap" type="button" title="Đổi chiều dịch" aria-label="Đổi chiều dịch">⇄</button>
+
+    <div class="box">
+      <div class="box-head"><span id="tgtName">Tiếng Ê Đê</span><small id="kind"></small></div>
+      <div class="result placeholder" id="output">Bản dịch sẽ hiện ở đây.</div>
+      <p class="note" id="note" hidden></p>
+      <div class="box-foot"><span id="timing"></span><span class="spacer"></span>
+        <button id="copy" type="button" disabled>Sao chép</button></div>
+    </div>
+  </div>
+
+  <div class="samples" id="samples"></div>
+
+  <section>
+    <h2>Dịch từng từ</h2>
+    <p class="hint">Mỗi ô là một từ hoặc cụm từ tra được trong từ điển. Viền vàng: khớp khi bỏ dấu. Viền đứt: không có trong từ điển.</p>
+    <div class="gloss" id="gloss"><span class="empty">Chưa có.</span></div>
+  </section>
+
+  <section>
+    <h2>Câu song ngữ tương tự</h2>
+    <p class="hint">Các câu gần giống nhất trong Kinh Thánh và ví dụ của từ điển. Câu khớp hoàn toàn thường là bản dịch đáng tin nhất.</p>
+    <div class="pairs" id="pairs"><span class="empty">Chưa có.</span></div>
+  </section>
+
+  <section>
+    <h2>Từ điển</h2>
+    <p class="hint">Các mục từ xuất hiện trong câu, theo Từ điển Ê Đê – Việt.</p>
+    <div class="cards" id="cards"><span class="empty">Chưa có.</span></div>
+  </section>
+
+  <footer>Dữ liệu: Từ điển Ê Đê – Việt và Kinh Thánh song ngữ. Kết quả chỉ để tham khảo, chưa được người bản ngữ kiểm tra.</footer>
+</div>
+
+<script>
+const LANG = { vi: "Tiếng Việt", ede: "Tiếng Ê Đê" };
+const EDE_KEYS = ["ă","â","ĕ","ê","ê̆","ĭ","ŏ","ô","ô̆","ơ","ơ̆","ŭ","ư","ư̆","ƀ","č","đ","ñ","Ƀ","Č","Đ","Ñ"];
+const SAMPLES = {
+  vi2ede: ["Đen như quạ", "Tôi muốn ăn cơm", "Con chó cắn con gà", "Ban đầu Đức Chúa Trời dựng nên trời đất."],
+  ede2vi: ["Jŭ msĕ si ak", "Dhŏng khăt", "Ƀŏng boh kroh", "Hlăk mphŭn dơ̆ng Aê Diê hrih adiê leh anăn lăn ala."],
+};
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+let direction = "vi2ede", status = null, timer = null, seq = 0;
+try { direction = localStorage.getItem("hriam.direction") || direction; } catch (e) {}
+
+function renderDirection() {
+  const [src, tgt] = direction === "vi2ede" ? ["vi", "ede"] : ["ede", "vi"];
+  $("srcName").textContent = LANG[src];
+  $("tgtName").textContent = LANG[tgt];
+  $("keys").hidden = src !== "ede";
+  $("samples").innerHTML = "<span>Thử:</span>" + SAMPLES[direction].map((s) => `<button type="button">${esc(s)}</button>`).join("");
+  $("samples").querySelectorAll("button").forEach((b) => b.onclick = () => { $("input").value = b.textContent; onInput(true); });
+  renderStatus();
+}
+
+function renderStatus() {
+  if (!status) return;
+  const ready = status.models[direction];
+  $("status").innerHTML =
+    `<span class="pill">${status.entries.toLocaleString("vi")} mục từ</span>` +
+    `<span class="pill">${status.pairs.toLocaleString("vi")} cặp câu</span>` +
+    `<span class="pill ${ready ? "ok" : "warn"}">${ready ? "Có mô hình dịch máy" : "Chưa có mô hình dịch máy"}</span>`;
+}
+
+function insertKey(ch) {
+  const t = $("input"), a = t.selectionStart, b = t.selectionEnd;
+  t.value = t.value.slice(0, a) + ch + t.value.slice(b);
+  t.selectionStart = t.selectionEnd = a + ch.length;
+  t.focus();
+  onInput();
+}
+
+function onInput(now = false) {
+  $("count").textContent = `${$("input").value.length}/2000`;
+  clearTimeout(timer);
+  timer = setTimeout(translate, now ? 0 : 450);
+}
+
+async function translate() {
+  const text = $("input").value.trim();
+  if (!text) return reset();
+  const mine = ++seq, started = performance.now();
+  $("timing").innerHTML = '<span class="spin"></span> Đang dịch…';
+  try {
+    const res = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" },
+                                                body: JSON.stringify({ text, direction }) });
+    const data = await res.json();
+    if (mine !== seq) return;
+    if (!res.ok) throw new Error(data.error || "Lỗi máy chủ");
+    render(data);
+    $("timing").textContent = `${Math.round(performance.now() - started)} ms`;
+  } catch (err) {
+    if (mine !== seq) return;
+    $("timing").textContent = "";
+    $("output").className = "result placeholder";
+    $("output").textContent = `Không dịch được: ${err.message}. Server còn chạy không?`;
+  }
+}
+
+function render(d) {
+  const out = $("output"), note = $("note");
+  if (d.machine) {
+    out.className = "result"; out.textContent = d.machine;
+    $("kind").textContent = "Dịch máy";
+    note.hidden = true;
+  } else {
+    out.className = "result"; out.textContent = d.draft;
+    $("kind").textContent = "Ghép từ";
+    note.hidden = false;
+    note.textContent = d.machine_error ||
+      "Đây là bản ghép nghĩa từng từ theo từ điển, chưa đúng ngữ pháp. Xem thêm các câu tương tự bên dưới. " +
+      "Train mô hình (scripts/train.py) để có bản dịch cả câu.";
+  }
+  $("copy").disabled = false;
+
+  $("gloss").innerHTML = d.gloss.length ? d.gloss.map((g) => {
+    const cls = g.classifier ? "tok cls" : !g.options.length ? "tok miss" : !g.exact ? "tok fuzzy" : "tok";
+    const main = g.classifier ? "(từ chỉ loại)" : g.options[0] || "—";
+    const alt = g.options.slice(1).join(" · ");
+    return `<div class="${cls}"><b>${esc(g.source)}</b><i>${esc(main)}</i>${alt ? `<div class="alt">${esc(alt)}</div>` : ""}</div>`;
+  }).join("") : '<span class="empty">Không có từ nào.</span>';
+
+  const [src, tgt] = direction === "vi2ede" ? ["vi", "ede"] : ["ede", "vi"];
+  $("pairs").innerHTML = d.examples.length ? d.examples.map((p) => `
+    <div class="pair">
+      <div><span class="lang">${LANG[src]}</span>${esc(p[src])}</div>
+      <div><span class="lang">${LANG[tgt]}</span>${esc(p[tgt])}</div>
+      <div class="meta">${esc(p.source)}${p.ref && p.source === "Kinh Thánh" ? " · " + esc(p.ref) : ""}
+        <div class="bar" title="Độ giống ${Math.round(p.score * 100)}%"><div style="width:${Math.round(Math.min(1, p.score) * 100)}%"></div></div></div>
+    </div>`).join("") : '<span class="empty">Không tìm thấy câu tương tự.</span>';
+
+  $("cards").innerHTML = d.entries.length ? d.entries.map((e) => `
+    <div class="card">
+      <h3>${esc(e.headword)}</h3>
+      <div class="pos">${esc(e.pos.join(", "))}${e.page ? ` · trang ${e.page}` : ""}</div>
+      <ol>${e.senses.map((s) => `<li>${s.pos ? `<span class="pos">${esc(s.pos)}.</span> ` : ""}${esc(s.gloss)}
+        ${s.examples.map((x) => `<div class="ex"><em>${esc(x.ede)}</em>: ${esc(x.vi)}</div>`).join("")}</li>`).join("")}</ol>
+    </div>`).join("") : '<span class="empty">Không có mục từ nào khớp.</span>';
+}
+
+function reset() {
+  seq++;
+  $("output").className = "result placeholder";
+  $("output").textContent = "Bản dịch sẽ hiện ở đây.";
+  $("note").hidden = true; $("kind").textContent = ""; $("timing").textContent = ""; $("copy").disabled = true;
+  for (const id of ["gloss", "pairs", "cards"]) $(id).innerHTML = '<span class="empty">Chưa có.</span>';
+}
+
+$("keys").innerHTML = EDE_KEYS.map((k) => `<button type="button">${k}</button>`).join("");
+$("keys").querySelectorAll("button").forEach((b) => b.onclick = () => insertKey(b.textContent));
+$("input").addEventListener("input", () => onInput());
+$("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); onInput(true); } });
+$("go").onclick = () => onInput(true);
+$("clear").onclick = () => { $("input").value = ""; onInput(true); $("input").focus(); };
+$("copy").onclick = async () => {
+  try { await navigator.clipboard.writeText($("output").textContent); $("copy").textContent = "Đã chép"; }
+  catch (e) { $("copy").textContent = "Không chép được"; }
+  setTimeout(() => $("copy").textContent = "Sao chép", 1500);
+};
+$("swap").onclick = () => {
+  direction = direction === "vi2ede" ? "ede2vi" : "vi2ede";
+  try { localStorage.setItem("hriam.direction", direction); } catch (e) {}
+  const out = $("output");
+  if (!out.classList.contains("placeholder") && $("kind").textContent === "Dịch máy") $("input").value = out.textContent;
+  renderDirection();
+  onInput(true);
+};
+
+fetch("/api/status").then((r) => r.json()).then((s) => { status = s; renderStatus(); })
+  .catch(() => { $("status").innerHTML = '<span class="pill warn">Không kết nối được server</span>'; });
+renderDirection();
+</script>
+</body>
+</html>

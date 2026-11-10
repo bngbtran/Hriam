@@ -27,7 +27,12 @@ D = os.path.join(ROOT, 'data', 'dictionary', '_build', TAG)
 RAW = os.path.join(ROOT, 'data', 'raw', 'dict_transcribed')
 VER = os.path.join(ROOT, 'data', 'verified', TAG)
 SCOPE = {'AC': 'A–Č', 'DY': 'D–Y'}[TAG]
-PDF_PAGES = {'AC': 'trang PDF 7–26 = trang sách 5–24', 'DY': 'trang PDF 27–168'}[TAG]
+PDF_PAGES = {'AC': 'trang PDF 7–26 = trang sách 5–24', 'DY': 'trang PDF 27–168 = trang sách 25–145, 148–168'}[TAG]
+
+
+def book_page(pdf_page):
+    """Bản scan thiếu trang sách 146–147: PDF 7–147 = sách 5–145, PDF 148–168 = sách 148–168."""
+    return pdf_page - 2 if pdf_page <= 147 else pdf_page
 
 
 def nfc(s):
@@ -137,7 +142,7 @@ for fn in sorted(os.listdir(VER)):
         for op, i1, i2, j1, j2 in sm.get_opcodes():
             if op == 'equal':
                 continue
-            corrections.append({'pdf_page': page, 'book_page': page - 2,
+            corrections.append({'pdf_page': page, 'book_page': book_page(page),
                                 'headword': nfc(old.split('|')[0].strip()) or '(dòng nối tiếp của mục trước)',
                                 'old': ' '.join(tok(old)[i1:i2]), 'new': ' '.join(tok(new)[j1:j2])})
 
@@ -176,7 +181,7 @@ for e in PARSED:
         'pos': [pos_obj(p) for p in e['pos']],
         'loan_source': ({'code': e['loan'], 'full': LOAN_FULL[e['loan']]} if e['loan'] else None),
         'senses': senses,
-        'book_page': e['pages'][0] - 2,
+        'book_page': book_page(e['pages'][0]),
         'pdf_page': e['pages'][0],
         'notes': notes,
         'source_line': tidy(e['raw']),

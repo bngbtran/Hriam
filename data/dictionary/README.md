@@ -1,6 +1,8 @@
 # Từ điển Êđê – Việt (A → Y)
 
-Nguồn: `data/PDF/TuDienEDe.pdf` (bản scan; trang sách = trang PDF − 2). 3.893 mục, 3.112 cặp ví dụ.
+Nguồn: `data/PDF/TuDienEDe.pdf` (bản scan). Trang PDF 7–147 là trang sách 5–145; trang PDF 148–168 là trang sách 148–168. 3.893 mục, 3.112 cặp ví dụ.
+
+**Bản scan thiếu trang sách 146–147** (giữa `Tli tlia` và `Trač`, vần `Tlo…`–`Tra…`), nên từ điển chưa đủ hoàn toàn. Muốn bổ sung cần sách giấy.
 
 ## Tệp và thư mục
 

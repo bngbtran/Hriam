@@ -2,7 +2,8 @@
 """Gộp Kinh Thánh, từ điển và ví dụ trong bài báo thành bộ dữ liệu Ê Đê – Việt ở data/dataset/.
 
 Chia dữ liệu theo nhóm để tránh rò rỉ: nguyên chương Kinh Thánh, nguyên mục từ điển.
-Mục từ và nghĩa của từ điển chỉ vào train. Từ điển được quy về chính tả Kinh Thánh (spelling_map.json).
+Mục từ và nghĩa của từ điển chỉ vào train. Từ điển lấy từ data/dictionary/dictionary_full.json (bản đã đối chiếu
+với scan) và được quy về chính tả Kinh Thánh (spelling_map.json).
 """
 from __future__ import annotations
 
@@ -16,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "interim"
 OUT = ROOT / "data" / "dataset"
+DICTIONARY = ROOT / "data" / "dictionary" / "dictionary_full.json"
 LANGS = ("ede", "vi")
 BIBLE_DEV, BIBLE_TEST = 0.025, 0.025
 DICT_DEV, DICT_TEST = 0.05, 0.10
@@ -104,14 +106,15 @@ def spelling_normalizer(vocabulary: Counter):
 
 def dictionary_rows(normalize) -> list[dict]:
     rows = []
-    for entry in read_jsonl(DATA / "dictionary.jsonl"):
+    entries = json.loads(DICTIONARY.read_text(encoding="utf-8"))["entries"]
+    for entry in entries:
         value = bucket(entry["headword"].lower())
         split = "test_dict" if value < DICT_TEST else "dev_dict" if value < DICT_TEST + DICT_DEV else "train"
-        ref = f'dict.p{entry["page"]}'
+        ref = f'dict.{entry["id"]}'
         headword = normalize(re.sub(r"\s*\([^)]*\)?", "", entry["headword"]))
         for sense in entry["senses"]:
-            if sense["gloss"]:
-                rows.append({"ede": headword, "vi": clean(sense["gloss"]), "source": "dict_word",
+            if sense["gloss_vi"]:
+                rows.append({"ede": headword, "vi": clean(sense["gloss_vi"]), "source": "dict_word",
                              "ref": ref, "split": "train"})
             for example in sense["examples"]:
                 rows.append({"ede": normalize(example["ede"]), "vi": clean(example["vi"]),

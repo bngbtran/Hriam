@@ -38,7 +38,7 @@ DATA_DIR = ROOT / "data" / "dataset"
 MODEL_NAME = "facebook/nllb-200-distilled-600M"
 LANG_CODES = {"ede": "ace_Latn", "vi": "vie_Latn"}
 DIRECTIONS = {"ede2vi": ("ede", "vi"), "vi2ede": ("vi", "ede")}
-REBUILD_STEPS = ["dict_parse.py", "realign.py", "build_dataset.py"]
+REBUILD_STEPS = ["realign.py", "build_dataset.py"]
 SEED = 42
 
 # GPU của Mac biên dịch lại mỗi khi đổi kích thước tensor, nên chỉ dùng vài độ dài cố định.

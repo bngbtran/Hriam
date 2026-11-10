@@ -22,6 +22,11 @@ caffeinate -i python scripts/train.py
 - Chạy lại đúng lệnh để tiếp tục từ checkpoint. Bấm Ctrl+C một lần để lưu rồi dừng.
 - Muốn train hướng ngược lại, thêm `--direction vi2ede`.
 - Kết quả nằm trong `runs/<hướng>/`.
+- Dịch thử bằng mô hình đã train: `python scripts/translate.py "câu Ê Đê"`. Thêm `--model base` để so với NLLB gốc, `--file` để dịch cả file.
+
+## Web dịch
+
+Chạy `python app/server.py` rồi mở http://127.0.0.1:8000, thêm `--port` để đổi cổng. Web đọc `data/dictionary/dictionary_full.json` và `data/dataset/`, nên sau khi dựng lại dữ liệu cần khởi động lại web. Mô hình trong `runs/<hướng>/best` được nạp ở lần dịch đầu tiên, mất vài giây.
 
 ## 2. Dựng lại dữ liệu
 
@@ -29,10 +34,10 @@ caffeinate -i python scripts/train.py
 |---|---|---|---|
 | 1. Cào Kinh Thánh | `python scripts/bible_scraper.py crawl` | Trang web | `data/raw/bible_html/`, `data/interim/{vi,ede}.jsonl`, `books.json` |
 | 2. Căn câu | `python scripts/realign.py` | `vi.jsonl`, `ede.jsonl` | `parallel_aligned.jsonl`, `unmatched.jsonl` |
-| 3. Phân tích từ điển | `python scripts/dict_parse.py` | `data/raw/dict_transcribed/` | `dictionary.jsonl` |
+| 3. Dựng từ điển | Xem [data/dictionary/README.md](../data/dictionary/README.md) | `data/verified/` | `data/dictionary/dictionary_full.json` |
 | 4. Tạo bộ dữ liệu | `python scripts/build_dataset.py` | Các file ở `data/interim/` | `data/dataset/` |
 
-HTML đã cào được lưu lại nên chạy lại bước 1 không tải lại trang. Bước 2–4 chạy gộp được bằng `python scripts/train.py --rebuild-data`, lệnh này sẽ train tiếp ngay sau đó.
+HTML đã cào được lưu lại nên chạy lại bước 1 không tải lại trang. Bước 2 và 4 chạy gộp được bằng `python scripts/train.py --rebuild-data`, lệnh này sẽ train tiếp ngay sau đó.
 
 ### Cào Kinh Thánh
 
@@ -52,10 +57,10 @@ Hai bản đánh số câu khác nhau ở một số chương, ví dụ Gióp 38
 
 ### Từ điển
 
-`TuDienEDe.pdf` là bản scan, nên bản dùng chính là bản chép từng trang trong `data/raw/dict_transcribed/`, với mỗi dòng có dạng `mục từ (từ loại) | nội dung`. Dòng bắt đầu bằng `| ` nối tiếp mục từ của trang trước.
+`TuDienEDe.pdf` là bản scan, nên bản dùng chính là bản chép từng trang đã đối chiếu trong `data/verified/AC/` (A–Č) và `data/verified/DY/` (D–Y), với mỗi dòng có dạng `mục từ (từ loại) | nội dung`. Dòng bắt đầu bằng `| ` nối tiếp mục từ của trang trước. `data/raw/dict_transcribed/` là bản chép lần đầu, chỉ dùng để ghi lại các chỗ đã sửa.
 
-- **Sửa lỗi:** sửa các file này rồi chạy bước 3 và 4.
-- **Chính tả:** `dictionary.jsonl` giữ đúng mặt chữ trong sách. Bộ dữ liệu cuối quy một số từ về chính tả Kinh Thánh, ví dụ `hơ̆ng` thành `hŏng`, danh sách ở `data/dataset/spelling_map.json`.
+- **Sửa lỗi:** sửa file trong `data/verified/`, dựng lại từ điển theo `data/dictionary/README.md`, rồi chạy bước 4.
+- **Chính tả:** từ điển giữ đúng mặt chữ trong sách. Sách viết `ŏ` giống Kinh Thánh, nhưng có `ê̆`, `ô̆` mà Kinh Thánh không dùng. Bộ dữ liệu cuối quy các từ này về chính tả Kinh Thánh, ví dụ `đuê̆` thành `đuĕ`, danh sách ở `data/dataset/spelling_map.json`.
 - **Còn thiếu:** bản scan thiếu trang 146–147 của sách, đoạn từ `Tli tlia` đến `Trač`. Nếu có sách giấy, hãy chép thành file mới trong cùng thư mục.
 
 ## 3. Các file dữ liệu
@@ -64,12 +69,13 @@ Hai bản đánh số câu khác nhau ở một số chương, ví dụ Gióp 38
 |---|---|
 | `data/raw/TuDienEDe.pdf`, `GiaiMaTiengEDE.pdf` | Hai file PDF gốc |
 | `data/raw/bible_html/` | HTML đã cào |
-| `data/raw/dict_transcribed/` | Bản chép tay 162 trang từ điển |
+| `data/raw/dict_transcribed/` | Bản chép tay lần đầu 162 trang từ điển |
+| `data/verified/AC/`, `DY/` | Bản chép đã đối chiếu, nguồn chính của từ điển |
+| `data/dictionary/` | Từ điển có cấu trúc (JSON, Excel), xem README trong thư mục |
 | `data/interim/vi.jsonl`, `ede.jsonl` | Kinh Thánh từng bản |
 | `data/interim/books.json` | Đối chiếu mã sách của trang với mã USFM |
 | `data/interim/parallel_aligned.jsonl` | Cặp câu đã căn theo nội dung |
 | `data/interim/unmatched.jsonl` | Câu chỉ có ở một bản |
-| `data/interim/dictionary.jsonl` | Từ điển có cấu trúc |
 | `data/dataset/` | `train`, `dev_*`, `test_*`, `rejected`, `spelling_map.json`, `stats.json` |
 
 ## 4. Xử lý sự cố

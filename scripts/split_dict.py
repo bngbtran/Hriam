@@ -97,7 +97,7 @@ for gi, g in enumerate(groups, 1):
 n_ex = sum(len(s['examples']) for e in entries for s in e['senses'])
 full_meta = {
     'title': 'Từ điển Êđê – Việt (toàn bộ A → Y)',
-    'source': 'data/PDF/TuDienEDe.pdf (bản scan), trang PDF 7–168 = trang sách 5–166',
+    'source': 'data/PDF/TuDienEDe.pdf (bản scan), trang PDF 7–168 = trang sách 5–145 và 148–168 (bản scan thiếu trang sách 146–147)',
     'entry_count': len(entries), 'example_count': n_ex,
     'entries_by_letter': {L: len(by_letter[L]) for L in letters},
     'groups': {n: g for n, g, _ in index},
