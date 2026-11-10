@@ -1,0 +1,4094 @@
+{
+  "meta": {
+    "title": "Từ điển Êđê – Việt, nhóm 5: N Ñ O Ŏ Ô",
+    "letters": [
+      "N",
+      "Ñ",
+      "O",
+      "Ŏ",
+      "Ô"
+    ],
+    "letters_without_entries": [],
+    "entries_by_letter": {
+      "N": 70,
+      "Ñ": 47,
+      "O": 3,
+      "Ŏ": 1,
+      "Ô": 6
+    },
+    "entry_count": 127,
+    "example_count": 109,
+    "pdf_pages": [
+      114,
+      120
+    ],
+    "generated": "2026-11-10"
+  },
+  "entries": [
+    {
+      "id": "DY2106",
+      "letter": "N",
+      "headword": "Nač",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ganh tị",
+          "examples": [
+            {
+              "ede": "Mâo ai tiê nač",
+              "vi": "Tính hay ganh tị"
+            }
+          ]
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nač (đgt) | Ganh tị. Mâo ai tiê nač: Tính hay ganh tị."
+    },
+    {
+      "id": "DY2107",
+      "letter": "N",
+      "headword": "Nač iăng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ghen ghét, ghen tị",
+          "examples": []
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nač iăng (đgt) | Ghen ghét, ghen tị."
+    },
+    {
+      "id": "DY2108",
+      "letter": "N",
+      "headword": "Nah",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Phía, bên",
+          "examples": [
+            {
+              "ede": "Yang hruê ƀlĕ nah ngŏ",
+              "vi": "Mặt trời mọc phía đông"
+            },
+            {
+              "ede": "Nah adih",
+              "vi": "Bên kia"
+            },
+            {
+              "ede": "Nah anei",
+              "vi": "Bên này"
+            }
+          ]
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nah (dt) | Phía, bên. Yang hruê ƀlĕ nah ngŏ: Mặt trời mọc phía đông; Nah adih: Bên kia; Nah anei: Bên này."
+    },
+    {
+      "id": "DY2109",
+      "letter": "N",
+      "headword": "Nah pŏk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Một nửa",
+          "examples": [
+            {
+              "ede": "Blah kơ kâo sa nah pŏk",
+              "vi": "Cắt cho tôi một nửa"
+            }
+          ]
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nah pŏk (dt) | Một nửa. Blah kơ kâo sa nah pŏk: Cắt cho tôi một nửa."
+    },
+    {
+      "id": "DY2110",
+      "letter": "N",
+      "headword": "Nai",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Giáo viên",
+          "examples": [
+            {
+              "ede": "Amĭ kâo ngă nai",
+              "vi": "Mẹ tôi làm giáo viên"
+            }
+          ]
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nai (dt) | Giáo viên. Amĭ kâo ngă nai: Mẹ tôi làm giáo viên."
+    },
+    {
+      "id": "DY2111",
+      "letter": "N",
+      "headword": "Nai kai",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Cán bộ công chức",
+          "examples": []
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nai kai (dt) | Cán bộ công chức."
+    },
+    {
+      "id": "DY2112",
+      "letter": "N",
+      "headword": "Naih",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Hiếm hoi",
+          "examples": []
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Naih (tt) | Hiếm hoi."
+    },
+    {
+      "id": "DY2113",
+      "letter": "N",
+      "headword": "Nao",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Đi",
+          "examples": [
+            {
+              "ede": "Aguah anei kâo nao sang čơ",
+              "vi": "Sáng nay tôi đi chợ"
+            }
+          ]
+        }
+      ],
+      "book_page": 112,
+      "pdf_page": 114,
+      "notes": [],
+      "source_line": "Nao (đgt) | Đi. Aguah anei kâo nao sang čơ: Sáng nay tôi đi chợ."
+    },
+    {
+      "id": "DY2114",
+      "letter": "N",
+      "headword": "Nanao",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "pht",
+          "full": "Phụ từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "",
+          "examples": [
+            {
+              "ede": "Thường xuyên, luôn luôn",
+              "vi": "Grăp hruê kâo khăng nao mă bruă nanao: Hàng ngày tôi thường xuyên đi làm"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Nanao (pht) | Thường xuyên, luôn luôn: Grăp hruê kâo khăng nao mă bruă nanao: Hàng ngày tôi thường xuyên đi làm."
+    },
+    {
+      "id": "DY2115",
+      "letter": "N",
+      "headword": "Nă",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đt",
+          "full": "Đại từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Đấy",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Nă (đt) | Đấy."
+    },
+    {
+      "id": "DY2116",
+      "letter": "N",
+      "headword": "Năm",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Sáu",
+          "examples": [
+            {
+              "ede": "Năm boh kčok",
+              "vi": "Sáu cái ly"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Năm (dt) | Sáu. Năm boh kčok: Sáu cái ly."
+    },
+    {
+      "id": "DY2117",
+      "letter": "N",
+      "headword": "Năng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Xứng đáng",
+          "examples": [
+            {
+              "ede": "Năng dưi pŭ mni",
+              "vi": "Xứng đáng được khen thưởng"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Năng (tt) | Xứng đáng. Năng dưi pŭ mni: Xứng đáng được khen thưởng."
+    },
+    {
+      "id": "DY2118",
+      "letter": "N",
+      "headword": "Năng ai",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "pht",
+          "full": "Phụ từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Có lẽ, có thể",
+          "examples": [
+            {
+              "ede": "Năng ai ñu amâo hriê ôh anei",
+              "vi": "Có lẽ cô ta không đến rồi"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Năng ai (pht) | Có lẽ, có thể. Năng ai ñu amâo hriê ôh anei: Có lẽ cô ta không đến rồi."
+    },
+    {
+      "id": "DY2119",
+      "letter": "N",
+      "headword": "Năt",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Con xì (con at trong bộ bài tú lơ khơ)",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Năt (dt) | Con xì (con at trong bộ bài tú lơ khơ)."
+    },
+    {
+      "id": "DY2120",
+      "letter": "N",
+      "headword": "Nĕ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đt",
+          "full": "Đại từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Này, đây",
+          "examples": [
+            {
+              "ede": "Nĕ kơ ih anei",
+              "vi": "Nè cho con cái này"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Nĕ (đt) | Này, đây. Nĕ kơ ih anei: Nè cho con cái này."
+    },
+    {
+      "id": "DY2121",
+      "letter": "N",
+      "headword": "Ngai",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm ngơ",
+          "examples": [
+            {
+              "ede": "Ƀuh kâo ngă hĕ ngai",
+              "vi": "Thấy tôi làm ngơ"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngai (tt) | Làm ngơ. Ƀuh kâo ngă hĕ ngai: Thấy tôi làm ngơ."
+    },
+    {
+      "id": "DY2122",
+      "letter": "N",
+      "headword": "Ngai mang",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm lơ như không hề quen biết",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "Ngai mang | Làm lơ như không hề quen biết."
+    },
+    {
+      "id": "DY2123",
+      "letter": "N",
+      "headword": "Ngak kkuê",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngửa cổ",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngak kkuê (đgt) | Ngửa cổ."
+    },
+    {
+      "id": "DY2124",
+      "letter": "N",
+      "headword": "Ngañ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ồn",
+          "examples": [
+            {
+              "ede": "Ngañ msĕ anôk dôk mnia",
+              "vi": "Ồn như chợ"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngañ (tt) | Ồn. Ngañ msĕ anôk dôk mnia: Ồn như chợ."
+    },
+    {
+      "id": "DY2125",
+      "letter": "N",
+      "headword": "Ngañ bañ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ồn ào",
+          "examples": [
+            {
+              "ede": "Ênai êdeh ngañ bañ",
+              "vi": "Tiếng xe ồn ào"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngañ bañ (tt) | Ồn ào. Ênai êdeh ngañ bañ: Tiếng xe ồn ào."
+    },
+    {
+      "id": "DY2126",
+      "letter": "N",
+      "headword": "Ngap ngap",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Nắng) Chang chang",
+          "examples": [
+            {
+              "ede": "Adiê mđiă ngap ngap",
+              "vi": "Trời nắng chang chang"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngap ngap(tt) | (Nắng) Chang chang. Adiê mđiă ngap ngap: Trời nắng chang chang."
+    },
+    {
+      "id": "DY2127",
+      "letter": "N",
+      "headword": "Ngă",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm, chế biến",
+          "examples": [
+            {
+              "ede": "Ngă bruă",
+              "vi": "Làm việc"
+            },
+            {
+              "ede": "Ngă êra",
+              "vi": "Làm dáng, làm đỏm"
+            },
+            {
+              "ede": "Ngă klei rung răng",
+              "vi": "Quấy rối"
+            },
+            {
+              "ede": "Ngă êa drao",
+              "vi": "Chế biến thuốc"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngă (đgt) | Làm, chế biến. Ngă bruă: Làm việc; Ngă êra: Làm dáng, làm đỏm; Ngă klei rung răng: Quấy rối; Ngă êa drao: Chế biến thuốc."
+    },
+    {
+      "id": "DY2128",
+      "letter": "N",
+      "headword": "Ngă ƀĭng găp",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Kết bạn",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngă ƀĭng găp (đgt) | Kết bạn."
+    },
+    {
+      "id": "DY2129",
+      "letter": "N",
+      "headword": "Ngă yang",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Cúng Giàng",
+          "examples": [
+            {
+              "ede": "Ngă yang kơ asei mlei",
+              "vi": "Cúng yàng cầu mong sức khoẻ"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngă yang(đgt) | Cúng Giàng. Ngă yang kơ asei mlei: Cúng yàng cầu mong sức khoẻ."
+    },
+    {
+      "id": "DY2130",
+      "letter": "N",
+      "headword": "Ngăn",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lặng",
+          "examples": [
+            {
+              "ede": "Adiê ngăn angĭn",
+              "vi": "Trời lặng gió"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngăn (tt) | Lặng. Adiê ngăn angĭn: Trời lặng gió."
+    },
+    {
+      "id": "DY2131",
+      "letter": "N",
+      "headword": "Ngăn drăp",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tài sản",
+          "examples": [
+            {
+              "ede": "Mbha ngăn drăp kơ anak čô",
+              "vi": "Chia tài sản cho con cái"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngăn drăp (dt) | Tài sản. Mbha ngăn drăp kơ anak čô: Chia tài sản cho con cái."
+    },
+    {
+      "id": "DY2132",
+      "letter": "N",
+      "headword": "Ngăn đah",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tiền bạc",
+          "examples": [
+            {
+              "ede": "Kƀah ngăn đah pŏk",
+              "vi": "Thiếu tiền bạc"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngăn đah (dt) | Tiền bạc. Kƀah ngăn đah pŏk: Thiếu tiền bạc."
+    },
+    {
+      "id": "DY2133",
+      "letter": "N",
+      "headword": "Ngeh ngeh",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Lo) ngay ngáy",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngeh ngeh (tt) | (Lo) ngay ngáy."
+    },
+    {
+      "id": "DY2134",
+      "letter": "N",
+      "headword": "Ngêč ngiâo",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngó",
+          "examples": [
+            {
+              "ede": "Ka lač ngêč ngiâo",
+              "vi": "Chưa nói mà đã ngó người"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngêč ngiâo (tt) | Ngó. Ka lač ngêč ngiâo: Chưa nói mà đã ngó người."
+    },
+    {
+      "id": "DY2135",
+      "letter": "N",
+      "headword": "Ngêk ngôk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Đãng trí",
+          "examples": [
+            {
+              "ede": "Mnuih ngêk ngôk ti dưm ti wơr",
+              "vi": "Người đãng trí để đâu quên đó"
+            }
+          ]
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngêk ngôk (tt) | Đãng trí. Mnuih ngêk ngôk ti dưm ti wơr: Người đãng trí để đâu quên đó."
+    },
+    {
+      "id": "DY2136",
+      "letter": "N",
+      "headword": "Ngêñ bêñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tức giận",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Ngêñ bêñ (đgt) | Tức giận."
+    },
+    {
+      "id": "DY2137",
+      "letter": "N",
+      "headword": "Nghar pui",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Than hồng",
+          "examples": []
+        }
+      ],
+      "book_page": 113,
+      "pdf_page": 115,
+      "notes": [],
+      "source_line": "Nghar pui (dt) | Than hồng."
+    },
+    {
+      "id": "DY2138",
+      "letter": "N",
+      "headword": "Ngiêk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Chim ri",
+          "examples": [
+            {
+              "ede": "Ngiêk hiu duah ƀŏng mdiê bi phung",
+              "vi": "Chim ri kiếm ăn lúa theo từng đàn"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngiêk (dt) | Chim ri. Ngiêk hiu duah ƀŏng mdiê bi phung: Chim ri kiếm ăn lúa theo từng đàn."
+    },
+    {
+      "id": "DY2139",
+      "letter": "N",
+      "headword": "Ngiêr",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Quay (đầu)",
+          "examples": [
+            {
+              "ede": "Ngiêr kŏ phă ngŏ",
+              "vi": "Quay đầu phía đông"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngiêr (đgt) | Quay (đầu). Ngiêr kŏ phă ngŏ: Quay đầu phía đông."
+    },
+    {
+      "id": "DY2140",
+      "letter": "N",
+      "headword": "Nging ngông",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Thẫn thờ",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Nging ngông (tt) | Thẫn thờ."
+    },
+    {
+      "id": "DY2141",
+      "letter": "N",
+      "headword": "Ngŏ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Phía đông",
+          "examples": [
+            {
+              "ede": "Yang hruê ƀlĕ tĭng Ngŏ",
+              "vi": "Mặt trời mọc ở phía đông"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngŏ (dt) | Phía đông. Yang hruê ƀlĕ tĭng Ngŏ: Mặt trời mọc ở phía đông."
+    },
+    {
+      "id": "DY2142",
+      "letter": "N",
+      "headword": "Ngŏk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngẩn",
+          "examples": [
+            {
+              "ede": "Hlŏng ngŏk hĕ",
+              "vi": "Ngẩn người ra"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngŏk (tt) | Ngẩn. Hlŏng ngŏk hĕ: Ngẩn người ra."
+    },
+    {
+      "id": "DY2143",
+      "letter": "N",
+      "headword": "Ngŏng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngẩn ngơ",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngŏng (tt) | Ngẩn ngơ."
+    },
+    {
+      "id": "DY2144",
+      "letter": "N",
+      "headword": "Ngôk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Uống (ực một hơi)",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngôk (đgt) | Uống (ực một hơi)."
+    },
+    {
+      "id": "DY2145",
+      "letter": "N",
+      "headword": "Ngông",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngỗng",
+          "examples": [
+            {
+              "ede": "Sang rông ngông",
+              "vi": "Nhà nuôi con ngỗng"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngông (dt) | Ngỗng. Sang rông ngông: Nhà nuôi con ngỗng."
+    },
+    {
+      "id": "DY2146",
+      "letter": "N",
+      "headword": "Ngơ ngăr",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Cứng đầu (Tỏ thái độ không vừa ý)",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngăr (tt) | Cứng đầu (Tỏ thái độ không vừa ý)."
+    },
+    {
+      "id": "DY2147",
+      "letter": "N",
+      "headword": "Ngơ ngăk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngất",
+          "examples": [
+            {
+              "ede": "Lĕ buh djiê hwăt ngơ ngăk",
+              "vi": "Té ngã ngất xỉu"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngăk (đgt) | Ngất. Lĕ buh djiê hwăt ngơ ngăk: Té ngã ngất xỉu."
+    },
+    {
+      "id": "DY2148",
+      "letter": "N",
+      "headword": "Ngơ ngŏk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngẩn người ra",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngŏk (tt) | Ngẩn người ra."
+    },
+    {
+      "id": "DY2149",
+      "letter": "N",
+      "headword": "Ngơ ngĕ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Chăm chú",
+          "examples": [
+            {
+              "ede": "Dôk hmư̆ ngơ ngĕ",
+              "vi": "Chăm chú lắng nghe"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngĕ (tt) | Chăm chú. Dôk hmư̆ ngơ ngĕ: Chăm chú lắng nghe."
+    },
+    {
+      "id": "DY2150",
+      "letter": "N",
+      "headword": "Ngơ ngĭn",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lặng như tờ (nước)",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngĭn (tt) | Lặng như tờ (nước)."
+    },
+    {
+      "id": "DY2151",
+      "letter": "N",
+      "headword": "Ngơ ngông",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tịt, mù tịt không biết gì cả",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngông (tt) | Tịt, mù tịt không biết gì cả."
+    },
+    {
+      "id": "DY2152",
+      "letter": "N",
+      "headword": "Ngơ ngŭk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ủ rũ",
+          "examples": [
+            {
+              "ede": "Dôk ngơ ngŭk",
+              "vi": "Ngồi ủ rũ"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngŭk (tt) | Ủ rũ. Dôk ngơ ngŭk: Ngồi ủ rũ."
+    },
+    {
+      "id": "DY2153",
+      "letter": "N",
+      "headword": "Ngơ ngư̆",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Thiu thiu (ngủ)",
+          "examples": [
+            {
+              "ede": "Čiăng pĭt ngơ ngư̆",
+              "vi": "Thiu thiu buồn ngủ"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơ ngư̆ (tt) | Thiu thiu (ngủ). Čiăng pĭt ngơ ngư̆: Thiu thiu buồn ngủ."
+    },
+    {
+      "id": "DY2154",
+      "letter": "N",
+      "headword": "Ngơi",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm lơ",
+          "examples": [
+            {
+              "ede": "Ƀuh kâo ngă hĕ ngơi",
+              "vi": "Thấy tôi làm lơ"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngơi (tt) | Làm lơ. Ƀuh kâo ngă hĕ ngơi: Thấy tôi làm lơ."
+    },
+    {
+      "id": "DY2155",
+      "letter": "N",
+      "headword": "Ngua kŏ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Dội lên đầu",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngua kŏ (đgt) | Dội lên đầu."
+    },
+    {
+      "id": "DY2156",
+      "letter": "N",
+      "headword": "Ngur",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Trái) ương",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngur (tt) | (Trái) ương."
+    },
+    {
+      "id": "DY2157",
+      "letter": "N",
+      "headword": "Ngur buč",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Chín rục",
+          "examples": [
+            {
+              "ede": "Boh ksă ngur buč",
+              "vi": "Qủa chín rục"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngur buč (tt) | Chín rục. Boh ksă ngur buč: Qủa chín rục."
+    },
+    {
+      "id": "DY2158",
+      "letter": "N",
+      "headword": "Ngŭr ngăr",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lắc đầu (tỏ thái độ không vừa lòng)",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngŭr ngăr (đgt) | Lắc đầu (tỏ thái độ không vừa lòng)."
+    },
+    {
+      "id": "DY2159",
+      "letter": "N",
+      "headword": "Ngưk kŏ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngước đầu, ngẩng đầu",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngưk kŏ (đgt) | Ngước đầu, ngẩng đầu."
+    },
+    {
+      "id": "DY2160",
+      "letter": "N",
+      "headword": "Ngưñ ngưñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Dứ (làm cho thèm)",
+          "examples": [
+            {
+              "ede": "Ngưñ ngưñ čiăng ƀŏng ƀêñ kâo",
+              "vi": "Cho thèm ăn bánh nè"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ngưñ ngưñ (đgt) | Dứ (làm cho thèm). Ngưñ ngưñ čiăng ƀŏng ƀêñ kâo: Cho thèm ăn bánh nè."
+    },
+    {
+      "id": "DY2161",
+      "letter": "N",
+      "headword": "Nhô",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Bầu dục",
+          "examples": [
+            {
+              "ede": "Ƀô̆ nhô",
+              "vi": "Khuôn mặt trái xoan"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Nhô (tt) | Bầu dục. Ƀô̆ nhô: Khuôn mặt trái xoan."
+    },
+    {
+      "id": "DY2162",
+      "letter": "N",
+      "headword": "Ni na",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rêu",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Ni na (dt) | Rêu."
+    },
+    {
+      "id": "DY2163",
+      "letter": "N",
+      "headword": "Nik",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rõ",
+          "examples": [
+            {
+              "ede": "Dlăng bi nik",
+              "vi": "Nhìn cho rõ"
+            },
+            {
+              "ede": "Ka thâo klă nik",
+              "vi": "Chưa biết rõ"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Nik (tt) | Rõ. Dlăng bi nik: Nhìn cho rõ. Ka thâo klă nik: Chưa biết rõ."
+    },
+    {
+      "id": "DY2164",
+      "letter": "N",
+      "headword": "Nik tam",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rõ ràng",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Nik tam (tt) | Rõ ràng."
+    },
+    {
+      "id": "DY2165",
+      "letter": "N",
+      "headword": "Niê",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Họ Niê của người Êđê",
+          "examples": []
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "Niê (dt) | Họ Niê của người Êđê."
+    },
+    {
+      "id": "DY2166",
+      "letter": "N",
+      "headword": "N'nung",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Thòng lọng",
+          "examples": [
+            {
+              "ede": "Klam kyâo n'nung",
+              "vi": "Vác cây thòng lòng"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [],
+      "source_line": "N'nung (dt) | Thòng lọng. Klam kyâo n'nung: Vác cây thòng lòng."
+    },
+    {
+      "id": "DY2167",
+      "letter": "N",
+      "headword": "No",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Kìa",
+          "examples": [
+            {
+              "ede": "No ñu anăn",
+              "vi": "Nó kia kìa"
+            }
+          ]
+        }
+      ],
+      "book_page": 114,
+      "pdf_page": 116,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "No | Kìa. No ñu anăn: Nó kia kìa."
+    },
+    {
+      "id": "DY2168",
+      "letter": "N",
+      "headword": "Nŏ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Đấy, đó",
+          "examples": [
+            {
+              "ede": "Nŏ ƀuh yơh ală ih",
+              "vi": "Đấy, thấy chưa"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "Nŏ | Đấy, đó. Nŏ ƀuh yơh ală ih: Đấy, thấy chưa."
+    },
+    {
+      "id": "DY2169",
+      "letter": "N",
+      "headword": "Nơ nư̆r",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Rốn) lồi ra",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nơ nư̆r (đgt) | (Rốn) lồi ra."
+    },
+    {
+      "id": "DY2170",
+      "letter": "N",
+      "headword": "Nŏng dŏ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đt",
+          "full": "Đại từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Cái gì",
+          "examples": [
+            {
+              "ede": "Nŏng dŏ anei?",
+              "vi": "Cái gì đây?"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nŏng dŏ (đt) | Cái gì. Nŏng dŏ anei?: Cái gì đây?."
+    },
+    {
+      "id": "DY2171",
+      "letter": "N",
+      "headword": "Nô",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Con cưng (gọi con trai)",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nô (dt) | Con cưng (gọi con trai)."
+    },
+    {
+      "id": "DY2172",
+      "letter": "N",
+      "headword": "Nun (kan ênun)",
+      "variants": [],
+      "alt_forms": [
+        "kan ênun"
+      ],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Cá) Chạch",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nun (kan ênun) (dt) | (Cá) Chạch."
+    },
+    {
+      "id": "DY2173",
+      "letter": "N",
+      "headword": "Nut",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nút",
+          "examples": [
+            {
+              "ede": "Ao tloh boh nut",
+              "vi": "Áo đứt nút"
+            },
+            {
+              "ede": "Kă boh nut ao",
+              "vi": "Kết nút áo"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nut (dt) | Nút. Ao tloh boh nut: Áo đứt nút; Kă boh nut ao: Kết nút áo."
+    },
+    {
+      "id": "DY2174",
+      "letter": "N",
+      "headword": "Nŭñ nêñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Dữ tợn",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nŭñ nêñ (tt) | Dữ tợn."
+    },
+    {
+      "id": "DY2175",
+      "letter": "N",
+      "headword": "Nư",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nợ",
+          "examples": [
+            {
+              "ede": "Đuôm nư",
+              "vi": "Mắc nợ"
+            },
+            {
+              "ede": "Tla nư",
+              "vi": "Trả nợ"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Nư (dt) | Nợ. Đuôm nư: Mắc nợ; Tla nư: Trả nợ."
+    },
+    {
+      "id": "DY2176",
+      "letter": "Ñ",
+      "headword": "Ñač",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Trúng, chạm, khắc",
+          "examples": [
+            {
+              "ede": "Ñač hip kčok",
+              "vi": "Chạm tủ chè"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñač (đgt) | Trúng, chạm, khắc. Ñač hip kčok: Chạm tủ chè."
+    },
+    {
+      "id": "DY2177",
+      "letter": "Ñ",
+      "headword": "Ñah",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Bùng ra, sổ ra",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñah (đgt) | Bùng ra, sổ ra."
+    },
+    {
+      "id": "DY2178",
+      "letter": "Ñ",
+      "headword": "Ñah đuê̆",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Xa lánh",
+          "examples": [
+            {
+              "ede": "Ñah đuê̆ kơ ƀĭng găp",
+              "vi": "Xa lánh bạn bè"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñah đuê̆ (đgt) | Xa lánh. Ñah đuê̆ kơ ƀĭng găp: Xa lánh bạn bè."
+    },
+    {
+      "id": "DY2179",
+      "letter": "Ñ",
+      "headword": "Ñah ñañ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Éo le",
+          "examples": [
+            {
+              "ede": "Klei truh ñah ñañ",
+              "vi": "Cảnh ngộ éo le"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñah ñañ (tt) | Éo le. Klei truh ñah ñañ: Cảnh ngộ éo le."
+    },
+    {
+      "id": "DY2180",
+      "letter": "Ñ",
+      "headword": "Ñao ñao",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Từ chỉ âm thanh thanh ve ve",
+          "examples": [
+            {
+              "ede": "Wai yut mñê ñao ñao",
+              "vi": "Ve sầu kêu ve ve"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Ồn ào",
+          "examples": []
+        },
+        {
+          "index": 3,
+          "label": "3.",
+          "pos": null,
+          "gloss_vi": "Léo nhéo",
+          "examples": [
+            {
+              "ede": "Mâo asăp iêo ñao ñao hlăm êlan",
+              "vi": "Có tiếng gọi léo nhéo ngoài đường"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñao ñao (tt) | 1. Từ chỉ âm thanh thanh ve ve. Wai yut mñê ñao ñao: Ve sầu kêu ve ve. 2. Ồn ào. 3. Léo nhéo. Mâo asăp iêo ñao ñao hlăm êlan: Có tiếng gọi léo nhéo ngoài đường."
+    },
+    {
+      "id": "DY2181",
+      "letter": "Ñ",
+      "headword": "Ñap ñap",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ùn ùn",
+          "examples": [
+            {
+              "ede": "Knam jŭ ñap ñap đĭ hriê",
+              "vi": "Mây đen ùn ùn kéo đến"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñap ñap (tt) | Ùn ùn. Knam jŭ ñap ñap đĭ hriê: Mây đen ùn ùn kéo đến."
+    },
+    {
+      "id": "DY2182",
+      "letter": "Ñ",
+      "headword": "Ñăk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Nhấc, bắc (lên, xuống)",
+          "examples": [
+            {
+              "ede": "Ñăk gŏ êsei hlăm kpur djuh",
+              "vi": "Bắc nồi cơm lên bếp lửa"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Nhắc nhở",
+          "examples": [
+            {
+              "ede": "Ñăk anak čô ti sang hriăm hră",
+              "vi": "Nhắc nhở con cháu ở nhà học tập"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "3.",
+          "pos": null,
+          "gloss_vi": "Tránh đi",
+          "examples": []
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñăk (đgt) | 1. Nhấc, bắc (lên, xuống). Ñăk gŏ êsei hlăm kpur djuh: Bắc nồi cơm lên bếp lửa. 2. Nhắc nhở. Ñăk anak čô ti sang hriăm hră: Nhắc nhở con cháu ở nhà học tập. 3. Tránh đi."
+    },
+    {
+      "id": "DY2183",
+      "letter": "Ñ",
+      "headword": "Ñăk êlan",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tránh đường",
+          "examples": [
+            {
+              "ede": "Ñăk êlan kâo nao",
+              "vi": "Tránh đường tôi đi"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñăk êlan (đgt) | Tránh đường. Ñăk êlan kâo nao: Tránh đường tôi đi."
+    },
+    {
+      "id": "DY2184",
+      "letter": "Ñ",
+      "headword": "Ñăm ñăm",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lờ lợ (ngọt)",
+          "examples": [
+            {
+              "ede": "Mmih ñăm ñăm",
+              "vi": "Ngọt lờ lợ"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñăm ñăm (tt) | Lờ lợ (ngọt). Mmih ñăm ñăm: Ngọt lờ lợ."
+    },
+    {
+      "id": "DY2185",
+      "letter": "Ñ",
+      "headword": "Ñăt",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Im",
+          "examples": [
+            {
+              "ede": "Dôk ñăt kriêp",
+              "vi": "Im lặng"
+            },
+            {
+              "ede": "Ñăt yơh!",
+              "vi": "Nín đi"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Kỳ cọ",
+          "examples": [
+            {
+              "ede": "Ñăt hlăm asei mlei",
+              "vi": "Kỳ cọ thân thể"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñăt (đgt) | 1.Im. Dôk ñăt kriêp: Im lặng; Ñăt yơh!: Nín đi. 2. Kỳ cọ. Ñăt hlăm asei mlei: Kỳ cọ thân thể."
+    },
+    {
+      "id": "DY2186",
+      "letter": "Ñ",
+      "headword": "Ñăm ñi",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Hồ đồ",
+          "examples": [
+            {
+              "ede": "Kđăm ênoh ñăm ñi",
+              "vi": "Đánh giá hồ đồ"
+            },
+            {
+              "ede": "Blŭ yăl ñăm ñi",
+              "vi": "Ăn nói hồ đồ"
+            }
+          ]
+        }
+      ],
+      "book_page": 115,
+      "pdf_page": 117,
+      "notes": [],
+      "source_line": "Ñăm ñi (tt) | Hồ đồ. Kđăm ênoh ñăm ñi: Đánh giá hồ đồ; Blŭ yăl ñăm ñi: Ăn nói hồ đồ."
+    },
+    {
+      "id": "DY2187",
+      "letter": "Ñ",
+      "headword": "Ñeh",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Bấm",
+          "examples": [
+            {
+              "ede": "Ñeh djiêu tlao bi k'iăk",
+              "vi": "Bấm nhau cười khúc khích"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Hất",
+          "examples": [
+            {
+              "ede": "Ñeh kkiêng kngan",
+              "vi": "Hất khuỷu tay"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "3.",
+          "pos": null,
+          "gloss_vi": "Hích",
+          "examples": [
+            {
+              "ede": "Ñeh kkiêng kngan ti grưh ƀĭng găp bi mthâo",
+              "vi": "Hích khuỷu tay vào sườn bạn ra hiệu"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñeh (đgt) | 1. Bấm. Ñeh djiêu tlao bi k'iăk: Bấm nhau cười khúc khích. 2. Hất. Ñeh kkiêng kngan: Hất khuỷu tay. 3. Hích. Ñeh kkiêng kngan ti grưh ƀĭng găp bi mthâo: Hích khuỷu tay vào sườn bạn ra hiệu."
+    },
+    {
+      "id": "DY2188",
+      "letter": "Ñ",
+      "headword": "Ñĕ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Giãn",
+          "examples": [
+            {
+              "ede": "Mnuih ñĕ đuê̆ brei kơ êdeh găn nao",
+              "vi": "Người giãn ra cho xe qua lại"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Né",
+          "examples": [
+            {
+              "ede": "Dôk ñĕ tĭng sa nah",
+              "vi": "Đứng né sang một bên"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "3.",
+          "pos": null,
+          "gloss_vi": "Tránh",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĕ (đgt) | 1. Giãn. Mnuih ñĕ đuê̆ brei kơ êdeh găn nao: Người giãn ra cho xe qua lại. 2. Né. Dôk ñĕ tĭng sa nah: Đứng né sang một bên. 3. Tránh."
+    },
+    {
+      "id": "DY2189",
+      "letter": "Ñ",
+      "headword": "Ñĕ dê̆č",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Né tránh",
+          "examples": [
+            {
+              "ede": "Ală dlăng ñĕ dê̆č",
+              "vi": "Cái nhìn né tránh"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĕ dê̆č (đgt) | Né tránh. Ală dlăng ñĕ dê̆č: Cái nhìn né tránh."
+    },
+    {
+      "id": "DY2190",
+      "letter": "Ñ",
+      "headword": "Ñĕng ñŏng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nhong nhong",
+          "examples": [
+            {
+              "ede": "Êran ñĕng ñŏng",
+              "vi": "Chạy nhong nhong"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĕng ñŏng (đgt) | Nhong nhong. Êran ñĕng ñŏng: Chạy nhong nhong."
+    },
+    {
+      "id": "DY2191",
+      "letter": "Ñ",
+      "headword": "Ñĕč",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Vò",
+          "examples": [
+            {
+              "ede": "Ñĕč čhum ao",
+              "vi": "Vò quần áo"
+            },
+            {
+              "ede": "Ñĕč djam hla hbei tao",
+              "vi": "Vò rau lang"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Nghiền",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĕč (đgt) | 1. Vò. Ñĕč čhum ao: Vò quần áo. Ñĕč djam hla hbei tao: Vò rau lang. 2. Nghiền."
+    },
+    {
+      "id": "DY2192",
+      "letter": "Ñ",
+      "headword": "Ñê̆ñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm nhàu",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñê̆ñ (đgt) | Làm nhàu."
+    },
+    {
+      "id": "DY2193",
+      "letter": "Ñ",
+      "headword": "Ñê̆ñ m'ar",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Làm nhàu giấy",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñê̆ñ m'ar (đgt) | Làm nhàu giấy."
+    },
+    {
+      "id": "DY2194",
+      "letter": "Ñ",
+      "headword": "Ñê̆ñ ñê",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tít",
+          "examples": [
+            {
+              "ede": "Ƀŭk kprê̆ñ ñê̆ñ ñê",
+              "vi": "Tóc xoăn tít"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñê̆ñ ñê (tt) | Tít. Ƀŭk kprê̆ñ ñê̆ñ ñê: Tóc xoăn tít."
+    },
+    {
+      "id": "DY2195",
+      "letter": "Ñ",
+      "headword": "Ñiêp",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Ngon",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñiêp (tt) | Ngon."
+    },
+    {
+      "id": "DY2196",
+      "letter": "Ñ",
+      "headword": "Ñil ñil",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Giôn giốt",
+          "examples": [
+            {
+              "ede": "Msăm ñil ñil",
+              "vi": "Giôn giốt chua"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñil ñil (tt) | Giôn giốt. Msăm ñil ñil: Giôn giốt chua."
+    },
+    {
+      "id": "DY2197",
+      "letter": "Ñ",
+      "headword": "Ñip",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nhíp",
+          "examples": [
+            {
+              "ede": "Ƀŭč mlâo mŭñ kang hŏng ñip",
+              "vi": "Nhổ râu bằng nhíp"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñip (dt) | Nhíp. Ƀŭč mlâo mŭñ kang hŏng ñip: Nhổ râu bằng nhíp."
+    },
+    {
+      "id": "DY2198",
+      "letter": "Ñ",
+      "headword": "Ñit ñit",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Mắc kẹt (đi xe mưa lầy, dính mắc kẹt)",
+          "examples": [
+            {
+              "ede": "Êdeh đuôm ñit ñit",
+              "vi": "Xe mắc kẹt"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñit ñit (đgt) | Mắc kẹt (đi xe mưa lầy, dính mắc kẹt). Êdeh đuôm ñit ñit: Xe mắc kẹt."
+    },
+    {
+      "id": "DY2199",
+      "letter": "Ñ",
+      "headword": "Ñĭng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Mắc phải",
+          "examples": [
+            {
+              "ede": "Đuôm ñĭng ti anăn",
+              "vi": "Mắc ở đó"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĭng (đgt) | Mắc phải. Đuôm ñĭng ti anăn: Mắc ở đó."
+    },
+    {
+      "id": "DY2200",
+      "letter": "Ñ",
+      "headword": "Ñĭp",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Tính tình) Nghiêm túc",
+          "examples": []
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñĭp (tt) | (Tính tình) Nghiêm túc."
+    },
+    {
+      "id": "DY2201",
+      "letter": "Ñ",
+      "headword": "Ñhŏk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Thót",
+          "examples": [
+            {
+              "ede": "Kdjăt ñhŏk asei mlei msĕ si pui kmlă kĕ",
+              "vi": "Thót người như bị điện giật"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñhŏk (đgt) | Thót. Kdjăt ñhŏk asei mlei msĕ si pui kmlă kĕ: Thót người như bị điện giật."
+    },
+    {
+      "id": "DY2202",
+      "letter": "Ñ",
+      "headword": "Ñhŏk ñhŏk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Thon thót",
+          "examples": [
+            {
+              "ede": "Kdjăt ñhŏk ñhŏk",
+              "vi": "Giật mình thon thót"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñhŏk ñhŏk (đgt) | Thon thót. Kdjăt ñhŏk ñhŏk: Giật mình thon thót."
+    },
+    {
+      "id": "DY2203",
+      "letter": "Ñ",
+      "headword": "Ñoh ñăt",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Hộc tốc",
+          "examples": [
+            {
+              "ede": "Ñoh ñăt êran nao hưn čiăng bi hmao",
+              "vi": "Hộc tốc chạy đi báo tin cho kịp"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Tất bật",
+          "examples": [
+            {
+              "ede": "Ñoh ñăt čhĭ mnŏng",
+              "vi": "Tất bật bán hàng"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñoh ñăt (tt) | 1. Hộc tốc. Ñoh ñăt êran nao hưn čiăng bi hmao: Hộc tốc chạy đi báo tin cho kịp. 2. Tất bật. Ñoh ñăt čhĭ mnŏng: Tất bật bán hàng."
+    },
+    {
+      "id": "DY2204",
+      "letter": "Ñ",
+      "headword": "Ñŏng ñŏng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lăng xăng",
+          "examples": [
+            {
+              "ede": "Ñŏng ñŏng êran wĭt êran nao",
+              "vi": "Lăng xăng chạy tới chạy lui"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñŏng ñŏng (đgt) | Lăng xăng. Ñŏng ñŏng êran wĭt êran nao: Lăng xăng chạy tới chạy lui."
+    },
+    {
+      "id": "DY2205",
+      "letter": "Ñ",
+      "headword": "Ñơ hñăn",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rúm",
+          "examples": [
+            {
+              "ede": "Hrut ñơ hñăn asei mlei",
+              "vi": "Co rúm người lại"
+            }
+          ]
+        }
+      ],
+      "book_page": 116,
+      "pdf_page": 118,
+      "notes": [],
+      "source_line": "Ñơ hñăn (tt) | Rúm. Hrut ñơ hñăn asei mlei: Co rúm người lại."
+    },
+    {
+      "id": "DY2206",
+      "letter": "Ñ",
+      "headword": "Ñơ hñê̆ñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Xệch",
+          "examples": [
+            {
+              "ede": "Ƀô̆ mta kwiâo ñơ hñê̆ñ kyua ruă",
+              "vi": "Mặt méo xệch vì đau"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñơ hñê̆ñ (tt) | Xệch. Ƀô̆ mta kwiâo ñơ hñê̆ñ kyua ruă: Mặt méo xệch vì đau."
+    },
+    {
+      "id": "DY2207",
+      "letter": "Ñ",
+      "headword": "Ñơ ñă",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rịt",
+          "examples": [
+            {
+              "ede": "Păn ñơ ñă ti amĭ",
+              "vi": "Bám rịt lấy mẹ"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñơ ñă (đgt) | Rịt. Păn ñơ ñă ti amĭ: Bám rịt lấy mẹ."
+    },
+    {
+      "id": "DY2208",
+      "letter": "Ñ",
+      "headword": "Ñơ ñĕ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Rịt (chặp)",
+          "examples": [
+            {
+              "ede": "Krŏng ñơ ñĕ ti sang",
+              "vi": "Giữ rịt ở nhà"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Chịt",
+          "examples": [
+            {
+              "ede": "Djă ñơ ñĕ hră bao",
+              "vi": "Giữ chịt lấy tờ báo"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñơ ñĕ (đgt) | 1. Rịt (chặp). Krŏng ñơ ñĕ ti sang: Giữ rịt ở nhà. 2. Chịt. Djă ñơ ñĕ hră bao: Giữ chịt lấy tờ báo."
+    },
+    {
+      "id": "DY2209",
+      "letter": "Ñ",
+      "headword": "Ñu",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đt",
+          "full": "Đại từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nó, hắn, ông, y,. (đại từ ngôi thứ 3 số ít)",
+          "examples": []
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñu (đt) | Nó, hắn, ông, y,... (đại từ ngôi thứ 3 số ít)."
+    },
+    {
+      "id": "DY2210",
+      "letter": "Ñ",
+      "headword": "Ñu pô",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Mình",
+          "examples": [
+            {
+              "ede": "Ñu knŏng mĭn ñu pô",
+              "vi": "Nó chỉ nghĩ đến mình"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "Ñu pô | Mình. Ñu knŏng mĭn ñu pô: Nó chỉ nghĩ đến mình."
+    },
+    {
+      "id": "DY2211",
+      "letter": "Ñ",
+      "headword": "Ñuăl",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lưới",
+          "examples": [
+            {
+              "ede": "Dăng ñuăl",
+              "vi": "Thả lưới"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñuăl (dt) | Lưới. Dăng ñuăl: Thả lưới."
+    },
+    {
+      "id": "DY2212",
+      "letter": "Ñ",
+      "headword": "Ñuh ñuh",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Từ chỉ âm thanh sột soạt",
+          "examples": []
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñuh ñuh (tt) | Từ chỉ âm thanh sột soạt."
+    },
+    {
+      "id": "DY2213",
+      "letter": "Ñ",
+      "headword": "Ñuôm",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nhuộm",
+          "examples": [
+            {
+              "ede": "Mnal ñuôm êa hrah",
+              "vi": "Vải nhuộm màu đỏ"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñuôm (đgt) | Nhuộm. Mnal ñuôm êa hrah: Vải nhuộm màu đỏ."
+    },
+    {
+      "id": "DY2214",
+      "letter": "Ñ",
+      "headword": "Ñuôt",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Dai",
+          "examples": [
+            {
+              "ede": "Čĭm ñuôt đei, amâo dưi mmah ôh",
+              "vi": "Thịt dai quá, không nhai được"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñuôt (tt) | Dai. Čĭm ñuôt đei, amâo dưi mmah ôh: Thịt dai quá, không nhai được."
+    },
+    {
+      "id": "DY2215",
+      "letter": "Ñ",
+      "headword": "Ñur",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Lẩn",
+          "examples": [
+            {
+              "ede": "Ñur msĕ si kan tluôr",
+              "vi": "Lẩn như chạch"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Lủi",
+          "examples": [
+            {
+              "ede": "Ñur msĕ si čĭm kŭk",
+              "vi": "Lủi như cuốc"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "3.",
+          "pos": null,
+          "gloss_vi": "Bò, lê",
+          "examples": []
+        },
+        {
+          "index": 4,
+          "label": "4.",
+          "pos": null,
+          "gloss_vi": "Chen",
+          "examples": [
+            {
+              "ede": "Ñur mŭt hlăm anôk lu mnuih",
+              "vi": "Chen vào đám đông"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñur (đgt) | 1. Lẩn. Ñur msĕ si kan tluôr: Lẩn như chạch. 2. Lủi. Ñur msĕ si čĭm kŭk: Lủi như cuốc. 3. Bò, lê. 4. Chen. Ñur mŭt hlăm anôk lu mnuih: Chen vào đám đông."
+    },
+    {
+      "id": "DY2216",
+      "letter": "Ñ",
+      "headword": "Ñur ăm",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lùi",
+          "examples": [
+            {
+              "ede": "Ñur ăm hbei tao",
+              "vi": "Lùi khoai lang"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñur ăm (đgt) | Lùi. Ñur ăm hbei tao: Lùi khoai lang."
+    },
+    {
+      "id": "DY2217",
+      "letter": "Ñ",
+      "headword": "Ñur hiu",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Lủi",
+          "examples": [
+            {
+              "ede": "Ñur hiu mŭt hlăm mnuih lu",
+              "vi": "Lủi vào đám đông"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñur hiu (đgt) | Lủi. Ñur hiu mŭt hlăm mnuih lu: Lủi vào đám đông."
+    },
+    {
+      "id": "DY2218",
+      "letter": "Ñ",
+      "headword": "Ñur ñŭ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rúc",
+          "examples": [
+            {
+              "ede": "Mja ñur ñŭ hlăm ƀur kyâo",
+              "vi": "Con cáo rúc vào bụi cây"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñur ñŭ (đgt) | Rúc. Mja ñur ñŭ hlăm ƀur kyâo: Con cáo rúc vào bụi cây."
+    },
+    {
+      "id": "DY2219",
+      "letter": "Ñ",
+      "headword": "Ñŭ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Hụp",
+          "examples": [
+            {
+              "ede": "Phung hđeh mnei êjai ñŭ êjai hlăm êa krông",
+              "vi": "Bọn trẻ vừa tắm vừa hụp dưới sông"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Lặn",
+          "examples": [
+            {
+              "ede": "Ñŭ sa êwa sui sĭn",
+              "vi": "Lặn một hơi dài"
+            },
+            {
+              "ede": "Mnuih ñŭ êa",
+              "vi": "Thợ lặn"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñŭ (đgt) | 1. Hụp. Phung hđeh mnei êjai ñŭ êjai hlăm êa krông: Bọn trẻ vừa tắm vừa hụp dưới sông. 2. Lặn. Ñŭ sa êwa sui sĭn: Lặn một hơi dài; Mnuih ñŭ êa: Thợ lặn."
+    },
+    {
+      "id": "DY2220",
+      "letter": "Ñ",
+      "headword": "Ñŭ kma",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "đgt",
+          "full": "Động từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Tham dự",
+          "examples": [
+            {
+              "ede": "Ñŭ kma anôk kƀĭn",
+              "vi": "Tham dự hội nghị"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñŭ kma (đgt) | Tham dự. Ñŭ kma anôk kƀĭn: Tham dự hội nghị."
+    },
+    {
+      "id": "DY2221",
+      "letter": "Ñ",
+      "headword": "Ñŭñ ñê̆ñ",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Nhăn nhó",
+          "examples": [
+            {
+              "ede": "Jih sa hruê ñŭñ ñê̆ñ",
+              "vi": "Suốt ngày nhăn nhó"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñŭñ ñê̆ñ (tt) | Nhăn nhó. Jih sa hruê ñŭñ ñê̆ñ: Suốt ngày nhăn nhó."
+    },
+    {
+      "id": "DY2222",
+      "letter": "Ñ",
+      "headword": "Ñŭt",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "E dè",
+          "examples": []
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Ñŭt (tt) | E dè."
+    },
+    {
+      "id": "DY2223",
+      "letter": "O",
+      "headword": "Oč oč",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "(Đói) Cồn cào",
+          "examples": [
+            {
+              "ede": "Êpa tian oč oč",
+              "vi": "Đói bụng cồn cào"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [],
+      "source_line": "Oč oč (tt) | (Đói) Cồn cào. Êpa tian oč oč: Đói bụng cồn cào."
+    },
+    {
+      "id": "DY2224",
+      "letter": "O",
+      "headword": "O oăr",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Từ chỉ âm thanh tiếng xe máy",
+          "examples": [
+            {
+              "ede": "Ênai êdeh o oăr",
+              "vi": "Tiếng xe"
+            }
+          ]
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "O oăr | Từ chỉ âm thanh tiếng xe máy. Ênai êdeh o oăr: Tiếng xe."
+    },
+    {
+      "id": "DY2225",
+      "letter": "O",
+      "headword": "Ot ot",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Từ chỉ âm thanh gọi heo về ăn",
+          "examples": []
+        }
+      ],
+      "book_page": 117,
+      "pdf_page": 119,
+      "notes": [
+        "Sách không ghi từ loại cho mục này."
+      ],
+      "source_line": "Ot ot | Từ chỉ âm thanh gọi heo về ăn."
+    },
+    {
+      "id": "DY2226",
+      "letter": "Ŏ",
+      "headword": "Ŏng",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Mày (xưng hô thân mật với người ngang hàng hay hàng dưới)",
+          "examples": [
+            {
+              "ede": "Ŏng nao anôk kâo hŏ",
+              "vi": "Mày đến chỗ tao nhé"
+            }
+          ]
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ŏng (dt) | Mày (xưng hô thân mật với người ngang hàng hay hàng dưới). Ŏng nao anôk kâo hŏ: Mày đến chỗ tao nhé."
+    },
+    {
+      "id": "DY2227",
+      "letter": "Ô",
+      "headword": "Ô ô",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "1.",
+          "pos": null,
+          "gloss_vi": "Hu hu (mô tả tiếng khóc)",
+          "examples": []
+        },
+        {
+          "index": 2,
+          "label": "2.",
+          "pos": null,
+          "gloss_vi": "Từ chỉ âm thanh rào rào",
+          "examples": [
+            {
+              "ede": "Hjan hriê ô ô",
+              "vi": "Mưa rào rào"
+            }
+          ]
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ô ô (tt) | 1. Hu hu (mô tả tiếng khóc). 2. Từ chỉ âm thanh rào rào. Hjan hriê ô ô: Mưa rào rào."
+    },
+    {
+      "id": "DY2228",
+      "letter": "Ô",
+      "headword": "Ôč ôč",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Reng reng (mô phỏng tiếng lục lạc kêu)",
+          "examples": []
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ôč ôč (tt) | Reng reng (mô phỏng tiếng lục lạc kêu)."
+    },
+    {
+      "id": "DY2229",
+      "letter": "Ô",
+      "headword": "Ôh",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Không (từ phủ định)",
+          "examples": [
+            {
+              "ede": "Amâo mâo hmư̆ sa mta ôh",
+              "vi": "Không nghe thấy gì"
+            }
+          ]
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ôh (tt) | Không (từ phủ định). Amâo mâo hmư̆ sa mta ôh: Không nghe thấy gì."
+    },
+    {
+      "id": "DY2230",
+      "letter": "Ô",
+      "headword": "Ôk",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Gian trong, gian sau dùng để nấu ăn, ngủ (nhà dài Êđê)",
+          "examples": []
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ôk (dt) | Gian trong, gian sau dùng để nấu ăn, ngủ (nhà dài Êđê)."
+    },
+    {
+      "id": "DY2231",
+      "letter": "Ô",
+      "headword": "Ông ông",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "tt",
+          "full": "Tính từ"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Rào rào",
+          "examples": []
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ông ông (tt) | Rào rào."
+    },
+    {
+      "id": "DY2232",
+      "letter": "Ô",
+      "headword": "Ô- ĕč",
+      "variants": [],
+      "alt_forms": [],
+      "pos": [
+        {
+          "code": "dt",
+          "full": "Danh từ hoặc những tổ hợp tương đương"
+        }
+      ],
+      "loan_source": null,
+      "senses": [
+        {
+          "index": 1,
+          "label": "",
+          "pos": null,
+          "gloss_vi": "Loạt",
+          "examples": [
+            {
+              "ede": "Mkra mjing ô- ĕč mnŏng yua",
+              "vi": "Sản xuất hàng loạt dụng cụ"
+            }
+          ]
+        }
+      ],
+      "book_page": 118,
+      "pdf_page": 120,
+      "notes": [],
+      "source_line": "Ô- ĕč (dt) | Loạt. Mkra mjing ô- ĕč mnŏng yua: Sản xuất hàng loạt dụng cụ."
+    }
+  ]
+}
