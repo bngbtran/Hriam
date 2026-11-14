@@ -6,6 +6,12 @@
     caffeinate -i python scripts/train.py      # train đầy đủ, Ê Đê → Việt
     python scripts/train.py --direction vi2ede # hướng ngược lại, lưu ở thư mục riêng
     python scripts/train.py --rebuild-data     # dựng lại dữ liệu từ các file nguồn rồi train
+    python scripts/train.py --data-dir data/dataset_noi --init-from runs/ede2vi-nen/best --run-dir runs/ede2vi-noi
+                                               # train tiếp từ một mô hình đã có trên bộ dữ liệu khác
+Train theo văn nói hằng ngày: xem scripts/train_daily.sh.
+
+Chỉ train trên GPU: card NVIDIA (CUDA) hoặc GPU của Mac (MPS). Không thấy GPU thì dừng, không chạy CPU.
+Trên card NVIDIA, script dùng mixed precision (bf16 hoặc fp16) và tự chỉnh batch theo bộ nhớ card.
 
 Chạy lại đúng lệnh sẽ tiếp tục từ checkpoint gần nhất. Bấm Ctrl+C một lần để lưu rồi dừng.
 Kết quả nằm trong runs/<hướng>/: best/, last/, train.log, test_results.json, predictions_*.jsonl.
@@ -38,7 +44,7 @@ DATA_DIR = ROOT / "data" / "dataset"
 MODEL_NAME = "facebook/nllb-200-distilled-600M"
 LANG_CODES = {"ede": "ace_Latn", "vi": "vie_Latn"}
 DIRECTIONS = {"ede2vi": ("ede", "vi"), "vi2ede": ("vi", "ede")}
-REBUILD_STEPS = ["dict_parse.py", "realign.py", "build_dataset.py"]
+REBUILD_STEPS = ["realign.py", "build_dataset.py"]
 SEED = 42
 
 # GPU của Mac biên dịch lại mỗi khi đổi kích thước tensor, nên chỉ dùng vài độ dài cố định.
@@ -57,6 +63,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-dir", type=Path, help="mặc định runs/<hướng>")
     parser.add_argument("--check", action="store_true", help="chỉ kiểm tra dữ liệu rồi thoát")
     parser.add_argument("--rebuild-data", action="store_true", help="dựng lại data/dataset trước khi train")
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR,
+                        help="thư mục có train.jsonl, dev_*.jsonl, test_*.jsonl (mặc định data/dataset)")
+    parser.add_argument("--batch-scale", type=float,
+                        help="nhân kích thước batch; mặc định tự tính theo bộ nhớ GPU NVIDIA, 1 trên Mac")
+    parser.add_argument("--allow-cpu", action="store_true", help="cho phép chạy CPU khi không có GPU (rất chậm)")
+    parser.add_argument("--init-from", help="bắt đầu từ mô hình này thay vì NLLB gốc, ví dụ runs/ede2vi-nen/best")
     parser.add_argument("--limit", type=int, help="chỉ dùng N cặp mỗi tập, để thử nhanh")
     parser.add_argument("--stop-after", type=int, help="dừng sau N bước tổng cộng, để thử nhanh")
     return parser.parse_args()
@@ -93,6 +105,13 @@ def load_split(name: str, src: str, tgt: str, limit: int | None) -> list[dict]:
     return rows
 
 
+def split_names(prefix: str) -> list[str]:
+    names = sorted(p.stem for p in DATA_DIR.glob(f"{prefix}_*.jsonl"))
+    if not names:
+        sys.exit(f"LỖI: {DATA_DIR} không có file {prefix}_*.jsonl.")
+    return names
+
+
 def attach_lengths(rows: list[dict], tokenizer, src: str, tgt: str) -> None:
     sources = tokenizer([row[src] for row in rows])["input_ids"]
     targets = tokenizer(text_target=[row[tgt] for row in rows])["input_ids"]
@@ -120,11 +139,58 @@ def make_batches(rows: list[dict], epoch: int) -> list[tuple[int, list[dict]]]:
     return batches
 
 
+def pick_device(allow_cpu: bool) -> tuple[str, str]:
+    """Chọn GPU: NVIDIA (CUDA) trước, rồi GPU của Mac (MPS). Không có GPU thì dừng, trừ khi --allow-cpu."""
+    if torch.cuda.is_available():
+        props = torch.cuda.get_device_properties(0)
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        torch.backends.cudnn.benchmark = True
+        return "cuda", f"{props.name}, {props.total_memory / 2**30:.0f} GB"
+    if torch.backends.mps.is_available():
+        return "mps", "GPU của Mac (MPS)"
+    if allow_cpu:
+        return "cpu", "CPU (rất chậm)"
+    sys.exit("LỖI: không thấy GPU nên dừng, không train bằng CPU.\n"
+             f"  torch {torch.__version__}, CUDA trong bản torch: {torch.version.cuda or 'không có'}\n"
+             "  Máy có card NVIDIA: kiểm tra driver bằng lệnh nvidia-smi, rồi cài torch bản CUDA:\n"
+             "    pip install --force-reinstall torch --index-url https://download.pytorch.org/whl/cu124\n"
+             "  Vẫn muốn chạy CPU: thêm --allow-cpu.")
+
+
+def auto_batch_scale(device: str) -> float:
+    """BATCH_BY_LENGTH chỉnh cho Mac 24 GB chạy fp32. Card NVIDIA chạy mixed precision tốn khoảng nửa bộ nhớ,
+    nên 12 GB tương đương mức gốc."""
+    if device != "cuda":
+        return 1.0
+    gigabytes = torch.cuda.get_device_properties(0).total_memory / 2**30
+    return round(min(4.0, max(0.25, gigabytes / 12)), 2)
+
+
+def apply_batch_scale(run_dir: Path | None, requested: float | None, device: str) -> float:
+    """Giữ nguyên hệ số batch giữa các lần chạy tiếp, để thứ tự batch khớp với checkpoint."""
+    global BATCH_BY_LENGTH
+    saved = run_dir / "batch.json" if run_dir else None
+    if requested is None and saved and saved.exists() and (run_dir / "last" / "train_state.pt").exists():
+        scale = json.loads(saved.read_text())["scale"]
+    else:
+        scale = requested if requested is not None else auto_batch_scale(device)
+    if saved:
+        saved.write_text(json.dumps({"scale": scale}) + "\n")
+    BATCH_BY_LENGTH = {k: max(1, round(v * scale)) for k, v in BATCH_BY_LENGTH.items()}
+    return scale
+
+
 class Trainer:
     def __init__(self, args: argparse.Namespace, log: Logger):
         self.args, self.log = args, log
         self.src, self.tgt = DIRECTIONS[args.direction]
-        self.device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+        self.device, self.device_name = pick_device(args.allow_cpu)
+        # Mixed precision trên card NVIDIA: bf16 nếu card hỗ trợ, không thì fp16 kèm GradScaler.
+        self.amp_dtype = None
+        if self.device == "cuda":
+            self.amp_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+        self.scaler = torch.amp.GradScaler("cuda", enabled=self.amp_dtype == torch.float16)
         self.run_dir = args.run_dir or ROOT / "runs" / args.direction
         self.last_dir, self.best_dir = self.run_dir / "last", self.run_dir / "best"
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -132,11 +198,17 @@ class Trainer:
         self.target_id = self.tokenizer.convert_tokens_to_ids(LANG_CODES[self.tgt])
         self.state = {"epoch": 0, "step": 0, "total_steps": 0, "best": -1.0, "history": [], "before": None}
 
+    def autocast(self):
+        """Mixed precision trên card NVIDIA; trên Mac giữ fp32 như khi đo tốc độ."""
+        return torch.autocast("cuda", dtype=self.amp_dtype, enabled=self.amp_dtype is not None)
+
     def load_data(self) -> None:
         limit = self.args.limit
         self.train = load_split("train", self.src, self.tgt, limit)
-        self.dev = {name: load_split(name, self.src, self.tgt, limit) for name in ("dev_bible", "dev_dict")}
-        self.test = {name: load_split(name, self.src, self.tgt, limit) for name in ("test_bible", "test_dict")}
+        # Mọi file dev_*.jsonl và test_*.jsonl trong thư mục dữ liệu; mô hình tốt nhất chọn theo chrF trung bình các tập dev.
+        self.dev = {name: load_split(name, self.src, self.tgt, limit) for name in split_names("dev")}
+        self.test = {name: load_split(name, self.src, self.tgt, limit) for name in split_names("test")}
+        self.log(f"Dữ liệu: {DATA_DIR}; dev: {', '.join(self.dev)}; test: {', '.join(self.test)}")
         attach_lengths(self.train, self.tokenizer, self.src, self.tgt)
         total = len(self.train)
         self.train = [row for row in self.train if row["length"] <= MAX_LENGTH]
@@ -156,7 +228,9 @@ class Trainer:
     def setup(self) -> None:
         total = self.args.epochs * self.steps_per_epoch
         saved = self.last_dir / "train_state.pt"
-        source = self.last_dir if saved.exists() else MODEL_NAME
+        source = self.last_dir if saved.exists() else (self.args.init_from or MODEL_NAME)
+        if source != self.last_dir:
+            self.log(f"Bắt đầu từ mô hình {source}")
         self.model = AutoModelForSeq2SeqLM.from_pretrained(source).to(self.device)
         self.model.generation_config.max_length = None
         self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=self.args.lr, weight_decay=0.01)
@@ -197,8 +271,10 @@ class Trainer:
                 part = indices[start:start + step]
                 batch = self.tokenizer([rows[i][self.src] for i in part], return_tensors="pt", padding="max_length",
                                        truncation=True, max_length=size).to(self.device)
-                ids = self.model.generate(**batch, forced_bos_token_id=self.target_id, num_beams=self.args.beams,
-                                          max_new_tokens=MAX_LENGTH, no_repeat_ngram_size=3)
+                with self.autocast():
+                    ids = self.model.generate(**batch, forced_bos_token_id=self.target_id,
+                                              num_beams=self.args.beams, max_new_tokens=MAX_LENGTH,
+                                              no_repeat_ngram_size=3)
                 for i, text in zip(part, self.tokenizer.batch_decode(ids, skip_special_tokens=True)):
                     output[i] = text
         if self.device == "mps":
@@ -236,12 +312,15 @@ class Trainer:
             encoded = self.tokenizer([row[self.src] for row in batch], text_target=[row[self.tgt] for row in batch],
                                      return_tensors="pt", padding="max_length", truncation=True, max_length=size)
             encoded["labels"][encoded["labels"] == self.tokenizer.pad_token_id] = -100
-            loss = self.model(**encoded.to(self.device)).loss
+            with self.autocast():
+                loss = self.model(**encoded.to(self.device)).loss
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Loss không hợp lệ ở epoch {epoch + 1}, bước {step}: {loss.item()}")
-            loss.backward()
+            self.scaler.scale(loss).backward()
+            self.scaler.unscale_(self.optimizer)
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
-            self.optimizer.step()
+            self.scaler.step(self.optimizer)
+            self.scaler.update()
             self.scheduler.step()
             self.optimizer.zero_grad(set_to_none=True)
             running += loss.item()
@@ -301,12 +380,18 @@ def main() -> None:
     args = parse_args()
     random.seed(SEED)
     torch.manual_seed(SEED)
+    global DATA_DIR
+    DATA_DIR = args.data_dir.resolve()
+    if args.init_from and not (Path(args.init_from) / "config.json").exists():
+        sys.exit(f"LỖI: không thấy mô hình ở {args.init_from}. Hãy train giai đoạn trước.")
     if args.rebuild_data or not (DATA_DIR / "train.jsonl").exists():
         build_data()
     if args.check:
         log = Logger()
         trainer = Trainer(args, log)
-        log(f"Thiết bị: {trainer.device}")
+        scale = apply_batch_scale(None, args.batch_scale, trainer.device)
+        log(f"Thiết bị: {trainer.device_name}; mixed precision: {trainer.amp_dtype or 'không'}; "
+            f"batch x{scale}: {BATCH_BY_LENGTH}")
         trainer.load_data()
         size, batch = make_batches(trainer.train, 0)[0]
         encoded = trainer.tokenizer([row[trainer.src] for row in batch],
@@ -321,7 +406,10 @@ def main() -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
     log = Logger(run_dir / "train.log")
     trainer = Trainer(args, log)
-    log(f"Hướng {args.direction}, thiết bị {trainer.device}, {args.epochs} epoch, lr {args.lr}")
+    scale = apply_batch_scale(run_dir, args.batch_scale, trainer.device)
+    log(f"Hướng {args.direction}, thiết bị {trainer.device_name}, mixed precision {trainer.amp_dtype or 'không'}, "
+        f"{args.epochs} epoch, lr {args.lr}")
+    log(f"Batch theo độ dài (x{scale}): {BATCH_BY_LENGTH}")
     trainer.load_data()
     trainer.setup()
     try:

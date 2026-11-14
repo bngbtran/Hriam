@@ -4,9 +4,13 @@
 Học từ vựng dịch bằng IBM Model 1 trên từ nội dung, rồi căn đơn điệu từng sách bằng quy hoạch động.
 Mặc định giữ nguyên ghép theo số câu; gộp hoặc bỏ câu bị phạt, nên chỉ xảy ra khi có bằng chứng rõ.
 Vào: data/interim/vi.jsonl, ede.jsonl. Ra: data/interim/parallel_aligned.jsonl, unmatched.jsonl.
+
+    python scripts/realign.py                                     # bản tiếng Việt 1925
+    python scripts/realign.py --vi vi_bpt.jsonl --suffix _bpt     # Bản Phổ Thông -> parallel_aligned_bpt.jsonl
 """
 from __future__ import annotations
 
+import argparse
 import json
 import random
 import re
@@ -142,7 +146,11 @@ def calibrate(scorer: Scorer, pairs: list[tuple[list[str], list[str]]]) -> tuple
 
 
 def main() -> None:
-    vi, ede = load("vi.jsonl"), load("ede.jsonl")
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--vi", default="vi.jsonl", help="file câu tiếng Việt trong data/interim")
+    parser.add_argument("--suffix", default="", help="hậu tố cho file kết quả, ví dụ _bpt")
+    args = parser.parse_args()
+    vi, ede = load(args.vi), load("ede.jsonl")
     drop_stopwords(vi)
     drop_stopwords(ede)
     ede_by_ref = {row["ref"]: row for rows in ede.values() for row in rows}
@@ -158,8 +166,8 @@ def main() -> None:
             aligned.append((book, vi_part, ede_part))
 
     moved = merged = 0
-    with (DATA / "parallel_aligned.jsonl").open("w", encoding="utf-8") as out, \
-            (DATA / "unmatched.jsonl").open("w", encoding="utf-8") as lost:
+    with (DATA / f"parallel_aligned{args.suffix}.jsonl").open("w", encoding="utf-8") as out, \
+            (DATA / f"unmatched{args.suffix}.jsonl").open("w", encoding="utf-8") as lost:
         for _book, vi_part, ede_part in aligned:
             ref_vi = "+".join(v["ref"] for v in vi_part)
             ref_ede = "+".join(e["ref"] for e in ede_part)

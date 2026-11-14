@@ -1,0 +1,2007 @@
+{
+ "ede_char_issues": [],
+ "diacritic_conflicts": [
+  {
+   "token": "alê",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "alĕ",
+     1
+    ]
+   ],
+   "where": [
+    "AC0047 Alê [headword]",
+    "AC0404 Ƀuôn [example]"
+   ]
+  },
+  {
+   "token": "amrê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "amrêč",
+     1
+    ]
+   ],
+   "where": [
+    "AC0076 Amrê̆č [headword]",
+    "AC0076 Amrê̆č [example]",
+    "AC0437 Čê̆č [example]"
+   ]
+  },
+  {
+   "token": "brê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "brêč",
+     18
+    ]
+   ],
+   "where": [
+    "AC0281 Brung brê̆č [headword]",
+    "AC0281 Brung brê̆č [example]"
+   ]
+  },
+  {
+   "token": "guê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "guêč",
+     2
+    ]
+   ],
+   "where": [
+    "AC0443 Čhiăm [example]"
+   ]
+  },
+  {
+   "token": "jŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "jơ̆ng",
+     505
+    ]
+   ],
+   "where": [
+    "AC0109 Añhuôr [example]",
+    "AC0249 Bŏk [example]",
+    "AC0427 Čă [example]"
+   ]
+  },
+  {
+   "token": "kdrê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "kdrêč",
+     516
+    ]
+   ],
+   "where": [
+    "AC0438 Čê̆č kdrê̆č [headword]"
+   ]
+  },
+  {
+   "token": "kmrŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "kmrơ̆ng",
+     63
+    ]
+   ],
+   "where": [
+    "AC0267 Bruă kmrŏng dhông [headword]"
+   ]
+  },
+  {
+   "token": "kê̆ñ",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "kêñ",
+     6
+    ]
+   ],
+   "where": [
+    "AC0234 Boh kê̆ñ [headword]"
+   ]
+  },
+  {
+   "token": "mdŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "mdơ̆ng",
+     633
+    ]
+   ],
+   "where": [
+    "AC0507 Čuôr hip mdŏng [headword]"
+   ]
+  },
+  {
+   "token": "mnŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "mnơ̆ng",
+     4417
+    ]
+   ],
+   "where": [
+    "AC0517 Čŭt mnŏng [headword]"
+   ]
+  },
+  {
+   "token": "mŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "mơ̆ng",
+     6152
+    ]
+   ],
+   "where": [
+    "AC0089 Anăn [example]"
+   ]
+  },
+  {
+   "token": "rŏk",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "rơ̆k",
+     302
+    ]
+   ],
+   "where": [
+    "AC0289 Bŭč [example]",
+    "AC0506 Čuôr [example]"
+   ]
+  },
+  {
+   "token": "thŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "thơ̆ng",
+     2
+    ]
+   ],
+   "where": [
+    "AC0486 Čŏng thŏng [headword]"
+   ]
+  },
+  {
+   "token": "čê",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "čĕ",
+     51
+    ]
+   ],
+   "where": [
+    "AC0436 Čê [headword]",
+    "AC0436 Čê [example]"
+   ]
+  },
+  {
+   "token": "đuê̆",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "đuĕ",
+     1425
+    ]
+   ],
+   "where": [
+    "AC0012 Adih [example]",
+    "AC0312 Ƀăng đuê̆ dăp [headword]"
+   ]
+  },
+  {
+   "token": "đê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "đêč",
+     20
+    ]
+   ],
+   "where": [
+    "AC0225 Boh đê̆č [headword]",
+    "AC0225 Boh đê̆č [example]"
+   ]
+  },
+  {
+   "token": "ƀlê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "ƀlêč",
+     12
+    ]
+   ],
+   "where": [
+    "AC0362 Ƀlê̆č ƀlir [headword]",
+    "AC0362 Ƀlê̆č ƀlir [example]"
+   ]
+  },
+  {
+   "token": "ƀrô",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "ƀrô̆",
+     1
+    ]
+   ],
+   "where": [
+    "AC0386 Ƀrô mơh [headword]"
+   ]
+  },
+  {
+   "token": "ƀê̆ñ",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "ƀêñ",
+     56
+    ]
+   ],
+   "where": [
+    "AC0330 Ƀê̆ñ [headword]",
+    "AC0330 Ƀê̆ñ [example]",
+    "AC0330 Ƀê̆ñ [example]"
+   ]
+  },
+  {
+   "token": "ƀê̆č",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "ƀêč",
+     51
+    ]
+   ],
+   "where": [
+    "AC0328 Ƀê̆č [headword]",
+    "AC0328 Ƀê̆č [example]",
+    "AC0328 Ƀê̆č [example]"
+   ]
+  },
+  {
+   "token": "ƀŏng",
+   "bible_count": 0,
+   "bible_variants": [
+    [
+     "ƀơ̆ng",
+     1818
+    ]
+   ],
+   "where": [
+    "AC0287 Bur [example]",
+    "AC0368 Ƀlĭt [example]",
+    "AC0380 Ƀŏng [headword]"
+   ]
+  }
+ ],
+ "ede_rare": [
+  {
+   "token": "adrŏk",
+   "where": [
+    "AC0016 Adrŏk [headword]"
+   ]
+  },
+  {
+   "token": "adĕ",
+   "where": [
+    "AC0005 Adĕ [headword]"
+   ]
+  },
+  {
+   "token": "akăt",
+   "where": [
+    "AC0036 Akăt [headword]",
+    "AC0036 Akăt [example]"
+   ]
+  },
+  {
+   "token": "aluê̆",
+   "where": [
+    "AC0046 Alĕ, Aluê̆ [headword]"
+   ]
+  },
+  {
+   "token": "alôk",
+   "where": [
+    "AC0048 Alôk [headword]",
+    "AC0048 Alôk [example]"
+   ]
+  },
+  {
+   "token": "alŭ",
+   "where": [
+    "AC0052 Alŭ [headword]",
+    "AC0053 Alŭ wăl [headword]"
+   ]
+  },
+  {
+   "token": "alưñ",
+   "where": [
+    "AC0055 Alưñ [headword]",
+    "AC0055 Alưñ [example]"
+   ]
+  },
+  {
+   "token": "amlŏk",
+   "where": [
+    "AC0073 Amlŏk [headword]",
+    "AC0073 Amlŏk [example]"
+   ]
+  },
+  {
+   "token": "amuôn",
+   "where": [
+    "AC0081 Amuôn [headword]",
+    "AC0081 Amuôn [example]"
+   ]
+  },
+  {
+   "token": "angưr",
+   "where": [
+    "AC0096 Angưr [headword]",
+    "AC0096 Angưr [example]"
+   ]
+  },
+  {
+   "token": "aprŏng",
+   "where": [
+    "AC0114 Aprŏng [headword]"
+   ]
+  },
+  {
+   "token": "ariêng",
+   "where": [
+    "AC0119 Ariêng [headword]",
+    "AC0120 Aruăt [example]"
+   ]
+  },
+  {
+   "token": "arăn",
+   "where": [
+    "AC0116 Arăn [headword]",
+    "AC0116 Arăn [example]"
+   ]
+  },
+  {
+   "token": "atiêng",
+   "where": [
+    "AC0137 Atiêng [headword]",
+    "AC0137 Atiêng [example]"
+   ]
+  },
+  {
+   "token": "awăng",
+   "where": [
+    "AC0494 Čuă awăng [headword]"
+   ]
+  },
+  {
+   "token": "añhuôr",
+   "where": [
+    "AC0109 Añhuôr [headword]",
+    "AC0109 Añhuôr [example]"
+   ]
+  },
+  {
+   "token": "bhô",
+   "where": [
+    "AC0254 Bơ bhô [headword]"
+   ]
+  },
+  {
+   "token": "bhôk",
+   "where": [
+    "AC0170 Bhôk gah [headword]"
+   ]
+  },
+  {
+   "token": "bhĭ",
+   "where": [
+    "AC0162 Bhĭ [headword]",
+    "AC0162 Bhĭ [example]"
+   ]
+  },
+  {
+   "token": "bhŏng",
+   "where": [
+    "AC0171 Bhŏng bhŏng [headword]",
+    "AC0171 Bhŏng bhŏng [headword]"
+   ]
+  },
+  {
+   "token": "blač",
+   "where": [
+    "AC0206 Blač [headword]",
+    "AC0206 Blač [example]"
+   ]
+  },
+  {
+   "token": "blô",
+   "where": [
+    "AC0211 Blô [headword]",
+    "AC0211 Blô [example]"
+   ]
+  },
+  {
+   "token": "buôr",
+   "where": [
+    "AC0286 Buôr [headword]",
+    "AC0286 Buôr [example]"
+   ]
+  },
+  {
+   "token": "bĭng",
+   "where": [
+    "AC0092 Anei [example]"
+   ]
+  },
+  {
+   "token": "bŏng",
+   "where": [
+    "AC0252 Bŏng bŭ [headword]"
+   ]
+  },
+  {
+   "token": "bŭng",
+   "where": [
+    "AC0291 Bŭng [headword]",
+    "AC0291 Bŭng [example]"
+   ]
+  },
+  {
+   "token": "bŭč",
+   "where": [
+    "AC0289 Bŭč [headword]",
+    "AC0289 Bŭč [example]"
+   ]
+  },
+  {
+   "token": "bưn",
+   "where": [
+    "AC0294 Bưn [headword]"
+   ]
+  },
+  {
+   "token": "bưng",
+   "where": [
+    "AC0295 Bưng [headword]",
+    "AC0296 Bưng gŏ [headword]"
+   ]
+  },
+  {
+   "token": "bưñ",
+   "where": [
+    "AC0055 Alưñ [example]"
+   ]
+  },
+  {
+   "token": "chiên",
+   "where": [
+    "AC0219 Boh [example]"
+   ]
+  },
+  {
+   "token": "chăm",
+   "where": [
+    "AC0418 Čam [example]"
+   ]
+  },
+  {
+   "token": "dôč",
+   "where": [
+    "AC0381 Ƀŏng dôč [headword]"
+   ]
+  },
+  {
+   "token": "dŏk",
+   "where": [
+    "AC0178 Bi dŏk bi dria [headword]"
+   ]
+  },
+  {
+   "token": "dŭč",
+   "where": [
+    "AC0028 Aguăt [example]"
+   ]
+  },
+  {
+   "token": "guê",
+   "where": [
+    "AC0293 Bư̆ guê [headword]"
+   ]
+  },
+  {
+   "token": "h'ô",
+   "where": [
+    "AC0281 Brung brê̆č [example]",
+    "AC0326 Ƀar h'ô [headword]"
+   ]
+  },
+  {
+   "token": "hgŭm",
+   "where": [
+    "AC0405 Ƀuôn hgŭm [headword]"
+   ]
+  },
+  {
+   "token": "hiă",
+   "where": [
+    "AC0264 Brŭ hiă [headword]"
+   ]
+  },
+  {
+   "token": "hlĭ",
+   "where": [
+    "AC0180 Bi hlĭ [headword]"
+   ]
+  },
+  {
+   "token": "hăt",
+   "where": [
+    "AC0104 Anŭng [example]"
+   ]
+  },
+  {
+   "token": "hồ",
+   "where": [
+    "AC0138 Awa [example]"
+   ]
+  },
+  {
+   "token": "k'hŏ",
+   "where": [
+    "AC0359 Ƀlĕ k'hŏ k'hang [headword]"
+   ]
+  },
+  {
+   "token": "k'ŭt",
+   "where": [
+    "AC0505 Čuôn k'ŭt [headword]"
+   ]
+  },
+  {
+   "token": "kbâo",
+   "where": [
+    "AC0141 Awan [example]"
+   ]
+  },
+  {
+   "token": "kdiêng",
+   "where": [
+    "AC0136 Atŭt [example]"
+   ]
+  },
+  {
+   "token": "kduê",
+   "where": [
+    "AC0350 Ƀik ƀik [example]"
+   ]
+  },
+  {
+   "token": "kdăn",
+   "where": [
+    "AC0495 Čuah [example]"
+   ]
+  },
+  {
+   "token": "khơr",
+   "where": [
+    "AC0320 Ƀâo khơr [headword]"
+   ]
+  },
+  {
+   "token": "kiê",
+   "where": [
+    "AC0279 Bruă yua kiê kngan [headword]"
+   ]
+  },
+  {
+   "token": "kmĭl",
+   "where": [
+    "AC0321 Ƀâo kmĭl [headword]"
+   ]
+  },
+  {
+   "token": "kruê̆",
+   "where": [
+    "AC0219 Boh [example]"
+   ]
+  },
+  {
+   "token": "ksŏ",
+   "where": [
+    "AC0249 Bŏk [example]"
+   ]
+  },
+  {
+   "token": "ktĭa",
+   "where": [
+    "AC0476 Čĭm [example]"
+   ]
+  },
+  {
+   "token": "ktơr",
+   "where": [
+    "AC0380 Ƀŏng [example]",
+    "AC0431 Čăt [example]"
+   ]
+  },
+  {
+   "token": "kôk",
+   "where": [
+    "AC0476 Čĭm [example]"
+   ]
+  },
+  {
+   "token": "luăl",
+   "where": [
+    "AC0212 Blŭ [example]"
+   ]
+  },
+  {
+   "token": "lĭng",
+   "where": [
+    "AC0032 Ai êwa [example]",
+    "AC0269 Bruă lĭng kahan [headword]"
+   ]
+  },
+  {
+   "token": "m'iêng",
+   "where": [
+    "AC0325 Ƀar [example]"
+   ]
+  },
+  {
+   "token": "m'ô̆",
+   "where": [
+    "AC0238 Boh m'ô̆ [headword]"
+   ]
+  },
+  {
+   "token": "m'ĭt",
+   "where": [
+    "AC0469 Čih [example]"
+   ]
+  },
+  {
+   "token": "mdiêr",
+   "where": [
+    "AC0212 Blŭ [example]"
+   ]
+  },
+  {
+   "token": "mgŭn",
+   "where": [
+    "AC0273 Bruă mdrao mgŭn [headword]",
+    "AC0273 Bruă mdrao mgŭn [example]"
+   ]
+  },
+  {
+   "token": "mhriêng",
+   "where": [
+    "AC0214 Blŭ mhriêng [headword]"
+   ]
+  },
+  {
+   "token": "miêu",
+   "where": [
+    "AC0280 Brung [example]"
+   ]
+  },
+  {
+   "token": "mjĕ",
+   "where": [
+    "AC0065 Amâo klă mngač [example]"
+   ]
+  },
+  {
+   "token": "mkuê̆",
+   "where": [
+    "AC0257 Braih mkuê̆ [headword]",
+    "AC0257 Braih mkuê̆ [example]"
+   ]
+  },
+  {
+   "token": "mnŭng",
+   "where": [
+    "AC0423 Čar [example]"
+   ]
+  },
+  {
+   "token": "mčuê",
+   "where": [
+    "AC0227 Boh blŭ mčuê [headword]"
+   ]
+  },
+  {
+   "token": "mđaŏ",
+   "where": [
+    "AC0473 Čih mđaŏ [headword]"
+   ]
+  },
+  {
+   "token": "ngưi",
+   "where": [
+    "AC0323 Ƀâo mngưi [example]"
+   ]
+  },
+  {
+   "token": "plê̆č",
+   "where": [
+    "AC0255 Braih [example]"
+   ]
+  },
+  {
+   "token": "praĭ",
+   "where": [
+    "AC0476 Čĭm [example]"
+   ]
+  },
+  {
+   "token": "păm",
+   "where": [
+    "AC0242 Boh păm [headword]",
+    "AC0242 Boh păm [example]"
+   ]
+  },
+  {
+   "token": "truôl",
+   "where": [
+    "AC0082 Ana [example]"
+   ]
+  },
+  {
+   "token": "việt",
+   "where": [
+    "AC0039 Ala čar [example]"
+   ]
+  },
+  {
+   "token": "wơ",
+   "where": [
+    "AC0216 Blŭ wah wơ [headword]"
+   ]
+  },
+  {
+   "token": "yuăn",
+   "where": [
+    "AC0474 Čih mkra [example]"
+   ]
+  },
+  {
+   "token": "yơi",
+   "where": [
+    "AC0250 Bŏk yơi [headword]"
+   ]
+  },
+  {
+   "token": "ê-un",
+   "where": [
+    "AC0129 Asei mlei [example]"
+   ]
+  },
+  {
+   "token": "ê-ưng",
+   "where": [
+    "AC0308 Ƀăng [example]"
+   ]
+  },
+  {
+   "token": "êhăng",
+   "where": [
+    "AC0046 Alĕ, Aluê̆ [example]",
+    "AC0514 Čŭr [example]"
+   ]
+  },
+  {
+   "token": "ênguê",
+   "where": [
+    "AC0461 Čhưn ênguê [headword]"
+   ]
+  },
+  {
+   "token": "êđê",
+   "where": [
+    "AC0025 Agam [example]",
+    "AC0189 Bi lông [example]"
+   ]
+  },
+  {
+   "token": "ăk",
+   "where": [
+    "AC0197 Bi ŭk bi ăk [headword]"
+   ]
+  },
+  {
+   "token": "ăp",
+   "where": [
+    "AC0148 Ăp [headword]",
+    "AC0148 Ăp [example]"
+   ]
+  },
+  {
+   "token": "čhar",
+   "where": [
+    "AC0441 Čhar [headword]",
+    "AC0479 Čing čhar [headword]"
+   ]
+  },
+  {
+   "token": "čhiăng",
+   "where": [
+    "AC0519 Čư̆ čhiăng [headword]"
+   ]
+  },
+  {
+   "token": "čhăt",
+   "where": [
+    "AC0442 Čhăt [headword]",
+    "AC0442 Čhăt [example]"
+   ]
+  },
+  {
+   "token": "čhŭ",
+   "where": [
+    "AC0458 Čhŭ, čhuai [headword]",
+    "AC0458 Čhŭ, čhuai [example]"
+   ]
+  },
+  {
+   "token": "čhŭñ",
+   "where": [
+    "AC0459 Čhŭñ [headword]",
+    "AC0459 Čhŭñ [example]"
+   ]
+  },
+  {
+   "token": "čua",
+   "where": [
+    "AC0491 Čua [headword]"
+   ]
+  },
+  {
+   "token": "čut",
+   "where": [
+    "AC0511 Čut [headword]"
+   ]
+  },
+  {
+   "token": "čê̆č",
+   "where": [
+    "AC0437 Čê̆č [headword]",
+    "AC0437 Čê̆č [example]"
+   ]
+  },
+  {
+   "token": "đaŏ",
+   "where": [
+    "AC0067 Amâo răk rai [example]"
+   ]
+  },
+  {
+   "token": "điŏ",
+   "where": [
+    "AC0368 Ƀlĭt [example]"
+   ]
+  },
+  {
+   "token": "ŭk",
+   "where": [
+    "AC0197 Bi ŭk bi ăk [headword]"
+   ]
+  },
+  {
+   "token": "ƀhê̆ñ",
+   "where": [
+    "AC0335 Ƀhĭ ƀhê̆ñ [headword]"
+   ]
+  },
+  {
+   "token": "ƀhŭl",
+   "where": [
+    "AC0340 Ƀhŭl [headword]"
+   ]
+  },
+  {
+   "token": "ƀhơi",
+   "where": [
+    "AC0337 Ƀhơi [headword]"
+   ]
+  },
+  {
+   "token": "ƀhư",
+   "where": [
+    "AC0339 Ƀhư [headword]",
+    "AC0339 Ƀhư [example]"
+   ]
+  },
+  {
+   "token": "ƀiêk",
+   "where": [
+    "AC0347 Ƀiêk [headword]",
+    "AC0412 Ƀŭk ƀiêk [headword]"
+   ]
+  },
+  {
+   "token": "ƀiêp",
+   "where": [
+    "AC0348 Ƀiêp ƀiêp [headword]",
+    "AC0348 Ƀiêp ƀiêp [headword]"
+   ]
+  },
+  {
+   "token": "ƀiêr",
+   "where": [
+    "AC0349 Ƀiêr [headword]",
+    "AC0349 Ƀiêr [example]"
+   ]
+  },
+  {
+   "token": "ƀluôn",
+   "where": [
+    "AC0374 Ƀluôn [headword]",
+    "AC0374 Ƀluôn [example]"
+   ]
+  },
+  {
+   "token": "ƀlô",
+   "where": [
+    "AC0372 Ƀlô [headword]"
+   ]
+  },
+  {
+   "token": "ƀlông",
+   "where": [
+    "AC0373 Ƀlông [headword]",
+    "AC0373 Ƀlông [example]"
+   ]
+  },
+  {
+   "token": "ƀlĭp",
+   "where": [
+    "AC0365 Ƀlĭp ƀlĭp [headword]",
+    "AC0365 Ƀlĭp ƀlĭp [headword]"
+   ]
+  },
+  {
+   "token": "ƀlŏng",
+   "where": [
+    "AC0370 Ƀlŏng ƀlŏng [headword]",
+    "AC0370 Ƀlŏng ƀlŏng [headword]"
+   ]
+  },
+  {
+   "token": "ƀruêh",
+   "where": [
+    "AC0388 Ƀruêh [headword]",
+    "AC0388 Ƀruêh [example]"
+   ]
+  },
+  {
+   "token": "ƀrôk",
+   "where": [
+    "AC0389 Ƀrôk ƀrôk [headword]",
+    "AC0389 Ƀrôk ƀrôk [headword]"
+   ]
+  },
+  {
+   "token": "ƀrĭk",
+   "where": [
+    "AC0384 Ƀrĭk [headword]",
+    "AC0384 Ƀrĭk [example]"
+   ]
+  },
+  {
+   "token": "ƀrŭk",
+   "where": [
+    "AC0394 Ƀrŭk ƀrŭk [headword]",
+    "AC0394 Ƀrŭk ƀrŭk [headword]"
+   ]
+  },
+  {
+   "token": "ƀrơp",
+   "where": [
+    "AC0385 Ƀrah ƀrơp [headword]"
+   ]
+  },
+  {
+   "token": "ƀăl",
+   "where": [
+    "AC0307 Ƀăl [headword]"
+   ]
+  },
+  {
+   "token": "ƀĭn",
+   "where": [
+    "AC0432 Čăt ƀĭn [headword]",
+    "AC0432 Čăt ƀĭn [example]"
+   ]
+  },
+  {
+   "token": "ƀŭl",
+   "where": [
+    "AC0413 Ƀŭl ƀŭl [headword]",
+    "AC0413 Ƀŭl ƀŭl [headword]"
+   ]
+  }
+ ],
+ "vi_unknown_syllables": [
+  {
+   "syllable": "alê",
+   "where": [
+    "AC0404 Ƀuôn"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "bìm",
+   "where": [
+    "AC0252 Bŏng bŭ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "bĩnh",
+   "where": [
+    "AC0211 Blô",
+    "AC0211 Blô"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "bơ",
+   "where": [
+    "AC0048 Alôk",
+    "AC0327 Ƀĕ"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "bươu",
+   "where": [
+    "AC0001 Abao"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "bật",
+   "where": [
+    "AC0360 Ƀlĕ tlao"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "bịp",
+   "where": [
+    "AC0252 Bŏng bŭ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "bọng",
+   "where": [
+    "AC0308 Ƀăng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "cheo",
+   "where": [
+    "AC0477 Čĭm pun"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "chiêng",
+   "where": [
+    "AC0478 Čing",
+    "AC0478 Čing",
+    "AC0479 Čing čhar"
+   ],
+   "count": 3
+  },
+  {
+   "syllable": "chuối",
+   "where": [
+    "AC0077 Amung mtei",
+    "AC0077 Amung mtei"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "chuỗi",
+   "where": [
+    "AC0107 Añŭ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "cháo",
+   "where": [
+    "AC0287 Bur",
+    "AC0287 Bur"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "chát",
+   "where": [
+    "AC0307 Ƀăl"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "chè",
+   "where": [
+    "AC0234 Boh kê̆ñ",
+    "AC0436 Čê",
+    "AC0436 Čê"
+   ],
+   "count": 3
+  },
+  {
+   "syllable": "chườm",
+   "where": [
+    "AC0148 Ăp",
+    "AC0148 Ăp"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "cua",
+   "where": [
+    "AC0119 Ariêng",
+    "AC0308 Ƀăng"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "cành",
+   "where": [
+    "AC0007 Adhan",
+    "AC0007 Adhan"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "cóc",
+   "where": [
+    "AC0016 Adrŏk"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "củng",
+   "where": [
+    "AC0183 Bi kjăp"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "dak",
+   "where": [
+    "AC0423 Čar"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "dán",
+   "where": [
+    "AC0366 Ƀlir",
+    "AC0366 Ƀlir"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "dì",
+   "where": [
+    "AC0093 Aneh"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "dúi",
+   "where": [
+    "AC0105 Anur"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "dũi",
+   "where": [
+    "AC0502 Čuk",
+    "AC0502 Čuk"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "dần",
+   "where": [
+    "AC0395 Ƀrư̆ ƀrư̆",
+    "AC0395 Ƀrư̆ ƀrư̆"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "giun",
+   "where": [
+    "AC0038 Ala"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "giầm",
+   "where": [
+    "AC0437 Čê̆č",
+    "AC0437 Čê̆č"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "giếc",
+   "where": [
+    "AC0055 Alưñ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "gòn",
+   "where": [
+    "AC0373 Ƀlông",
+    "AC0373 Ƀlông"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "gừng",
+   "where": [
+    "AC0137 Atiêng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "hoắc",
+   "where": [
+    "AC0264 Brŭ hiă"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "huynh",
+   "where": [
+    "AC0072 Amĭ ama hđeh"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "hắt",
+   "where": [
+    "AC0161 Bhañ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "hến",
+   "where": [
+    "AC0005 Adĕ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "hốc",
+   "where": [
+    "AC0308 Ƀăng",
+    "AC0308 Ƀăng"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "khuy",
+   "where": [
+    "AC0221 Boh anut"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "khò",
+   "where": [
+    "AC0097 Anghar",
+    "AC0097 Anghar"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "khơi",
+   "where": [
+    "AC0409 Ƀuôr",
+    "AC0409 Ƀuôr"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "kẹo",
+   "where": [
+    "AC0333 Ƀê̆ñ mlim",
+    "AC0333 Ƀê̆ñ mlim",
+    "AC0380 Ƀŏng"
+   ],
+   "count": 3
+  },
+  {
+   "syllable": "lak",
+   "where": [
+    "AC0423 Čar"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "li",
+   "where": [
+    "AC0335 Ƀhĭ ƀhê̆ñ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "lé",
+   "where": [
+    "AC0364 Ƀling",
+    "AC0364 Ƀling"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "lênh",
+   "where": [
+    "AC0371 Ƀlŏng ƀlut"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "lùn",
+   "where": [
+    "AC0200 Biêr",
+    "AC0200 Biêr"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "lười",
+   "where": [
+    "AC0041 Alah",
+    "AC0041 Alah",
+    "AC0041 Alah"
+   ],
+   "count": 3
+  },
+  {
+   "syllable": "lẩm",
+   "where": [
+    "AC0329 Ƀê̆č ƀê̆č"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "lợn",
+   "where": [
+    "AC0073 Amlŏk",
+    "AC0080 Amung ŭn",
+    "AC0082 Ana"
+   ],
+   "count": 6
+  },
+  {
+   "syllable": "lức",
+   "where": [
+    "AC0256 Braih ka hroh"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "mu",
+   "where": [
+    "AC0079 Amung kngan"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "muôi",
+   "where": [
+    "AC0140 Awak boh"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "mía",
+   "where": [
+    "AC0141 Awan"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "mít",
+   "where": [
+    "AC0082 Ana",
+    "AC0374 Ƀluôn"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "mõm",
+   "where": [
+    "AC0080 Amung ŭn",
+    "AC0502 Čuk"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "múi",
+   "where": [
+    "AC0374 Ƀluôn",
+    "AC0374 Ƀluôn"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "mỉ",
+   "where": [
+    "AC0438 Čê̆č kdrê̆č"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "ngáy",
+   "where": [
+    "AC0097 Anghar",
+    "AC0097 Anghar"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ngô",
+   "where": [
+    "AC0431 Čăt"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "ngẩng",
+   "where": [
+    "AC0096 Angưr",
+    "AC0096 Angưr"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "nhiệt",
+   "where": [
+    "AC0197 Bi ŭk bi ăk"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "nhải",
+   "where": [
+    "AC0348 Ƀiêp ƀiêp",
+    "AC0348 Ƀiêp ƀiêp"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "niêu",
+   "where": [
+    "AC0296 Bưng gŏ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "nái",
+   "where": [
+    "AC0082 Ana",
+    "AC0087 Anal"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "nôi",
+   "where": [
+    "AC0154 Bai đih"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "nườm",
+   "where": [
+    "AC0350 Ƀik ƀik",
+    "AC0350 Ƀik ƀik"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "nượp",
+   "where": [
+    "AC0350 Ƀik ƀik",
+    "AC0350 Ƀik ƀik"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "nập",
+   "where": [
+    "AC0197 Bi ŭk bi ăk"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "nứa",
+   "where": [
+    "AC0207 Blah"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "oang",
+   "where": [
+    "AC0389 Ƀrôk ƀrôk",
+    "AC0389 Ƀrôk ƀrôk"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "oải",
+   "where": [
+    "AC0042 Alah alan",
+    "AC0042 Alah alan"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "phèng",
+   "where": [
+    "AC0441 Čhar"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "phúng",
+   "where": [
+    "AC0420 Čang"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "phổi",
+   "where": [
+    "AC0249 Bŏk",
+    "AC0249 Bŏk"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "quai",
+   "where": [
+    "AC0250 Bŏk yơi"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "quàng",
+   "where": [
+    "AC0443 Čhiăm"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "quỳ",
+   "where": [
+    "AC0505 Čuôn k'ŭt"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "rẫy",
+   "where": [
+    "AC0294 Bưn",
+    "AC0298 Ƀah dah...ƀah dah"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "rặn",
+   "where": [
+    "AC0116 Arăn",
+    "AC0116 Arăn"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "rỉ",
+   "where": [
+    "AC0260 Bring",
+    "AC0260 Bring"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "rộ",
+   "where": [
+    "AC0339 Ƀhư",
+    "AC0339 Ƀhư"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "soài",
+   "where": [
+    "AC0125 Asăr"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "sàn",
+   "where": [
+    "AC0015 Adring",
+    "AC0015 Adring",
+    "AC0170 Bhôk gah"
+   ],
+   "count": 3
+  },
+  {
+   "syllable": "sên",
+   "where": [
+    "AC0355 Ƀlă"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "sần",
+   "where": [
+    "AC0432 Čăt ƀĭn",
+    "AC0432 Čăt ƀĭn"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "sặc",
+   "where": [
+    "AC0281 Brung brê̆č",
+    "AC0281 Brung brê̆č"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "sỡ",
+   "where": [
+    "AC0281 Brung brê̆č",
+    "AC0281 Brung brê̆č"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "thiu",
+   "where": [
+    "AC0319 Ƀâo iu",
+    "AC0319 Ƀâo iu"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "thoáng",
+   "where": [
+    "AC0166 Bhiâo riâo rit"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "thoại",
+   "where": [
+    "AC0176 Bi blŭ",
+    "AC0176 Bi blŭ"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "thui",
+   "where": [
+    "AC0500 Čuh",
+    "AC0500 Čuh"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "thỉu",
+   "where": [
+    "AC0452 Čhŏ mrŏ",
+    "AC0452 Čhŏ mrŏ"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ti",
+   "where": [
+    "AC0335 Ƀhĭ ƀhê̆ñ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "toát",
+   "where": [
+    "AC0359 Ƀlĕ k'hŏ k'hang"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "tre",
+   "where": [
+    "AC0026 Agha",
+    "AC0036 Akăt",
+    "AC0136 Atŭt"
+   ],
+   "count": 4
+  },
+  {
+   "syllable": "trà",
+   "where": [
+    "AC0436 Čê",
+    "AC0436 Čê"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "trườn",
+   "where": [
+    "AC0155 Ban"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "trầu",
+   "where": [
+    "AC0046 Alĕ, Aluê̆",
+    "AC0514 Čŭr"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "trỉa",
+   "where": [
+    "AC0283 Buh",
+    "AC0283 Buh"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "tủ",
+   "where": [
+    "AC0507 Čuôr hip mdŏng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "uể",
+   "where": [
+    "AC0042 Alah alan",
+    "AC0042 Alah alan"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "uỡn",
+   "where": [
+    "AC0414 Ƀư̆",
+    "AC0414 Ƀư̆"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ven",
+   "where": [
+    "AC0506 Čuôr"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "viêm",
+   "where": [
+    "AC0249 Bŏk",
+    "AC0249 Bŏk"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "von",
+   "where": [
+    "AC0370 Ƀlŏng ƀlŏng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "vánh",
+   "where": [
+    "AC0165 Bhiâo hin"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "véo",
+   "where": [
+    "AC0370 Ƀlŏng ƀlŏng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "vù",
+   "where": [
+    "AC0251 Bŏk wi wu"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "vỉa",
+   "where": [
+    "AC0204 Bir",
+    "AC0204 Bir"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "vựng",
+   "where": [
+    "AC0226 Boh blŭ"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "xoài",
+   "where": [
+    "AC0219 Boh",
+    "AC0238 Boh m'ô̆"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "xã",
+   "where": [
+    "AC0407 Ƀuôn prŏng"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "xỉn",
+   "where": [
+    "AC0508 Čuôt"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "yểng",
+   "where": [
+    "AC0476 Čĭm"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "êđê",
+   "where": [
+    "AC0006 Adham",
+    "AC0025 Agam",
+    "AC0121 Arul"
+   ],
+   "count": 8
+  },
+  {
+   "syllable": "êđê-việt",
+   "where": [
+    "AC0474 Čih mkra"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "điệp",
+   "where": [
+    "AC0521 Čư̆ kbuôn tring ahing"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "đênh",
+   "where": [
+    "AC0371 Ƀlŏng ƀlut"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "đơm",
+   "where": [
+    "AC0221 Boh anut"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "đạn",
+   "where": [
+    "AC0125 Asăr",
+    "AC0240 Boh mtuh"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "đểu",
+   "where": [
+    "AC0362 Ƀlê̆č ƀlir",
+    "AC0362 Ƀlê̆č ƀlir"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "địu",
+   "where": [
+    "AC0304 Ƀă",
+    "AC0304 Ƀă"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ạ",
+   "where": [
+    "AC0029 Ah",
+    "AC0029 Ah"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ạt",
+   "where": [
+    "AC0171 Bhŏng bhŏng",
+    "AC0171 Bhŏng bhŏng"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ỉa",
+   "where": [
+    "AC0357 Ƀlĕ eh",
+    "AC0357 Ƀlĕ eh"
+   ],
+   "count": 2
+  },
+  {
+   "syllable": "ồng",
+   "where": [
+    "AC0254 Bơ bhô"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "ổi",
+   "where": [
+    "AC0082 Ana"
+   ],
+   "count": 1
+  },
+  {
+   "syllable": "ộc",
+   "where": [
+    "AC0254 Bơ bhô"
+   ],
+   "count": 1
+  }
+ ]
+}

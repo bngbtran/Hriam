@@ -1,0 +1,44 @@
+{
+  "_nguon": "Trang 'CHỮ VIẾT TẮT' của Từ điển Êđê – Việt (ảnh chụp do người dùng cung cấp)",
+  "loan_sources": {
+    "Anh": "tiếng Anh",
+    "Pr": "tiếng Pháp (Prăng)",
+    "Yu": "tiếng Việt (Yuăn)",
+    "La": "tiếng Latinh",
+    "Trg": "tiếng Trung Quốc"
+  },
+  "abbreviations": {
+    "cd": "Ca dao",
+    "dt": "Danh từ hoặc những tổ hợp tương đương",
+    "đgt": "Động từ hoặc những tổ hợp tương đương",
+    "đt": "Đại từ hoặc những tổ hợp tương đương",
+    "lt": "Liên từ hoặc những tổ hợp tương đương",
+    "ng": "Nghĩa",
+    "nh": "Như",
+    "pht": "Phụ từ",
+    "tht": "Thán từ hoặc những tổ hợp tương đương",
+    "tng": "Thành ngữ, tục ngữ",
+    "trt": "Trợ từ",
+    "trgt": "Trạng từ",
+    "tt": "Tính từ",
+    "tl": "Từ loại",
+    "gt": "Giới từ",
+    "st": "Số từ"
+  },
+  "spelled_out_in_text": {
+    "phó từ": "pht",
+    "phụ từ": "pht",
+    "trạng từ": "trgt",
+    "giới từ": "gt",
+    "đại từ": "đt",
+    "đại từ chỉ định": "đt",
+    "số từ": "st",
+    "liên từ": "lt",
+    "trợ từ": "trt",
+    "hư từ": null
+  },
+  "unlisted_in_table": {
+    "ct": "Không có trong bảng viết tắt. Các mục dùng 'ct' đều là từ cảm thán (Ôi, Ái chà) nên nhiều khả năng là 'tht' (thán từ).",
+    "hư từ": "Được in nguyên chữ (không viết tắt), không có trong bảng viết tắt; nghĩa chung là từ chức năng/hư từ."
+  }
+}
