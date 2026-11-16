@@ -189,7 +189,10 @@ class Trainer:
         # Mixed precision trên card NVIDIA: bf16 nếu card hỗ trợ, không thì fp16 kèm GradScaler.
         self.amp_dtype = None
         if self.device == "cuda":
-            self.amp_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            # bf16 chỉ nhanh trên card có Tensor Core bf16 (Ampere trở lên, compute capability 8.0+).
+            # Card cũ như Tesla T4 (Kaggle, Colab) vẫn báo "hỗ trợ" bf16 nhưng chạy giả lập, chậm: dùng fp16.
+            major, _ = torch.cuda.get_device_capability(0)
+            self.amp_dtype = torch.bfloat16 if major >= 8 and torch.cuda.is_bf16_supported() else torch.float16
         self.scaler = torch.amp.GradScaler("cuda", enabled=self.amp_dtype == torch.float16)
         self.run_dir = args.run_dir or ROOT / "runs" / args.direction
         self.last_dir, self.best_dir = self.run_dir / "last", self.run_dir / "best"

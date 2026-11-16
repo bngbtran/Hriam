@@ -43,7 +43,7 @@ Mở http://127.0.0.1:8000. Deploy: đưa nguyên thư mục `web/` lên GitHub 
 - **Câu song ngữ tương tự:** tìm trong khoảng 33.000 cặp câu Kinh Thánh và ví dụ từ điển.
 - **Tra từ điển:** theo từ Ê Đê hoặc nghĩa tiếng Việt.
 
-Bản ghép từ chưa đúng ngữ pháp Ê Đê. Web tĩnh không chạy được mô hình dịch máy; dùng `scripts/translate.py` sau khi train.
+Bản ghép từ chưa đúng ngữ pháp Ê Đê. Web tĩnh không chạy được mô hình dịch máy. Trên máy có mô hình đã train (`runs/`), chạy `python scripts/serve_model.py` rồi mở http://127.0.0.1:8000: web tự hiện thêm bản dịch máy cả câu.
 
 ## Bắt đầu nhanh
 

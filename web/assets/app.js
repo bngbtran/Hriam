@@ -196,6 +196,9 @@ const fmt = (n) => n.toLocaleString("vi-VN");
 const emptyState = (motif, text) =>
   `<p class="empty-state"><img src="assets/brand/icon-${motif}.svg" alt="" width="44" height="36">${esc(text)}</p>`;
 const state = { dict: null, pairs: null, sources: [], index: {}, building: {}, direction: "vi2ede" };
+// Mô hình dịch máy: có khi web chạy qua scripts/serve_model.py, hoặc khi đặt ?api=<địa chỉ server>.
+// Web tĩnh (Vercel...) không có /api nên phần này tự tắt.
+state.api = { base: "", models: {} };
 try { state.direction = localStorage.getItem("hriam.direction") || "vi2ede"; } catch (e) { /* trình duyệt chặn bộ nhớ */ }
 if (!DIRS[state.direction]) state.direction = "vi2ede";
 
@@ -245,6 +248,10 @@ async function translate() {
   draft = draft.charAt(0).toUpperCase() + draft.slice(1);
 
   renderDraft(draft);
+  if (state.api.models[state.direction]) machineTranslate(text, mine, draft);
+  else if (Object.values(state.api.models).some(Boolean)) {
+    $("note").textContent = "Chưa có mô hình dịch máy cho chiều này, đây là bản ghép nghĩa theo từ điển. Hãy đối chiếu với các câu tương tự bên dưới.";
+  }
   renderGloss(gloss);
   $("cards").innerHTML = cardIds.length ? cardIds.map(card).join("") : '<span class="empty">Không có mục từ nào khớp.</span>';
 
@@ -254,6 +261,50 @@ async function translate() {
   const hits = index ? index.search(text, src) : [];
   renderPairs(hits.map(([score, d]) => ({ score, row: state.pairs[d] })), src, tgt, text);
   $("timing").textContent = `${Math.round(performance.now() - started)} ms`;
+}
+
+async function machineTranslate(text, mine, draft) {
+  $("kind").innerHTML = '<span class="spin"></span> Mô hình đang dịch…';
+  try {
+    const res = await fetch(`${state.api.base}/api/translate`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, direction: state.direction }),
+    });
+    const data = await res.json();
+    if (mine !== seq) return;
+    if (!res.ok) throw new Error(data.error || res.status);
+    $("output").className = "result";
+    $("output").textContent = data.output;
+    $("kind").textContent = `Dịch máy · ${data.seconds}s`;
+    $("note").hidden = false;
+    $("note").textContent = `Bản dịch của mô hình NLLB-200 đã tinh chỉnh, có thể sai với câu ngắn đời thường. Ghép nghĩa từng từ: ${draft}`;
+  } catch (err) {
+    if (mine !== seq) return;
+    $("kind").textContent = "Ghép nghĩa từng từ";
+    $("note").textContent = `Không gọi được mô hình (${err.message}). Đây là bản ghép nghĩa theo từ điển.`;
+  }
+}
+
+function updateLead() {
+  const names = { ede2vi: "Ê Đê → Việt", vi2ede: "Việt → Ê Đê" };
+  const on = Object.keys(state.api.models).filter((d) => state.api.models[d]).map((d) => names[d]);
+  let text = state.pairs
+    ? `Tra ${$("factEntries").textContent} mục từ và tìm trong ${fmt(state.pairs.length)} cặp câu song ngữ, ngay trên trình duyệt của bạn.`
+    : "Tra từ điển và tìm câu song ngữ, ngay trên trình duyệt của bạn.";
+  if (on.length) text += ` Dịch máy cả câu: ${on.join(", ")}.`;
+  $("lead").textContent = text;
+}
+
+async function detectModel() {
+  try {
+    const res = await fetch(`${state.api.base}/api/health`, { cache: "no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data || !data.models) return;
+    state.api.models = data.models;
+    updateLead();
+    if ($("input").value.trim()) onInput(true);
+  } catch (e) { /* web tĩnh, không có mô hình */ }
 }
 
 function renderDraft(draft) {
@@ -364,6 +415,8 @@ const params = new URLSearchParams(location.search);
 if (DIRS[params.get("dir")]) state.direction = params.get("dir");
 if (params.get("text")) { $("input").value = params.get("text").slice(0, 2000); $("count").textContent = `${$("input").value.length}/2000`; }
 if (params.get("q")) $("q").value = params.get("q").slice(0, 100);
+if (window.HRIAM_API) state.api.base = String(window.HRIAM_API).replace(/\/$/, "");
+if (params.get("api")) state.api.base = params.get("api").replace(/\/$/, "");
 
 renderDirection();
 loadJSON("data/dictionary.json").then((data) => {
@@ -374,11 +427,12 @@ loadJSON("data/dictionary.json").then((data) => {
 }).catch((err) => {
   $("lead").textContent = `Không tải được từ điển (${err.message}). Hãy mở trang qua một web server, không mở trực tiếp file.`;
 });
+detectModel();
 loadJSON("data/pairs.json").then((data) => {
   state.pairs = data.rows;
   state.sources = data.sources;
   $("factPairs").textContent = fmt(data.rows.length);
-  $("lead").textContent = `Tra ${$("factEntries").textContent} mục từ và tìm trong ${fmt(data.rows.length)} cặp câu song ngữ, ngay trên trình duyệt của bạn.`;
+  updateLead();
   indexFor(DIRS[state.direction][0]);
   if ($("input").value.trim()) onInput(true);
 }).catch(() => { /* web vẫn tra từ được khi thiếu kho câu */ });

@@ -15,12 +15,26 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
+
+
+def rel(path: Path) -> str:
+    """Đường dẫn gọn để in: tương đối với repo nếu nằm trong repo."""
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
+def prune(run_dir: Path) -> None:
+    """Xoá checkpoint train tiếp (last/, khoảng 7 GB) của giai đoạn đã xong; giữ best/ và kết quả."""
+    last = run_dir / "last"
+    if (run_dir / "test_results.json").exists() and last.exists():
+        shutil.rmtree(last)
+        print(f"Đã xoá {rel(last)} để tiết kiệm ổ đĩa.", flush=True)
 
 
 def run(*args: str) -> None:
@@ -44,9 +58,12 @@ def main() -> None:
     parser.add_argument("--lr-noi", default="2e-5", help="learning rate giai đoạn 2, nhỏ để không quên")
     parser.add_argument("--batch-scale", help="nhân kích thước batch; mặc định tự tính theo bộ nhớ card")
     parser.add_argument("--smoke", action="store_true", help="chạy thử nhanh với 32 cặp, kết quả ở runs-smoke/")
+    parser.add_argument("--runs-dir", type=Path, help="thư mục lưu mô hình (mặc định runs/ trong repo)")
+    parser.add_argument("--prune", action="store_true",
+                        help="xoá checkpoint last/ của giai đoạn đã xong, tránh đầy ổ (Kaggle, Colab)")
     args = parser.parse_args()
 
-    runs = ROOT / ("runs-smoke" if args.smoke else "runs")
+    runs = args.runs_dir.resolve() if args.runs_dir else ROOT / ("runs-smoke" if args.smoke else "runs")
     extra = ["--batch-scale", args.batch_scale] if args.batch_scale else []
     if args.smoke:
         args.vi_version, args.epochs_nen, args.epochs_noi = "VI1934", 1, 1
@@ -77,31 +94,35 @@ def main() -> None:
     nen, noi = runs / f"{args.direction}-nen", runs / f"{args.direction}-noi"
 
     # 3. Giai đoạn nền
-    step(f"Giai đoạn 1: train nền, {args.epochs_nen} epoch -> {nen.relative_to(ROOT)}")
+    step(f"Giai đoạn 1: train nền, {args.epochs_nen} epoch -> {rel(nen)}")
     if (nen / "test_results.json").exists():
-        print(f"Đã xong, bỏ qua. Xoá {nen.relative_to(ROOT)} nếu muốn train lại.")
+        print(f"Đã xong, bỏ qua. Xoá {rel(nen)} nếu muốn train lại.")
     else:
         run("scripts/train.py", "--direction", args.direction, "--data-dir", str(base), "--run-dir", str(nen),
             "--epochs", str(args.epochs_nen), *extra)
         if not (nen / "test_results.json").exists():
             print("Giai đoạn 1 chưa xong. Chạy lại đúng lệnh này để train tiếp.")
             return
+    if args.prune:
+        prune(nen)
 
     # 4. Giai đoạn văn nói
-    step(f"Giai đoạn 2: train văn nói, {args.epochs_noi} epoch, lr {args.lr_noi} -> {noi.relative_to(ROOT)}")
+    step(f"Giai đoạn 2: train văn nói, {args.epochs_noi} epoch, lr {args.lr_noi} -> {rel(noi)}")
     if (noi / "test_results.json").exists():
-        print(f"Đã xong, bỏ qua. Xoá {noi.relative_to(ROOT)} nếu muốn train lại.")
+        print(f"Đã xong, bỏ qua. Xoá {rel(noi)} nếu muốn train lại.")
     else:
         run("scripts/train.py", "--direction", args.direction, "--data-dir", str(noi_data), "--run-dir", str(noi),
             "--init-from", str(nen / "best"), "--epochs", str(args.epochs_noi), "--lr", args.lr_noi, *extra)
         if not (noi / "test_results.json").exists():
             print("Giai đoạn 2 chưa xong. Chạy lại đúng lệnh này để train tiếp.")
             return
+    if args.prune:
+        prune(noi)
 
     step("Xong")
-    print(f"Kết quả: {(noi / 'test_results.json').relative_to(ROOT)}  (test_dict, test_hoithoai: câu đời thường)")
-    print(f"Mô hình: {(noi / 'best').relative_to(ROOT)}")
-    model_arg = "" if not args.smoke else f" --model {(noi / 'best').relative_to(ROOT)}"
+    print(f"Kết quả: {rel(noi / 'test_results.json')}  (test_dict, test_hoithoai: câu đời thường)")
+    print(f"Mô hình: {rel(noi / 'best')}")
+    model_arg = "" if not args.smoke else f" --model {rel(noi / 'best')}"
     print(f'Dịch thử: python scripts/translate.py --direction {args.direction}{model_arg} "..."')
 
 
