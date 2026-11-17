@@ -18,7 +18,8 @@ Mọi lệnh chạy từ thư mục gốc repo, trong `conda activate msa`. Thay
 
 ## 1. Supabase
 
-1. Tạo project mới trên supabase.com, đặt mật khẩu database (lưu lại).
+1. Tạo project mới trên supabase.com, đặt mật khẩu database (lưu lại). Region nên chọn gần Space (Hugging Face thường chạy ở Mỹ): East US.
+   Vào **Project Settings → Data API**, tắt Data API: Hriăm kết nối thẳng PostgreSQL, không dùng API tự sinh của Supabase, tắt đi để không ai đọc được bảng qua khoá công khai.
 2. Vào **Connect → Session pooler**, sao chép chuỗi kết nối. Đổi `postgresql://` thành `postgresql+psycopg://` và điền mật khẩu:
    `postgresql+psycopg://postgres.xxxx:MATKHAU@aws-0-xx.pooler.supabase.com:5432/postgres`
 3. Tạo bảng và nhập từ điển **từ máy của bạn** (từ điển không đưa lên Space):

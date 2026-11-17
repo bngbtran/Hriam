@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import uuid
 from pathlib import Path
 
 from sqlalchemy import select
@@ -221,6 +222,8 @@ def import_dictionary(db: Session, path: Path = DICTIONARY) -> dict:
     report = {"imported": 0, "skipped": 0, "duplicate_form": 0, "examples": 0, "license_status":
               source.license.review_status if source.license else "unknown"}
     seen_forms: set[str] = set()
+    # Gán id sẵn và ghi theo lô: tránh hàng nghìn lượt đi-về khi database ở xa (Supabase).
+    entries, forms, senses, examples, links = [], [], [], [], []
     for item in data["entries"]:
         ref = f"{item['id']} · tr.{item['book_page']}"
         if ref in existing:
@@ -231,36 +234,35 @@ def import_dictionary(db: Session, path: Path = DICTIONARY) -> dict:
             report["duplicate_form"] += 1  # đồng âm/đồng tự: giữ mục riêng, chuyên gia phân biệt sau
         seen_forms.add(key)
         pos = ", ".join(p["code"] for p in item.get("pos") or [])
-        entry = LexicalEntry(canonical_form=item["headword"], normalized_form=key,
+        entry = LexicalEntry(id=uuid.uuid4(), canonical_form=item["headword"], normalized_form=key,
                              entry_type="multiword_expression" if " " in item["headword"].strip() else "word",
                              orthography_profile_id=profile.id if profile else None, source_id=source.id,
                              source_ref=ref, part_of_speech=pos or None, loan_source=_code(item.get("loan_source")),
                              notes="; ".join(item.get("notes") or []))
-        db.add(entry)
-        db.flush()
+        entries.append(entry)
         for form in (item.get("variants") or []) + (item.get("alt_forms") or []):
             text = form if isinstance(form, str) else form.get("form") or form.get("text") or ""
             if text:
-                db.add(LexicalForm(entry_id=entry.id, form_text=text, normalized_form=search_key(text),
-                                   form_type="variant", source_id=source.id))
+                forms.append(LexicalForm(entry_id=entry.id, form_text=text, normalized_form=search_key(text),
+                                         form_type="variant", source_id=source.id))
         for n, sense in enumerate(item["senses"], 1):
             gloss = (sense.get("gloss_vi") or "").strip()
             if not gloss:
                 continue
-            s = LexicalSense(entry_id=entry.id, sense_number=n, definition_vi=gloss, definition_vi_key=search_key(gloss),
-                             part_of_speech=(sense.get("pos") or {}).get("code") if isinstance(sense.get("pos"), dict) else sense.get("pos"),
-                             status="draft", verification_level="source_unreviewed",
-                             source_id=source.id)
-            db.add(s)
-            db.flush()
+            sense_pos = sense.get("pos")
+            sense_row = LexicalSense(id=uuid.uuid4(), entry_id=entry.id, sense_number=n, definition_vi=gloss,
+                                     definition_vi_key=search_key(gloss), part_of_speech=_code(sense_pos),
+                                     status="draft", verification_level="source_unreviewed", source_id=source.id)
+            senses.append(sense_row)
             for i, ex in enumerate(sense.get("examples") or []):
-                example = CorpusExample(text_ede=ex["ede"], text_vi=ex["vi"], source_id=source.id,
+                example = CorpusExample(id=uuid.uuid4(), text_ede=ex["ede"], text_vi=ex["vi"], source_id=source.id,
                                         verification_status="unreviewed")
-                db.add(example)
-                db.flush()
-                db.add(SenseExample(sense_id=s.id, example_id=example.id, position=i))
+                examples.append(example)
+                links.append(SenseExample(sense_id=sense_row.id, example_id=example.id, position=i))
                 report["examples"] += 1
         report["imported"] += 1
-    db.flush()
+    for batch in (entries, forms, senses, examples, links):
+        db.add_all(batch)
+        db.flush()
     term_index.invalidate()
     return report
