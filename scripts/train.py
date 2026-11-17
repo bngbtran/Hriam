@@ -38,6 +38,9 @@ import sacrebleu  # noqa: E402
 import torch  # noqa: E402
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from translate import decode_ede  # noqa: E402
+
 SCRIPTS = Path(__file__).resolve().parent
 ROOT = SCRIPTS.parent
 DATA_DIR = ROOT / "data" / "dataset"
@@ -278,7 +281,9 @@ class Trainer:
                     ids = self.model.generate(**batch, forced_bos_token_id=self.target_id,
                                               num_beams=self.args.beams, max_new_tokens=MAX_LENGTH,
                                               no_repeat_ngram_size=3)
-                for i, text in zip(part, self.tokenizer.batch_decode(ids, skip_special_tokens=True)):
+                texts = decode_ede(self.tokenizer, ids) if self.tgt == "ede" else \
+                    self.tokenizer.batch_decode(ids, skip_special_tokens=True)
+                for i, text in zip(part, texts):
                     output[i] = text
         if self.device == "mps":
             torch.mps.empty_cache()

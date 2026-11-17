@@ -276,8 +276,7 @@ async function machineTranslate(text, mine, draft) {
     $("output").className = "result";
     $("output").textContent = data.output;
     $("kind").textContent = `Dịch máy · ${data.seconds}s`;
-    $("note").hidden = false;
-    $("note").textContent = `Bản dịch của mô hình NLLB-200 đã tinh chỉnh, có thể sai với câu ngắn đời thường. Ghép nghĩa từng từ: ${draft}`;
+    $("note").hidden = true;
   } catch (err) {
     if (mine !== seq) return;
     $("kind").textContent = "Ghép nghĩa từng từ";

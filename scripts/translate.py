@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import sys
 import unicodedata
 from pathlib import Path
@@ -41,6 +42,18 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def decode_ede(tokenizer, ids) -> list[str]:
+    """Giải mã, giữ lại chữ ƀ/Ƀ.
+
+    Bộ từ vựng NLLB không có ƀ nên mô hình sinh <unk> ở chỗ đó; giải mã thường bỏ <unk>, "ƀŏng" thành "ŏng".
+    Trong tiếng Ê Đê ƀ là ký tự duy nhất hay gặp bị <unk>, nên đổi <unk> lại thành ƀ (đầu câu thì viết hoa).
+    """
+    drop = set(tokenizer.all_special_ids) - {tokenizer.unk_token_id}
+    texts = tokenizer.batch_decode([[i for i in row.tolist() if i not in drop] for row in ids])
+    texts = [t.replace(tokenizer.unk_token, "ƀ").strip() for t in texts]
+    return [re.sub(r"(^|[.!?]\s+)ƀ", lambda m: m.group(1) + "Ƀ", t) for t in texts]
+
+
 class Translator:
     def __init__(self, model: str, direction: str, beams: int):
         src, tgt = DIRECTIONS[direction]
@@ -50,6 +63,8 @@ class Translator:
         self.model.generation_config.max_length = None
         self.target_id = self.tokenizer.convert_tokens_to_ids(LANG_CODES[tgt])
         self.beams = beams
+        self.decode = (lambda ids: decode_ede(self.tokenizer, ids)) if tgt == "ede" else \
+            (lambda ids: self.tokenizer.batch_decode(ids, skip_special_tokens=True))
 
     @torch.no_grad()
     def __call__(self, sentences: list[str]) -> list[str]:
@@ -60,7 +75,7 @@ class Translator:
                                    max_length=MAX_LENGTH).to(self.device)
             ids = self.model.generate(**batch, forced_bos_token_id=self.target_id, num_beams=self.beams,
                                       max_new_tokens=MAX_LENGTH, no_repeat_ngram_size=3)
-            output += self.tokenizer.batch_decode(ids, skip_special_tokens=True)
+            output += self.decode(ids)
         return output
 
 
