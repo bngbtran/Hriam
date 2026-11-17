@@ -8,3 +8,11 @@ scripts/.fonts/
 
 # Thư mục tải mô hình từ Kaggle (mô hình đã chuyển vào runs/)
 tieng viet sang ede/
+
+# Nền tảng React + FastAPI
+backend/hriam.db*
+backend/storage/
+backend/.env
+frontend/node_modules/
+frontend/dist/
+__pycache__/

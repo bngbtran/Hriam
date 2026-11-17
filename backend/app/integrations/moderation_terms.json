@@ -1,0 +1,10 @@
+{
+  "note": "Danh sách cụm từ cần người duyệt xem lại (không phải kết luận vi phạm). Language Expert/Moderator cập nhật; mỗi lần sửa tăng MODERATION_POLICY_VERSION.",
+  "terms": [
+    {"term": "cá độ", "category": "spam_scam"},
+    {"term": "vay tiền nhanh", "category": "spam_scam"},
+    {"term": "kiếm tiền online", "category": "spam_scam"},
+    {"term": "số tài khoản", "category": "personal_data"},
+    {"term": "mật khẩu", "category": "personal_data"}
+  ]
+}

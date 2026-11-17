@@ -1,4 +1,4 @@
-# Hriam: dịch máy Ê Đê – Việt
+# Hriăm: nền tảng ngôn ngữ Ê Đê – tiếng Kinh
 
 Đồ án môn Xử lý ngôn ngữ tự nhiên (NLP501): xây dựng bộ dữ liệu song ngữ và mô hình dịch Ê Đê – Việt bằng cách tinh chỉnh NLLB.
 
@@ -15,8 +15,8 @@ scripts/
   translate.py       Dịch bằng mô hình đã train
   export_web_data.py Xuất dữ liệu cho web
   make_brand.py      Sinh logo và hoa văn theo lối dệt thổ cẩm
-web/                 Web tĩnh dịch Việt ↔ Ê Đê, deploy nguyên thư mục này
-  index.html, assets/ (style.css, app.js, brand/), data/ (do export_web_data.py tạo)
+backend/, frontend/  Nền tảng Hriăm (xem mục bên dưới)
+web/                 Web tĩnh cũ (tham khảo)
 docs/
   HUONG_DAN.md       Hướng dẫn chi tiết
   BRAND.md           Bộ nhận diện Hriăm: logo, màu, chữ, hoa văn
@@ -29,21 +29,42 @@ data/
 runs/                Mô hình và kết quả, không đưa lên git
 ```
 
-## Web dịch
+## Nền tảng Hriăm (React + FastAPI)
 
-Web tĩnh, chạy hoàn toàn trên trình duyệt, không cần server hay train. Xem thử trên máy:
+Ứng dụng chính, làm theo bộ tài liệu phát triển (bản gốc lưu ngoài repo) (đối chiếu từng điểm: [docs/DOI_CHIEU_TAI_LIEU.md](docs/DOI_CHIEU_TAI_LIEU.md)).
 
-```bash
-python -m http.server 8000 -d web
+```text
+backend/    FastAPI + SQLAlchemy + Alembic (SQLite khi dev, PostgreSQL khi production)
+  app/api/v1/        auth, translation, forum, contributions, admin
+  app/services/      pipeline dịch, từ điển, đóng góp, kiểm duyệt, strike, dataset release
+  app/integrations/  adapter dịch máy (NLLB) và kiểm duyệt theo quy tắc
+  app/tests/         27 test theo docs/09
+frontend/   React + TypeScript (Vite, React Router, TanStack Query, Zustand, React Hook Form + Zod)
 ```
 
-Mở http://127.0.0.1:8000. Deploy: đưa nguyên thư mục `web/` lên GitHub Pages, Netlify, Cloudflare Pages hoặc Vercel (xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md#web-dịch)).
+Chạy trên máy (không cần Docker):
 
-- **Dịch từng từ:** ghép nghĩa theo từ điển, nhận cả chữ Ê Đê gõ thiếu dấu.
-- **Câu song ngữ tương tự:** tìm trong khoảng 33.000 cặp câu Kinh Thánh và ví dụ từ điển.
-- **Tra từ điển:** theo từ Ê Đê hoặc nghĩa tiếng Việt.
+```bash
+conda activate msa
+cd backend
+pip install -r requirements.txt
+python -m app.cli setup                 # tạo bảng, vai trò, nguồn/giấy phép, nhập từ điển
+python -m app.cli create-admin --username admin
+uvicorn app.main:app --port 8000        # API: http://127.0.0.1:8000/api/v1/docs
+python -m pytest app/tests              # chạy test
 
-Bản ghép từ chưa đúng ngữ pháp Ê Đê. Web tĩnh không chạy được mô hình dịch máy. Trên máy có mô hình đã train (`runs/`), chạy `python scripts/serve_model.py` rồi mở http://127.0.0.1:8000: web tự hiện thêm bản dịch máy cả câu.
+cd ../frontend
+npm install
+npm run dev                             # http://127.0.0.1:5173 (tự chuyển /api tới cổng 8000)
+```
+
+Gán vai trò: `python -m app.cli grant --username lan --role language_expert` (hoặc trong trang Quản trị → Người dùng).
+Dịch máy dùng mô hình trong `runs/` nếu có; không có thì trả bản ghép nghĩa kèm nhãn "Cần xem lại".
+
+Deploy: `frontend/` lên Vercel (Framework: Vite, build `npm run build`, output `dist`); sửa `frontend/vercel.json` để `/api` trỏ tới máy chủ chạy backend.
+Backend cần một máy chủ Python (có GPU/CPU cho mô hình) và PostgreSQL; đặt biến môi trường theo `backend/.env.example`.
+
+Web tĩnh cũ (`web/`, `scripts/serve_model.py`) vẫn còn để tham khảo, không còn là ứng dụng chính.
 
 ## Bắt đầu nhanh
 

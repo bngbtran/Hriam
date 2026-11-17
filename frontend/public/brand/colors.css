@@ -1,0 +1,9 @@
+/* Bảng màu Hriăm, sinh bởi scripts/make_brand.py. Không sửa tay: sửa PALETTE trong script. */
+:root {
+  --cham: #161722;  /* Chàm đen */
+  --cham-xanh: #2A3566;  /* Chàm */
+  --do: #A8281E;  /* Đỏ */
+  --vang: #E2A72E;  /* Vàng nghệ */
+  --nga: #F3EDE1;  /* Trắng sợi bông */
+  --xanh: #3D5A9E;  /* Xanh */
+}
