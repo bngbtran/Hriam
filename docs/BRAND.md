@@ -1,8 +1,8 @@
 # Bộ nhận diện Hriăm
 
-Bản trình bày đầy đủ, có hình minh hoạ, nằm ở `web/brand.html` (mở từ chân trang web, mục "Bộ nhận diện"). Tài liệu này tóm tắt các quy tắc và căn cứ.
+Tài liệu này tóm tắt các quy tắc và căn cứ của bộ nhận diện.
 
-Mọi file hình trong `web/assets/brand/` được sinh bằng `python scripts/make_brand.py`. Muốn sửa hình thì sửa bản vẽ trong script, không sửa tay các file SVG.
+Mọi file hình trong `frontend/public/brand/` được sinh bằng `python scripts/make_brand.py`. Muốn sửa hình thì sửa bản vẽ trong script, không sửa tay các file SVG.
 
 ## Một nguồn cho cả web
 
@@ -10,7 +10,7 @@ Mọi file hình trong `web/assets/brand/` được sinh bằng `python scripts/
 
 | File | Nội dung |
 |---|---|
-| `colors.css` | Sáu màu gốc dạng biến CSS (`--cham`, `--cham-xanh`, `--do`, `--vang`, `--nga`, `--xanh`), nạp trước `style.css` ở mọi trang |
+| `colors.css` | Sáu màu gốc dạng biến CSS (`--cham`, `--cham-xanh`, `--do`, `--vang`, `--nga`, `--xanh`), nạp trong `frontend/index.html` trước stylesheet của ứng dụng |
 | `mark.svg`, `favicon.svg`, `logo.svg`, `logo-dark.svg` | Logo; chữ trong logo đã đổi thành nét vẽ nên hiển thị đúng phông ở mọi nơi |
 | `motif-*.svg`, `icon-*.svg` | Hoạ tiết trên nền chàm, và bản nền trong suốt dùng trên nền sáng |
 | `hem.svg`, `stripe.svg`, `texture.svg` | Các dải hoa văn và lưới nền |
@@ -18,7 +18,7 @@ Mọi file hình trong `web/assets/brand/` được sinh bằng `python scripts/
 
 Lần đầu chạy, script tải hai phông Noto vào `scripts/.fonts/` (không đưa lên git) để đổi chữ thành nét vẽ.
 
-`web/assets/style.css` không chứa mã màu thương hiệu nào. Mọi sắc độ được pha từ sáu màu gốc bằng `color-mix`, kể cả chế độ tối. Ngoài sáu màu gốc, chỉ có các màu bề mặt trung tính cho nền sáng: nền trang `#F6F1E7`, giấy `#FFFDF9`, mực `#1C1A17`, chữ phụ `#6F665B`, đường kẻ `#E6DDCC`.
+`frontend/src/styles.css` không chứa mã màu thương hiệu nào. Mọi sắc độ được pha từ sáu màu gốc bằng `color-mix`, kể cả chế độ tối. Ngoài sáu màu gốc, chỉ có các màu bề mặt trung tính cho nền sáng: nền trang `#F6F1E7`, giấy `#FFFDF9`, mực `#1C1A17`, chữ phụ `#6F665B`, đường kẻ `#E6DDCC`.
 
 **Thành phần dùng chung trên mọi trang:**
 
@@ -83,7 +83,7 @@ Hai dải sọc đỏ viền trắng đứng song song như hai dải dệt, t�
 | Trắng sợi bông | `#F3EDE1` | Chữ trên nền chàm, viền hoạ tiết |
 | Xanh | `#3D5A9E` | Chỉ điểm xuyết trong dải hoa văn |
 
-Nền trang sáng là `#F6F1E7`. Ở chế độ tối, nền là `#10111A` và đỏ sáng lên thành `#E05A47` để đủ tương phản. Các mã màu nằm trong `:root` của `web/assets/style.css`.
+Nền trang sáng là `#F6F1E7`. Ở chế độ tối, nền là `#10111A` và đỏ sáng lên thành `#E05A47` để đủ tương phản. Các mã màu nằm trong `:root` của `frontend/src/styles.css`.
 
 ## Hoạ tiết và dải hoa văn
 

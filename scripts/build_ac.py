@@ -210,7 +210,7 @@ n_examples = sum(len(s['examples']) for e in entries for s in e['senses'])
 letters = Counter(e['letter'] for e in entries)
 meta = {
     'title': f'Từ điển Êđê – Việt (phần {SCOPE})',
-    'source': f'data/PDF/TuDienEDe.pdf (bản scan), {PDF_PAGES}',
+    'source': f'data/raw/TuDienEDe.pdf (bản scan), {PDF_PAGES}',
     'scope': SCOPE_TEXT,
     'generated': date.today().isoformat(),
     'entry_count': len(entries),

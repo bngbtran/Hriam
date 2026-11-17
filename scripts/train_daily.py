@@ -122,6 +122,9 @@ def main() -> None:
     step("Xong")
     print(f"Kết quả: {rel(noi / 'test_results.json')}  (test_dict, test_hoithoai: câu đời thường)")
     print(f"Mô hình: {rel(noi / 'best')}")
+    if not args.smoke:
+        print(f"Dùng cho ứng dụng: chép nội dung {rel(noi / 'best')} vào models/{args.direction}/ "
+              f"(và {rel(noi / 'test_results.json')} vào models/{args.direction}/eval/)")
     model_arg = "" if not args.smoke else f" --model {rel(noi / 'best')}"
     print(f'Dịch thử: python scripts/translate.py --direction {args.direction}{model_arg} "..."')
 

@@ -17,7 +17,13 @@ from .security import decode_access_token
 
 
 def client_key(request: Request, user: User | None = None) -> str:
-    return str(user.id) if user else (request.client.host if request.client else "unknown")
+    if user:
+        return str(user.id)
+    from .config import settings
+    forwarded = request.headers.get("x-forwarded-for") if settings.trust_proxy else None
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
 
 
 def permissions_of(user: User) -> set[str]:

@@ -31,7 +31,7 @@ LICENSES = [
 
 SOURCES = [
     {"code": "tudien-ede-viet", "name": "Từ điển Êđê – Việt (bản scan, nhóm Hriăm số hoá)", "source_type": "dictionary",
-     "url_or_reference": "data/PDF/TuDienEDe.pdf", "license": 0,
+     "url_or_reference": "data/raw/TuDienEDe.pdf", "license": 0,
      "notes": "Bản scan thiếu trang sách 146–147. Số hoá bằng OCR + rà soát thủ công, chưa có chuyên gia xác minh."},
     {"code": "nirvlab-rhade", "name": "Rhade–Vietnamese MT dataset (NIRVLab)", "source_type": "corpus",
      "url_or_reference": "https://huggingface.co/datasets/NIRVLab/rhade-vietnamese-mt", "license": 1,
@@ -43,6 +43,119 @@ DIACRITIC_NAMES = {"ă": "a trăng", "â": "a mũ", "ƀ": "b có gạch (b hút 
                    "đ": "đ", "ĕ": "e trăng", "ê": "ê", "ê̆": "ê trăng", "ĭ": "i trăng", "ñ": "n ngã (nh)",
                    "ŏ": "o trăng", "ô": "ô", "ô̆": "ô trăng", "ơ": "ơ", "ơ̆": "ơ trăng", "ŭ": "u trăng", "ư": "ư",
                    "ư̆": "ư trăng"}
+
+
+# Ký tự đặc thù theo bảng chữ cái của từ điển nguồn (chỉ bảng chữ, không chứa nội dung từ điển).
+EDE_CHARACTERS = [
+ {
+  "char": "ă",
+  "upper": "Ă",
+  "name": "a trăng",
+  "note": "ă"
+ },
+ {
+  "char": "â",
+  "upper": "Â",
+  "name": "a mũ",
+  "note": "â (â + o thành vần: âo- đọc là au)"
+ },
+ {
+  "char": "ƀ",
+  "upper": "Ƀ",
+  "name": "b có gạch (b hút hơi)",
+  "note": "b"
+ },
+ {
+  "char": "č",
+  "upper": "Č",
+  "name": "c có dấu móc (ch)",
+  "note": "ch"
+ },
+ {
+  "char": "đ",
+  "upper": "Đ",
+  "name": "đ",
+  "note": "đ"
+ },
+ {
+  "char": "ĕ",
+  "upper": "Ĕ",
+  "name": "e trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ê",
+  "upper": "Ê",
+  "name": "ê",
+  "note": "ê"
+ },
+ {
+  "char": "ê̆",
+  "upper": "Ê̆",
+  "name": "ê trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ĭ",
+  "upper": "Ĭ",
+  "name": "i trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ñ",
+  "upper": "Ñ",
+  "name": "n ngã (nh)",
+  "note": "nh"
+ },
+ {
+  "char": "ŏ",
+  "upper": "Ŏ",
+  "name": "o trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ô",
+  "upper": "Ô",
+  "name": "ô",
+  "note": "ô"
+ },
+ {
+  "char": "ô̆",
+  "upper": "Ô̆",
+  "name": "ô trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ơ",
+  "upper": "Ơ",
+  "name": "ơ",
+  "note": "ơ"
+ },
+ {
+  "char": "ơ̆",
+  "upper": "Ơ̆",
+  "name": "ơ trăng",
+  "note": "â"
+ },
+ {
+  "char": "ŭ",
+  "upper": "Ŭ",
+  "name": "u trăng",
+  "note": "không có âm tương ứng"
+ },
+ {
+  "char": "ư",
+  "upper": "Ư",
+  "name": "ư",
+  "note": "ư"
+ },
+ {
+  "char": "ư̆",
+  "upper": "Ư̆",
+  "name": "ư trăng",
+  "note": "không có âm tương ứng"
+ }
+]
 
 
 def seed_roles(db: Session) -> None:
@@ -82,12 +195,7 @@ def seed_reference(db: Session) -> None:
             data = dict(data)
             db.add(Source(license_id=licenses[data.pop("license")].id, **data))
     if not db.scalar(select(OrthographyProfile).where(OrthographyProfile.code == "ede-tudien-baseline")):
-        chars = []
-        if DICTIONARY.exists():
-            for letter in json.loads(DICTIONARY.read_text(encoding="utf-8"))["alphabet"]:
-                if letter["lower"] in DIACRITIC_NAMES:
-                    chars.append({"char": letter["lower"], "upper": letter["upper"],
-                                  "name": DIACRITIC_NAMES[letter["lower"]], "note": letter["vietnamese_sound"]})
+        chars = list(EDE_CHARACTERS)
         db.add(OrthographyProfile(
             code="ede-tudien-baseline", name="Bảng chữ cái theo Từ điển Êđê–Việt", version="0.1",
             description="Profile nháp lấy từ bảng chữ cái của từ điển nguồn. Chờ Language Expert/hội đồng xác nhận "

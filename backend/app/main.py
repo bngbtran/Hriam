@@ -2,19 +2,33 @@
 from __future__ import annotations
 
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.v1 import admin, auth, contributions, forum, translation
 from .core import errors
 from .core.config import settings
-from .core.errors import ok
+from .core.db import engine
+from .core.errors import AppError, ok
+from .integrations import mt as mt_module
 from .integrations.mt import mt
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
-app = FastAPI(title="Hriăm API", version="1.0.0", openapi_url="/api/v1/openapi.json", docs_url="/api/v1/docs",
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    import asyncio
+    # Tải/nạp mô hình ở luồng phụ để không chặn khởi động; trong lúc đó API vẫn trả bản ghép nghĩa.
+    asyncio.get_running_loop().run_in_executor(None, mt_module.init, settings.mt_preload)
+    yield
+
+
+app = FastAPI(lifespan=lifespan, title="Hriăm API", version="1.0.0", openapi_url="/api/v1/openapi.json", docs_url="/api/v1/docs",
               description="Nền tảng ngôn ngữ và văn hoá Ê Đê ↔ tiếng Kinh. Phản hồi bọc trong {data, meta}; "
                           "lỗi trong {error}. Quyền ghi chú trong từng endpoint admin.")
 errors.install(app)
@@ -28,4 +42,11 @@ for module in (auth, translation, forum, contributions, admin):
 
 @app.get("/api/v1/health", tags=["system"])
 def health():
-    return ok({"status": "ok", "translation": {d: mt.info(d).available for d in ("ede2vi", "vi2ede")}})
+    """Dùng cho UptimeRobot: có truy vấn database thật (giữ Supabase không bị tạm dừng)."""
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+    except Exception as exc:
+        raise AppError(503, "DB_UNAVAILABLE", "Không kết nối được cơ sở dữ liệu.") from exc
+    return ok({"status": "ok", "database": "ok",
+               "translation": {d: mt.info(d).available for d in ("ede2vi", "vi2ede")}})

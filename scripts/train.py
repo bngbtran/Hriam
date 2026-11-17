@@ -8,7 +8,7 @@
     python scripts/train.py --rebuild-data     # dựng lại dữ liệu từ các file nguồn rồi train
     python scripts/train.py --data-dir data/dataset_noi --init-from runs/ede2vi-nen/best --run-dir runs/ede2vi-noi
                                                # train tiếp từ một mô hình đã có trên bộ dữ liệu khác
-Train theo văn nói hằng ngày: xem scripts/train_daily.sh.
+Train theo văn nói hằng ngày: xem scripts/train_daily.py.
 
 Chỉ train trên GPU: card NVIDIA (CUDA) hoặc GPU của Mac (MPS). Không thấy GPU thì dừng, không chạy CPU.
 Trên card NVIDIA, script dùng mixed precision (bf16 hoặc fp16) và tự chỉnh batch theo bộ nhớ card.

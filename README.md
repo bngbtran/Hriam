@@ -1,53 +1,41 @@
 # Hriăm: nền tảng ngôn ngữ Ê Đê – tiếng Kinh
 
-Đồ án môn Xử lý ngôn ngữ tự nhiên (NLP501): xây dựng bộ dữ liệu song ngữ và mô hình dịch Ê Đê – Việt bằng cách tinh chỉnh NLLB.
+Đồ án môn Xử lý ngôn ngữ tự nhiên (NLP501): bộ dữ liệu song ngữ, mô hình dịch Ê Đê ↔ tiếng Kinh (tinh chỉnh NLLB-200)
+và nền tảng web React + FastAPI làm theo bộ tài liệu phát triển (đối chiếu từng điểm: [docs/DOI_CHIEU_TAI_LIEU.md](docs/DOI_CHIEU_TAI_LIEU.md)).
 
 ## Cấu trúc
 
 ```text
-scripts/
-  bible_scraper.py   Cào Kinh Thánh hai bản
-  realign.py         Căn câu theo nội dung
-  parse_ac.py, validate_ac.py, build_ac.py, dict_xlsx.py, split_dict.py
-                     Dựng từ điển từ bản chép đã đối chiếu (xem data/dictionary/README.md)
-  build_dataset.py   Gộp nguồn, chia train/dev/test
-  train.py           Train và đánh giá trên máy
-  translate.py       Dịch bằng mô hình đã train
-  export_web_data.py Xuất dữ liệu cho web
-  make_brand.py      Sinh logo và hoa văn theo lối dệt thổ cẩm
-backend/, frontend/  Nền tảng Hriăm (xem mục bên dưới)
-web/                 Web tĩnh cũ (tham khảo)
-docs/
-  HUONG_DAN.md       Hướng dẫn chi tiết
-  BRAND.md           Bộ nhận diện Hriăm: logo, màu, chữ, hoa văn
-data/
-  raw/               PDF gốc, HTML đã cào, bản chép tay từ điển lần đầu
-  verified/          Bản chép từ điển đã đối chiếu với scan (nguồn chính)
-  dictionary/        Từ điển có cấu trúc: JSON, Excel, tách theo chữ cái
-  interim/           Kinh Thánh đã cào và căn câu
-  dataset/           Bộ dữ liệu cuối
-runs/                Mô hình và kết quả, không đưa lên git
-```
-
-## Nền tảng Hriăm (React + FastAPI)
-
-Ứng dụng chính, làm theo bộ tài liệu phát triển (bản gốc lưu ngoài repo) (đối chiếu từng điểm: [docs/DOI_CHIEU_TAI_LIEU.md](docs/DOI_CHIEU_TAI_LIEU.md)).
-
-```text
-backend/    FastAPI + SQLAlchemy + Alembic (SQLite khi dev, PostgreSQL khi production)
+frontend/            Giao diện React + TypeScript (Vite, React Router, TanStack Query, Zustand, React Hook Form + Zod)
+  public/brand/      Logo, màu, hoa văn (sinh bằng scripts/make_brand.py)
+backend/             API FastAPI + SQLAlchemy + Alembic (SQLite khi dev, PostgreSQL/Supabase khi deploy)
   app/api/v1/        auth, translation, forum, contributions, admin
   app/services/      pipeline dịch, từ điển, đóng góp, kiểm duyệt, strike, dataset release
   app/integrations/  adapter dịch máy (NLLB) và kiểm duyệt theo quy tắc
-  app/tests/         27 test theo docs/09
-frontend/   React + TypeScript (Vite, React Router, TanStack Query, Zustand, React Hook Form + Zod)
+  app/tests/         27 test
+  migrations/        Alembic
+models/              Mô hình chính thức, không đưa lên git (tải lên Hugging Face)
+  ede2vi/, vi2ede/   File mô hình; eval/ chứa kết quả đánh giá
+deploy/huggingface/  Dockerfile và README cho Hugging Face Space
+scripts/             Dữ liệu, train, dịch, deploy
+  bible_scraper.py, realign.py               Cào và căn câu Kinh Thánh
+  parse_ac.py, validate_ac.py, build_ac.py, dict_xlsx.py, split_dict.py   Dựng từ điển
+  build_dataset.py, build_daily.py           Dựng bộ dữ liệu (chung và văn nói)
+  train.py, train_daily.py                   Train (cần card NVIDIA)
+  translate.py                               Dịch bằng mô hình (backend dùng lại file này)
+  deploy_hf.py                               Đưa mô hình và backend lên Hugging Face
+  make_brand.py                              Sinh bộ nhận diện
+data/                raw/ (PDF, HTML đã cào, câu hội thoại), verified/, dictionary/, interim/, dataset/
+docs/                HUONG_DAN.md, DEPLOY.md, BRAND.md, DOI_CHIEU_TAI_LIEU.md, BAN_GIAO_Hriam.docx
+runs/                Kết quả train tạm, không đưa lên git
 ```
 
-Chạy trên máy (không cần Docker):
+## Chạy trên máy
 
 ```bash
 conda activate msa
 cd backend
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-ml.txt
 python -m app.cli setup                 # tạo bảng, vai trò, nguồn/giấy phép, nhập từ điển
 python -m app.cli create-admin --username admin
 uvicorn app.main:app --port 8000        # API: http://127.0.0.1:8000/api/v1/docs
@@ -58,15 +46,14 @@ npm install
 npm run dev                             # http://127.0.0.1:5173 (tự chuyển /api tới cổng 8000)
 ```
 
-Gán vai trò: `python -m app.cli grant --username lan --role language_expert` (hoặc trong trang Quản trị → Người dùng).
-Dịch máy dùng mô hình trong `runs/` nếu có; không có thì trả bản ghép nghĩa kèm nhãn "Cần xem lại".
+- Dịch máy dùng `models/ede2vi` và `models/vi2ede`; thiếu mô hình thì trả bản ghép nghĩa kèm nhãn "Cần xem lại".
+- Gán vai trò: `python -m app.cli grant --username lan --role language_expert`, hoặc trong Quản trị → Người dùng.
 
-Deploy: `frontend/` lên Vercel (Framework: Vite, build `npm run build`, output `dist`); sửa `frontend/vercel.json` để `/api` trỏ tới máy chủ chạy backend.
-Backend cần một máy chủ Python (có GPU/CPU cho mô hình) và PostgreSQL; đặt biến môi trường theo `backend/.env.example`.
+## Deploy
 
-Web tĩnh cũ (`web/`, `scripts/serve_model.py`) vẫn còn để tham khảo, không còn là ứng dụng chính.
+Vercel (giao diện) + Hugging Face Space (backend và mô hình) + Supabase (database) + UptimeRobot, đều miễn phí: [docs/DEPLOY.md](docs/DEPLOY.md).
 
-## Bắt đầu nhanh
+## Train mô hình
 
 ```bash
 conda activate msa
@@ -75,6 +62,8 @@ python scripts/train.py --check
 python scripts/train_daily.py ede2vi   # train theo văn nói hằng ngày, hai giai đoạn, cần card NVIDIA
 python scripts/translate.py "Jŭ msĕ si ak"
 ```
+
+Train xong, chép `runs/<hướng>-noi/best/` vào `models/<hướng>/` để ứng dụng dùng.
 
 `train_daily.py` train nền trên toàn bộ dữ liệu (Kinh Thánh dùng bản tiếng Việt hiện đại), rồi train tiếp trên câu đời thường để dịch tự nhiên hơn. Câu hội thoại do người bản ngữ dịch đặt trong `data/raw/hoi_thoai/`. Xem [docs/HUONG_DAN.md](docs/HUONG_DAN.md#train-theo-văn-nói-hằng-ngày).
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sinh bộ nhận diện Hriăm (web/assets/brand/*.svg) theo lối dệt thổ cẩm Ê Đê.
+"""Sinh bộ nhận diện Hriăm (frontend/public/brand/*.svg) theo lối dệt thổ cẩm Ê Đê.
 
     python scripts/make_brand.py
 
@@ -15,7 +15,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "web" / "assets" / "brand"
+OUT = ROOT / "frontend" / "public" / "brand"
 FONT_DIR = ROOT / "scripts" / ".fonts"      # phông tải về để đổi chữ trong logo thành nét vẽ, không đưa lên git
 FONTS = {
     "display": "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerifDisplay/hinted/ttf/NotoSerifDisplay-SemiBold.ttf",

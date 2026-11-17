@@ -42,7 +42,13 @@ class Settings:
         "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o])
     cookie_secure: bool = _env("COOKIE_SECURE", "false").lower() == "true"
     storage_dir: Path = Path(_env("STORAGE_DIR", str(BACKEND / "storage")))
+    models_dir: Path = Path(_env("MODELS_DIR", str(ROOT / "models")))
     runs_dir: Path = Path(_env("RUNS_DIR", str(ROOT / "runs")))
+    # Repo mô hình riêng tư trên Hugging Face (vd. ten-ban/hriam-models); tải về models_dir khi khởi động nếu thiếu
+    hf_model_repo: str = _env("HF_MODEL_REPO", "")
+    mt_preload: bool = _env("MT_PRELOAD", "false").lower() == "true"
+    # Chạy sau proxy (Vercel rewrite, Hugging Face): lấy IP người dùng từ X-Forwarded-For
+    trust_proxy: bool = _env("TRUST_PROXY", "false").lower() == "true"
     model_ede2vi: str = _env("MODEL_EDE2VI", "")
     model_vi2ede: str = _env("MODEL_VI2EDE", "")
     mt_enabled: bool = _env("MT_ENABLED", "true").lower() == "true"

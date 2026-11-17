@@ -7,7 +7,7 @@
     python scripts/translate.py                                # gõ từng câu, Enter để dịch, Ctrl+D để thoát
     python scripts/translate.py --model base "..."            # NLLB gốc chưa train, để so sánh
 
-Mặc định dùng runs/<hướng>-noi/best (scripts/train_daily.py), nếu không có thì runs/<hướng>/best (scripts/train.py).
+Mặc định dùng models/<hướng> (mô hình chính thức), nếu không có thì kết quả train mới nhất trong runs/.
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("text", nargs="*", help="câu cần dịch; bỏ trống để gõ từng câu")
     parser.add_argument("--direction", choices=DIRECTIONS, default="ede2vi")
-    parser.add_argument("--model", help="thư mục mô hình, hoặc 'base' cho NLLB gốc; mặc định runs/<hướng>/best")
+    parser.add_argument("--model", help="thư mục mô hình, hoặc 'base' cho NLLB gốc; mặc định models/<hướng>")
     parser.add_argument("--file", type=Path, help="file văn bản, mỗi dòng một câu")
     parser.add_argument("--beams", type=int, default=4)
     return parser.parse_args()
@@ -85,7 +85,8 @@ def resolve_model(args: argparse.Namespace) -> str:
     if args.model:
         path = Path(args.model)
     else:  # ưu tiên mô hình văn nói của scripts/train_daily.py, rồi tới mô hình của scripts/train.py
-        candidates = [ROOT / "runs" / f"{args.direction}-noi" / "best", ROOT / "runs" / args.direction / "best"]
+        candidates = [ROOT / "models" / args.direction, ROOT / "runs" / f"{args.direction}-noi" / "best",
+                      ROOT / "runs" / args.direction / "best"]
         path = next((p for p in candidates if (p / "config.json").exists()), candidates[-1])
     if not (path / "config.json").exists():
         sys.exit(f"LỖI: không thấy mô hình ở {path}. Hãy train trước: python scripts/train_daily.py {args.direction}")

@@ -1,0 +1,7 @@
+# Thư viện cho dịch máy NLLB. torch cài riêng (bản CPU khi deploy, bản CUDA khi train).
+transformers==5.22.1
+sentencepiece==0.2.2
+protobuf==7.35.1
+safetensors==0.8.0
+tokenizers==0.23.3
+huggingface_hub==2.4.0

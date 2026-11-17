@@ -40,13 +40,13 @@ python scripts/train_daily.py vi2ede
 | 2 | Dựng bộ dữ liệu văn nói: ví dụ và nghĩa trong từ điển, câu hội thoại, cộng 3.000 câu Kinh Thánh ngắn để không quên | `data/dataset_noi/` |
 | 3 | Giai đoạn nền: 3 epoch trên toàn bộ dữ liệu | `runs/<hướng>-nen/` |
 | 4 | Giai đoạn văn nói: 4 epoch, learning rate nhỏ hơn, bắt đầu từ mô hình nền; chọn mô hình tốt nhất theo tập câu đời thường | `runs/<hướng>-noi/` |
-| 5 | Đặt mô hình văn nói làm mặc định cho `translate.py` | `runs/<hướng>/best` |
+| 5 | Chép mô hình văn nói vào `models/<hướng>/` để ứng dụng dùng | `models/<hướng>/` |
 
 - **Thời gian:** lần đầu cào bản Phổ Thông mất khoảng 30–60 phút. Trên Apple M5 Pro, giai đoạn nền khoảng 8–9 giờ, giai đoạn văn nói khoảng 1–2 giờ. Trên card NVIDIA với mixed precision thường nhanh hơn vài lần, tuỳ card; xem tốc độ thật trong `train.log`.
 - **Tiếp tục:** chạy lại đúng lệnh là tiếp tục từ chỗ dừng; bước đã xong được bỏ qua. Muốn train lại một giai đoạn thì xoá thư mục `runs/<hướng>-nen` hoặc `runs/<hướng>-noi`.
 - **Tuỳ chỉnh:** `--vi-version VI1934` dùng lại bản 1925 có sẵn, không cần cào. `--epochs-nen`, `--epochs-noi`, `--lr-noi` đổi số epoch và learning rate. `--batch-scale` đổi kích thước batch.
 
-**Train trên Kaggle:** mở `notebooks/train_vi2ede_kaggle.ipynb` trên Kaggle. Notebook train chiều Việt → Ê Đê hai giai đoạn, lưu checkpoint ở `/tmp` để không vượt giới hạn 20 GB của `/kaggle/working`, rồi chép mô hình tốt nhất vào tab Output. Muốn train chiều khác, đổi `DIRECTION`. Khi chạy `train_daily.py` ở nơi khác, `--runs-dir` đổi thư mục lưu mô hình, `--prune` xoá checkpoint của giai đoạn đã xong.
+**Train trên máy khác (Kaggle, Colab...):** khi chạy `train_daily.py` ở nơi khác, `--runs-dir` đổi thư mục lưu mô hình, `--prune` xoá checkpoint của giai đoạn đã xong.
 
 **GPU:** `train.py` chỉ train trên GPU. Không thấy GPU thì dừng và báo cách sửa, không lặng lẽ chạy CPU. Với card NVIDIA:
 
@@ -58,30 +58,13 @@ python scripts/train_daily.py vi2ede
 
 **Câu hội thoại là yếu tố quan trọng nhất.** Ví dụ trong từ điển phần lớn là câu ngắn. Mỗi câu hội thoại do người bản ngữ dịch giúp mô hình nói tự nhiên hơn nhiều so với thêm Kinh Thánh. Danh sách câu cần dịch và cách đóng góp nằm ở [data/raw/hoi_thoai/README.md](../data/raw/hoi_thoai/README.md). Sau khi thêm câu, xoá `runs/<hướng>-noi` rồi chạy lại lệnh; giai đoạn nền không cần train lại.
 
-## Web dịch
+## Đưa mô hình vào ứng dụng
 
-Thư mục `web/` là một web tĩnh: HTML, CSS và JavaScript thuần, không framework, không bước build. Mọi xử lý chạy trên trình duyệt.
+Mô hình chính thức nằm ở `models/<hướng>/` (không đưa vào git): file mô hình ở ngay trong thư mục, kết quả đánh giá ở `eval/`.
+Sau khi train xong, chép nội dung `runs/<hướng>-noi/best/` vào `models/<hướng>/` và `test_results.json` vào `models/<hướng>/eval/`.
+Backend (`backend/`) và `scripts/translate.py` tự dùng `models/<hướng>`; khi deploy, tải mô hình lên Hugging Face theo [DEPLOY.md](DEPLOY.md).
 
-| Việc | Lệnh |
-|---|---|
-| Xem thử trên máy | `python -m http.server 8000 -d web`, mở http://127.0.0.1:8000 |
-| Cập nhật dữ liệu web sau khi sửa từ điển hoặc dataset | `python scripts/export_web_data.py` |
-| Bỏ Kinh Thánh khỏi web | `python scripts/export_web_data.py --no-bible` |
-| Sinh lại logo và hoa văn | `python scripts/make_brand.py` (xem [BRAND.md](BRAND.md)) |
-
-**Web có mô hình dịch máy:** trên máy có mô hình trong `runs/`, chạy `python scripts/serve_model.py` (thêm `--host 0.0.0.0` để máy khác trong mạng truy cập), rồi mở http://127.0.0.1:8000. Script vừa mở web, vừa phục vụ mô hình qua `/api/translate`; web tự nhận ra và hiện bản dịch máy cả câu, kèm bản ghép từng từ để đối chiếu. Chiều nào chưa có mô hình thì web vẫn ghép nghĩa như cũ. Web deploy ở nơi khác gọi được server này bằng `?api=<địa chỉ server>`.
-
-Không mở thẳng file `index.html` bằng trình duyệt: trình duyệt chặn đọc file dữ liệu, nên phải chạy qua web server như trên.
-
-**Deploy:** đưa nguyên thư mục `web/` lên host tĩnh bất kỳ.
-
-- **Netlify hoặc Cloudflare Pages:** kéo thả thư mục `web/` vào trang tạo site.
-- **GitHub Pages:** chọn deploy từ nhánh, hoặc dùng GitHub Actions với thư mục `web/`. Repo private cần gói GitHub trả phí mới bật được Pages.
-- **Vercel:** tạo project, đặt Root Directory là `web`, Framework là Other, để trống lệnh build.
-
-**Bản quyền:** web tĩnh cho phép ai cũng tải nguyên `web/data/pairs.json`, gồm cả câu Kinh Thánh Ê Đê 2015 nhiều khả năng còn bản quyền. Nếu web công khai, nên xuất lại bằng `--no-bible`.
-
-Link có thể điền sẵn câu: `?dir=ede2vi&text=Jŭ msĕ si ak` hoặc `?q=hriăm#tra-tu`.
+Sinh lại logo và hoa văn: `python scripts/make_brand.py` (ra `frontend/public/brand/`, xem [BRAND.md](BRAND.md)).
 
 ## 2. Dựng lại dữ liệu
 
