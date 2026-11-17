@@ -1,0 +1,34 @@
+# Render Blueprint: backend Hriăm trên gói Free (512 MB RAM, không chạy mô hình dịch).
+# Tạo: Render Dashboard → New → Blueprint → chọn repo này. Xem docs/DEPLOY.md.
+services:
+  - type: web
+    name: hriam-api
+    runtime: python
+    plan: free
+    region: virginia            # gần Supabase us-east-1
+    rootDir: backend
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    # Tạo/cập nhật bảng và vai trò (chạy lại an toàn), rồi mở API trên cổng Render cấp.
+    startCommand: python -m app.cli migrate && python -m app.cli seed && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips='*'
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.12
+      - key: HRIAM_ENV
+        value: production
+      - key: MT_ENABLED
+        value: "false"          # 512 MB không đủ cho NLLB; dịch trả bản ghép nghĩa theo từ điển
+      - key: TRUST_PROXY
+        value: "true"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: DATABASE_URL       # chuỗi Supabase Session pooler, dạng postgresql+psycopg://...
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PHONE_HMAC_KEY     # tạo một lần, không đổi về sau
+        generateValue: true
+      - key: CORS_ORIGINS       # vd. https://hriam.vercel.app
+        sync: false
