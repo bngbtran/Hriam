@@ -132,3 +132,81 @@ class RolesIn(BaseModel):
 class ReleaseIn(BaseModel):
     version: str = Field(pattern=r"^\d{4}\.\d{2}(\.\d+)?(-[a-z0-9]+)?$")
     change_summary: str = Field(min_length=3, max_length=2000)
+
+
+# ---------- Lexical Discovery ----------
+
+class CandidateApproveIn(BaseModel):
+    sense_id: uuid.UUID | None = None
+    reason_code: str = Field(default="LEXICAL_DISCOVERY_APPROVED", min_length=2, max_length=60)
+    review_note: str | None = Field(default=None, max_length=2000)
+    canonical_form: str | None = Field(default=None, max_length=500)
+    definition_vi: str = Field(min_length=1, max_length=2000)
+    part_of_speech: str | None = Field(default=None, max_length=60)
+    entry_type: Literal["word", "multiword_expression", "idiom", "proverb", "phrase", "other"] = "word"
+
+
+class CandidateRejectIn(BaseModel):
+    reason_code: str = Field(min_length=2, max_length=60)
+    review_note: str | None = Field(default=None, max_length=2000)
+
+
+class CandidateRequestEvidenceIn(BaseModel):
+    note: str = Field(min_length=3, max_length=2000)
+
+
+# ---------- Live Conversation ----------
+
+class RoomCreateIn(BaseModel):
+    mode: Literal["shared_device", "two_devices"] = "shared_device"
+    language_a: Lang = "ede"
+    language_b: Lang = "vi"
+    endpointing_mode: Literal["push_to_talk", "auto_pause", "sentence_aware"] = "push_to_talk"
+    silence_threshold_ms: int = Field(default=1500, ge=500, le=5000)
+    save_audio: bool = False
+    save_transcript: bool = False
+
+
+class JoinTokenIn(BaseModel):
+    participant_alias: str = Field(min_length=1, max_length=60)
+    language_preference: Lang = "vi"
+
+
+class TurnIn(BaseModel):
+    speaker: Lang
+    text: str = Field(min_length=1, max_length=2000)
+    audio_ref: str | None = None
+    sequence_no: int = 1
+
+
+# ---------- Cultural Archive ----------
+
+class CulturalItemIn(BaseModel):
+    title: str = Field(min_length=2, max_length=255)
+    category: Literal["story", "song", "proverb_idiom", "history", "custom", "term", "other"] = "story"
+    content_ede: str = Field(min_length=1, max_length=50000)
+    content_vi: str = Field(min_length=1, max_length=50000)
+    summary: str | None = Field(default=None, max_length=2000)
+    storyteller_or_author: str | None = Field(default=None, max_length=200)
+    dialect_id: uuid.UUID | None = None
+    region: str | None = Field(default=None, max_length=200)
+    access_tier: Literal["public", "community", "restricted", "private"] = "public"
+    license_id: uuid.UUID | None = None
+    source_ref: str | None = Field(default=None, max_length=200)
+    consent_flags: dict = Field(default_factory=dict)
+
+
+class CulturalItemReviewIn(BaseModel):
+    approve: bool
+    decision_note: str = Field(min_length=3, max_length=2000)
+
+
+# ---------- Phone Verification ----------
+
+class RequestPhoneCodeIn(BaseModel):
+    phone: str = Field(min_length=8, max_length=30)
+
+
+class VerifyPhoneCodeIn(BaseModel):
+    code: str = Field(min_length=4, max_length=10)
+

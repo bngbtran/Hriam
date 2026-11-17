@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api.v1 import admin, auth, contributions, forum, translation
+from .api.v1 import admin, auth, contributions, conversation, culture, forum, translation
 from .core import errors
 from .core.config import settings
 from .core.db import engine
@@ -36,7 +36,7 @@ app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins, allow_cr
                    allow_methods=["GET", "POST", "PATCH", "PUT", "DELETE"],
                    allow_headers=["Authorization", "Content-Type", "Idempotency-Key"])
 
-for module in (auth, translation, forum, contributions, admin):
+for module in (auth, translation, forum, contributions, admin, conversation, culture):
     app.include_router(module.router, prefix="/api/v1")
 
 

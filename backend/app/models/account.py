@@ -101,3 +101,17 @@ class IdempotencyKey(Base):
     key: Mapped[str] = mapped_column(String(120))
     response_json: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class PhoneVerificationCode(IdMixin, Base):
+    """Mã xác thực số điện thoại (docs/07 §2)."""
+    __tablename__ = "phone_verification_codes"
+    user_id: Mapped[uuid.UUID] = mapped_column(Uuid, ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    phone_hmac: Mapped[str] = mapped_column(String(128), index=True)
+    phone_display_masked: Mapped[str] = mapped_column(String(20))
+    code: Mapped[str] = mapped_column(String(10))
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    attempts: Mapped[int] = mapped_column(default=0)
+    verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
