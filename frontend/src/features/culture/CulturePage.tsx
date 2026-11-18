@@ -125,7 +125,7 @@ export function CulturePage() {
         {Object.entries(TIER_DESCRIPTIONS).map(([k, desc], idx) => (
           <div key={k} className="principle">
             <span className="num">{idx + 1}</span>
-            <h3>{TIERS.find((t) => t.id === k)?.label.split(" ")[0]}</h3>
+            <h3>{TIERS.find((t) => t.id === k)?.label.replace(/\s*\(.*\)$/, "")}</h3>
             <p>{desc}</p>
           </div>
         ))}
