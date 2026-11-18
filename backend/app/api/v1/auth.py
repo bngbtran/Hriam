@@ -11,7 +11,7 @@ from ...core.db import get_db, utcnow
 from ...core.deps import client_key, current_user, permissions_of
 from ...core.errors import AppError, ok
 from ...models import ModerationCase, Notification, User, UserStrikeEvent
-from ...schemas.requests import LoginIn, ProfilePatch, RefreshIn, RegisterIn
+from ...schemas.requests import LoginIn, ProfilePatch, RefreshIn, RegisterIn, RequestPhoneCodeIn, VerifyPhoneCodeIn
 from ...services import accounts
 
 router = APIRouter(tags=["auth"])
@@ -25,7 +25,9 @@ def _set_cookie(response: Response, token: str) -> None:
 
 def me_view(user: User, db: Session) -> dict:
     return {"id": str(user.id), "username": user.username, "display_name": user.display_name,
-            "email": user.email_normalized, "has_phone": bool(user.phone_hmac), "status": user.status,
+            "email": user.email_normalized, "has_phone": bool(user.phone_hmac),
+            "phone_verified": bool(user.phone_verified_at),
+            "status": user.status,
             "roles": user.role_names, "permissions": sorted(permissions_of(user)),
             "save_translation_history": user.save_translation_history,
             "effective_strikes": accounts.effective_strikes(db, user.id), "created_at": user.created_at}
@@ -80,9 +82,21 @@ def logout(cookie: str | None = Cookie(default=None, alias=COOKIE), db: Session 
     return response
 
 
+@router.post("/auth/request-phone-code")
+def request_phone_code(body: RequestPhoneCodeIn, request: Request, user: User = Depends(current_user),
+                       db: Session = Depends(get_db)):
+    ratelimit.check("auth_phone", client_key(request, user))
+    res = accounts.request_phone_code(db, user, body.phone)
+    return ok(res)
+
+
 @router.post("/auth/verify-phone")
-def verify_phone(_: User = Depends(current_user)):
-    raise AppError(501, "NOT_IMPLEMENTED", "Xác minh số điện thoại qua SMS chưa được tích hợp nhà cung cấp.")
+def verify_phone(body: VerifyPhoneCodeIn, request: Request, user: User = Depends(current_user),
+                 db: Session = Depends(get_db)):
+    ratelimit.check("auth_phone_verify", client_key(request, user))
+    res = accounts.verify_phone_code(db, user, body.code)
+    return ok(res)
+
 
 
 @router.get("/me")

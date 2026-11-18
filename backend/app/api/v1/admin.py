@@ -16,11 +16,12 @@ from ...core.deps import (audit, idempotency_key, idempotent_replay, paginate, p
                           remember_idempotent, require)
 from ...core.errors import AppError, not_found, ok
 from ...core.permissions import ROLES
-from ...models import (AdminAuditLog, ContributionSubmission, DatasetRelease, ForumComment, ForumPost, License,
-                       ModerationCase, OrthographyProfile, Role, Source, User, UserAppeal, UserPhoneRestriction,
-                       UserRole)
-from ...schemas.requests import AppealDecisionIn, DecisionIn, ReasonIn, ReleaseIn, ReviewIn, RolesIn
-from ...services import accounts, contributions, datasets, moderation
+from ...models import (AdminAuditLog, ContributionSubmission, DatasetRelease, ForumComment, ForumPost,
+                       LexicalCandidate, License, ModerationCase, OrthographyProfile, Role, Source, User,
+                       UserAppeal, UserPhoneRestriction, UserRole)
+from ...schemas.requests import (AppealDecisionIn, CandidateApproveIn, CandidateRejectIn, CandidateRequestEvidenceIn,
+                                DecisionIn, ReasonIn, ReleaseIn, ReviewIn, RolesIn)
+from ...services import accounts, contributions, datasets, discovery, moderation
 from .contributions import appeal_view
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -88,12 +89,59 @@ def reject_contribution(sub_id: uuid.UUID, body: ReviewIn, key: str = Depends(id
     return ok(_replay_or(db, actor, f"contribution.reject:{sub_id}", key, run))
 
 
-# ---------- Ứng viên AI (giai đoạn 5) ----------
+# ---------- Ứng viên AI (Lexical Discovery - docs/01 §4.7, docs/04 §6) ----------
 
 @router.get("/lexical-candidates")
-def lexical_candidates(_: User = Depends(require("lexicon.candidate_review"))):
-    return ok([], extra_meta={"stage": "not_started",
-                              "message": "Lexical Discovery thuộc giai đoạn 5 của lộ trình, chưa triển khai."})
+def list_lexical_candidates(status: str = Query("all"), cursor: str | None = None, limit: int = 30,
+                            _: User = Depends(require("lexicon.candidate_review")), db: Session = Depends(get_db)):
+    stmt = discovery.list_candidates(db, status)
+    rows, nxt = paginate(db, stmt, cursor, limit)
+    counts = {s: db.scalar(select(func.count()).select_from(LexicalCandidate).where(LexicalCandidate.candidate_status == s))
+              for s in ("new", "collecting_evidence", "needs_expert", "approved", "rejected")}
+    return ok([discovery.candidate_view(c) for c in rows], extra_meta={"next_cursor": nxt, "counts": counts})
+
+
+@router.post("/lexical-candidates/run-discovery")
+def trigger_discovery(_: User = Depends(require("lexicon.candidate_review")), db: Session = Depends(get_db)):
+    """Kích hoạt pipeline phân tích các bài viết đã public có consent để tìm từ/cụm từ mới."""
+    report = discovery.run_discovery_pipeline(db, limit=50)
+    return ok(report)
+
+
+@router.get("/lexical-candidates/{candidate_id}")
+def candidate_detail(candidate_id: uuid.UUID, _: User = Depends(require("lexicon.candidate_review")),
+                     db: Session = Depends(get_db)):
+    cand = db.get(LexicalCandidate, candidate_id)
+    if not cand:
+        raise not_found()
+    return ok(discovery.candidate_view(cand, full=True))
+
+
+@router.post("/lexical-candidates/{candidate_id}/approve")
+def approve_candidate(candidate_id: uuid.UUID, body: CandidateApproveIn, key: str = Depends(idempotency_key),
+                      actor: User = Depends(require("lexicon.approve")), db: Session = Depends(get_db)):
+    def run():
+        return discovery.approve_candidate(
+            db, candidate_id, actor, body.reason_code, body.definition_vi,
+            body.part_of_speech, body.entry_type, body.sense_id, body.review_note
+        )
+    return ok(_replay_or(db, actor, f"candidate.approve:{candidate_id}", key, run))
+
+
+@router.post("/lexical-candidates/{candidate_id}/reject")
+def reject_candidate(candidate_id: uuid.UUID, body: CandidateRejectIn, key: str = Depends(idempotency_key),
+                     actor: User = Depends(require("lexicon.reject")), db: Session = Depends(get_db)):
+    def run():
+        return discovery.reject_candidate(db, candidate_id, actor, body.reason_code, body.review_note)
+    return ok(_replay_or(db, actor, f"candidate.reject:{candidate_id}", key, run))
+
+
+@router.post("/lexical-candidates/{candidate_id}/request-evidence")
+def request_candidate_evidence(candidate_id: uuid.UUID, body: CandidateRequestEvidenceIn,
+                               actor: User = Depends(require("lexicon.candidate_review")),
+                               db: Session = Depends(get_db)):
+    return ok(discovery.request_evidence(db, candidate_id, actor, body.note))
+
 
 
 # ---------- Kiểm duyệt ----------

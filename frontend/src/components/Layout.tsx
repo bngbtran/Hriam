@@ -5,6 +5,16 @@ import { api } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import type { Notification } from "../lib/types";
 
+function BellIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
+      strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+    </svg>
+  );
+}
+
 const NAV = [
   ["/translate", "Dịch"], ["/dictionary", "Từ điển"], ["/conversation", "Hội thoại"],
   ["/community", "Cộng đồng"], ["/contribute", "Đóng góp"], ["/culture", "Văn hoá"],
@@ -51,14 +61,23 @@ function UserMenu() {
   }
   return (
     <div className="user-actions">
+      <Link to="/profile#thong-bao" className={`bell${unread > 0 ? " has-new" : ""}`}
+        aria-label={unread > 0 ? `${unread} thông báo mới` : "Thông báo"} title={unread > 0 ? `${unread} thông báo mới` : "Thông báo"}>
+        <BellIcon />
+        {unread > 0 && <span className="bell-count" aria-hidden>{unread > 99 ? "99+" : unread}</span>}
+      </Link>
       <button className="user-btn" aria-expanded={open} aria-haspopup="menu" onClick={() => setOpen((o) => !o)}>
         <span className="avatar" aria-hidden>{user.display_name.slice(0, 1).toUpperCase()}</span>
         <span className="user-name">{user.display_name}</span>
-        {unread > 0 && <span className="dot" aria-label={`${unread} thông báo mới`}>{unread}</span>}
       </button>
       {open && (
         <div className="menu" role="menu">
-          <Link role="menuitem" to="/profile">Hồ sơ & thông báo{unread > 0 && ` (${unread})`}</Link>
+          <Link role="menuitem" to="/profile#thong-bao" className={`menu-notify${unread > 0 ? " has-new" : ""}`}>
+            <BellIcon />
+            <span>Thông báo</span>
+            {unread > 0 && <span className="menu-badge">{unread > 99 ? "99+" : unread} mới</span>}
+          </Link>
+          <Link role="menuitem" to="/profile">Hồ sơ</Link>
           <Link role="menuitem" to="/community/my-submissions">Bài của tôi</Link>
           <Link role="menuitem" to="/contribute">Đóng góp của tôi</Link>
           <Link role="menuitem" to="/community/appeals">Khiếu nại</Link>
@@ -74,7 +93,12 @@ export function Layout() {
   const { user } = useAuth();
   const [menu, setMenu] = useState(false);
   const loc = useLocation();
-  useEffect(() => { setMenu(false); window.scrollTo(0, 0); }, [loc.pathname]);
+  useEffect(() => {
+    setMenu(false);
+    if (!loc.hash) { window.scrollTo(0, 0); return; }
+    const t = setTimeout(() => document.getElementById(loc.hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" }), 300);
+    return () => clearTimeout(t);
+  }, [loc.pathname, loc.hash]);
   return (
     <>
       <a href="#main" className="skip">Bỏ qua, tới nội dung chính</a>

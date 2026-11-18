@@ -308,3 +308,156 @@ def test_dataset_release_has_manifest_and_checksum(client):
     again = client.post("/api/v1/admin/dataset-releases", headers=admin["headers"] | idem(),
                         json={"version": "2026.11", "change_summary": "Trùng"})
     assert again.status_code == 409
+
+
+# ---------- Lexical Discovery ----------
+
+def test_lexical_discovery_pipeline_and_approval(client):
+    u = make_user(client, "lan")
+    expert = make_user(client, "chuyengia", ("language_expert",))
+    mod = make_user(client, "kiemduyet", ("moderator",))
+    # Đăng bài có bật consent phân tích ngôn ngữ
+    post_res = client.post("/api/v1/forum/posts", headers=u["headers"], json={
+        "category": "tu-vung", "title": "Tìm hiểu từ mới",
+        "body_text": "Klei mghao čiăng bla bla kdrêč",
+        "consent_research_analysis": True,
+    })
+    assert post_res.status_code == 202
+    pid = post_res.json()["data"]["id"]
+
+    # Duyệt bài qua moderation để chuyển sang published
+    cases = client.get("/api/v1/admin/moderation/cases", headers=mod["headers"]).json()["data"]
+    pcase = next(c for c in cases if c["content_id"] == pid)
+    client.post(f"/api/v1/admin/moderation/cases/{pcase['id']}/approve", headers=mod["headers"] | idem(),
+                json={})
+
+    # Chạy pipeline discovery
+    run_res = client.post("/api/v1/admin/lexical-candidates/run-discovery", headers=expert["headers"])
+    assert run_res.status_code == 200
+
+    # Liệt kê candidates
+    cands_res = client.get("/api/v1/admin/lexical-candidates", headers=expert["headers"])
+    assert cands_res.status_code == 200
+    cands = cands_res.json()["data"]
+    assert len(cands) > 0
+    cid = cands[0]["id"]
+
+    # Xem chi tiết candidate
+    detail_res = client.get(f"/api/v1/admin/lexical-candidates/{cid}", headers=expert["headers"])
+    assert detail_res.status_code == 200
+    assert "occurrences" in detail_res.json()["data"]
+
+    # Duyệt candidate vào Master Lexicon
+    appr_res = client.post(f"/api/v1/admin/lexical-candidates/{cid}/approve",
+                           headers=expert["headers"] | idem(),
+                           json={"definition_vi": "Nghĩa thử nghiệm", "reason_code": "VERIFIED_VALID"})
+    assert appr_res.status_code == 200
+    assert appr_res.json()["data"]["status"] == "approved"
+
+
+
+# ---------- Live Conversation ----------
+
+def test_conversation_room_and_turns(client):
+    u = make_user(client, "lan")
+    # Tạo room
+    room_res = client.post("/api/v1/conversations/rooms", headers=u["headers"], json={
+        "mode": "two_devices", "language_a": "ede", "language_b": "vi",
+        "endpointing_mode": "push_to_talk", "silence_threshold_ms": 1500,
+        "save_transcript": True
+    })
+    assert room_res.status_code == 201
+    room = room_res.json()["data"]
+    assert len(room["room_code"]) == 6
+    rid = room["id"]
+
+    # Tra cứu room qua code
+    code_res = client.get(f"/api/v1/conversations/rooms/code/{room['room_code']}")
+    assert code_res.status_code == 200
+
+    # Cấp join token
+    token_res = client.post(f"/api/v1/conversations/rooms/{rid}/join-token", json={
+        "participant_alias": "Bạn A", "language_preference": "ede"
+    })
+    assert token_res.status_code == 200
+    assert "token" in token_res.json()["data"]
+
+    # Gửi một lượt nói
+    turn_res = client.post(f"/api/v1/conversations/rooms/{rid}/turns", json={
+        "speaker": "vi", "text": "Tôi muốn ăn cơm", "sequence_no": 1
+    })
+    assert turn_res.status_code == 200
+    turn = turn_res.json()["data"]
+    assert turn["target_language"] == "ede"
+    assert turn["translated_text"]
+
+
+# ---------- Cultural Archive ----------
+
+def test_cultural_archive_access_tiers(client):
+    u = make_user(client, "lan")
+    expert = make_user(client, "chuyengia", ("language_expert",))
+
+    # Đăng một mục văn hoá cấp community
+    item_res = client.post("/api/v1/culture/items", headers=u["headers"], json={
+        "title": "Sử thi Đăm Săn", "category": "story",
+        "content_ede": "Klei khan Dam San...", "content_vi": "Sử thi Đăm Săn kể về...",
+        "access_tier": "community"
+    })
+    assert item_res.status_code == 201
+    item_id = item_res.json()["data"]["id"]
+
+    # Khách chưa đăng nhập không đọc được nội dung community
+    guest_view = client.get(f"/api/v1/culture/items/{item_id}")
+    assert "hạn chế" in guest_view.json()["data"]["content_ede"]
+
+    # Thành viên đã đăng nhập đọc được nội dung community
+    member_view = client.get(f"/api/v1/culture/items/{item_id}", headers=u["headers"])
+    assert member_view.json()["data"]["content_ede"] == "Klei khan Dam San..."
+
+
+# ---------- Phone Verification ----------
+
+def test_phone_verification_flow(client):
+    u = make_user(client, "lan")
+    # Yêu cầu mã xác thực
+    req_res = client.post("/api/v1/auth/request-phone-code", headers=u["headers"], json={
+        "phone": "+84912345678"
+    })
+    assert req_res.status_code == 200
+    code = req_res.json()["data"]["dev_code_hint"]
+
+    # Nhập mã xác thực
+    verify_res = client.post("/api/v1/auth/verify-phone", headers=u["headers"], json={
+        "code": code
+    })
+    assert verify_res.status_code == 200
+    assert verify_res.json()["data"]["verified"] is True
+
+
+
+# ---------- Phòng hội thoại hai thiết bị ----------
+
+def test_room_flow_by_code_join_and_websocket(client):
+    room = client.post("/api/v1/conversations/rooms", json={"mode": "two_devices", "save_transcript": True}).json()["data"]
+    assert room["save_transcript"] is True
+    found = client.get(f"/api/v1/conversations/rooms/code/{room['room_code'].lower()}")
+    assert found.status_code == 200 and found.json()["data"]["id"] == room["id"]
+    assert client.get("/api/v1/conversations/rooms/code/ZZZZZZ").status_code == 404
+    ticket = client.post(f"/api/v1/conversations/rooms/{room['id']}/join-token",
+                         json={"participant_alias": "Lan", "language_preference": "ede"}).json()["data"]["token"]
+    with client.websocket_connect(f"/api/v1/realtime/rooms/{room['id']}?token={ticket}") as ws:
+        assert ws.receive_json()["type"] == "room.joined"
+        assert ws.receive_json()["type"] == "participant.joined"
+        ws.send_json({"type": "turn.text", "payload": {"text": "Adŭ", "language": "ede"}})
+        types = [ws.receive_json()["type"] for _ in range(3)]
+        assert types == ["transcript.final", "translation.final", "turn.completed"]
+
+
+def test_room_websocket_rejects_bad_ticket(client):
+    room = client.post("/api/v1/conversations/rooms", json={"mode": "two_devices"}).json()["data"]
+    from starlette.websockets import WebSocketDisconnect
+    import pytest
+    with pytest.raises(WebSocketDisconnect):
+        with client.websocket_connect(f"/api/v1/realtime/rooms/{room['id']}?token=sai") as ws:
+            ws.receive_json()

@@ -13,7 +13,8 @@ from ..core.deps import audit, notify
 from ..core.errors import AppError
 from ..core.security import (create_access_token, hash_password, new_refresh_token, normalize_phone, phone_hmac,
                              sha256, verify_password)
-from ..models import RefreshSession, Role, User, UserPhoneRestriction, UserRole, UserStrikeEvent
+from ..models import (PhoneVerificationCode, RefreshSession, Role, User, UserPhoneRestriction,
+                      UserRole, UserStrikeEvent)
 
 BAN_THRESHOLD = 3  # khoá khi strike hiệu lực > 3 (strike thứ 4) — ADR-010
 USERNAME = re.compile(r"^[a-zA-Z0-9_.]{3,40}$")
@@ -157,3 +158,73 @@ def unban(db: Session, user: User, actor: User, reason_code: str, note: str) -> 
         r.status, r.released_by, r.released_at, r.release_reason = "released", actor.id, utcnow(), note
     audit(db, actor, "user.unban", "user", user.id, reason_code)
     notify(db, user.id, "account", "Tài khoản đã được mở khoá", note)
+
+
+# ---------- Xác minh số điện thoại ----------
+
+def _mask_phone(e164: str) -> str:
+    if len(e164) > 6:
+        return f"{e164[:4]}***{e164[-3:]}"
+    return e164
+
+
+def request_phone_code(db: Session, user: User, phone_raw: str) -> dict:
+    e164 = normalize_phone(phone_raw)
+    if not e164:
+        raise AppError(422, "INVALID_PHONE", "Số điện thoại không hợp lệ theo chuẩn quốc tế E.164.")
+    digest, version = phone_hmac(e164)
+    if db.scalar(select(UserPhoneRestriction).where(UserPhoneRestriction.phone_hmac == digest,
+                                                    UserPhoneRestriction.status == "active")):
+        raise AppError(403, "PHONE_BLOCKED", "Số điện thoại này đang bị hạn chế trên hệ thống.")
+    # Sinh mã 6 chữ số ngẫu nhiên
+    import secrets
+    code = f"{secrets.randbelow(900000) + 100000}"
+    expires_at = utcnow() + timedelta(minutes=10)
+    masked = _mask_phone(e164)
+
+    record = PhoneVerificationCode(
+        user_id=user.id,
+        phone_hmac=digest,
+        phone_display_masked=masked,
+        code=code,
+        expires_at=expires_at,
+    )
+    db.add(record)
+    user.phone_hmac = digest
+    user.phone_hmac_key_version = version
+    db.commit()
+    return {
+        "status": "code_sent",
+        "phone_masked": masked,
+        "expires_in_seconds": 600,
+        "dev_code_hint": code,  # Hỗ trợ môi trường phát triển / demo
+    }
+
+
+def verify_phone_code(db: Session, user: User, code: str) -> dict:
+    now = utcnow()
+    record = db.scalar(
+        select(PhoneVerificationCode)
+        .where(
+            PhoneVerificationCode.user_id == user.id,
+            PhoneVerificationCode.verified_at.is_(None),
+            PhoneVerificationCode.expires_at > now,
+        )
+        .order_by(PhoneVerificationCode.created_at.desc())
+    )
+    if not record:
+        raise AppError(400, "EXPIRED_CODE", "Mã xác thực đã hết hạn hoặc không tồn tại. Vui lòng yêu cầu mã mới.")
+    if record.attempts >= 5:
+        raise AppError(429, "TOO_MANY_ATTEMPTS", "Bạn đã nhập sai quá số lần cho phép. Hãy yêu cầu mã mới.")
+
+    record.attempts += 1
+    if record.code != code.strip():
+        db.commit()
+        raise AppError(400, "INVALID_CODE", f"Mã xác thực không đúng. Còn {5 - record.attempts} lần thử.")
+
+    record.verified_at = now
+    user.phone_verified_at = now
+    audit(db, user, "phone.verify", "user", user.id, masked_phone=record.phone_display_masked)
+    db.commit()
+    return {"verified": True, "phone_masked": record.phone_display_masked, "verified_at": now}
+

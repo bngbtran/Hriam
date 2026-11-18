@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, ErrorBox, PageHead, fmtDate } from "../../components/ui";
 import { api } from "../../lib/api";
@@ -8,6 +8,114 @@ import type { Me, Notification } from "../../lib/types";
 
 const ROLE: Record<string, string> = { user: "Thành viên", trusted_contributor: "Người đóng góp tin cậy", language_expert: "Chuyên gia ngôn ngữ", moderator: "Người kiểm duyệt", admin: "Quản trị viên" };
 const EVENT: Record<string, string> = { strike_applied: "Nhận strike", strike_revoked: "Huỷ strike (khiếu nại được chấp nhận)", strike_reinstated: "Khôi phục strike", admin_adjustment: "Điều chỉnh" };
+
+function PhoneVerificationSection({ user, onUpdated }: { user: Me; onUpdated: (u: Me) => void }) {
+  const [phone, setPhone] = useState("");
+  const [code, setCode] = useState("");
+  const [step, setStep] = useState<"idle" | "code_sent">("idle");
+  const [hint, setHint] = useState<string | null>(null);
+  const [masked, setMasked] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  const requestCode = useMutation({
+    mutationFn: () => api.post<{ status: string; phone_masked: string; dev_code_hint?: string }>("/auth/request-phone-code", { phone }),
+    onSuccess: (data) => {
+      setStep("code_sent");
+      setMasked(data.phone_masked);
+      if (data.dev_code_hint) setHint(data.dev_code_hint);
+      setErrorMsg(null);
+      setSuccessMsg(`Mã xác thực đã được gửi tới ${data.phone_masked}.`);
+    },
+    onError: (e) => {
+      setErrorMsg((e as Error).message);
+      setSuccessMsg(null);
+    },
+  });
+
+  const verifyCode = useMutation({
+    mutationFn: () => api.post<{ verified: boolean; phone_masked: string }>("/auth/verify-phone", { code }),
+    onSuccess: async () => {
+      setSuccessMsg("Xác thực số điện thoại thành công!");
+      setErrorMsg(null);
+      setStep("idle");
+      setCode("");
+      const me = await api.get<Me>("/me");
+      onUpdated(me);
+    },
+    onError: (e) => {
+      setErrorMsg((e as Error).message);
+    },
+  });
+
+  return (
+    <div className="card mt">
+      <h3>Xác minh số điện thoại (Chống lạm dụng & Bảo vệ cộng đồng)</h3>
+      <p className="muted small">
+        Hệ thống không lưu số điện thoại ở dạng văn bản rõ; chỉ lưu mã băm HMAC có muối để chống tài khoản ảo và spam (docs/08 §3).
+      </p>
+      {user.phone_verified ? (
+        <div className="alert success">
+          ✓ Số điện thoại của bạn đã được xác minh bảo mật.
+        </div>
+      ) : (
+        <div>
+          {user.has_phone && !user.phone_verified && (
+            <div className="alert warning">
+              Bạn đã đăng ký số điện thoại nhưng chưa hoàn tất xác thực OTP.
+            </div>
+          )}
+          {step === "idle" ? (
+            <form onSubmit={(e) => { e.preventDefault(); if (phone.trim()) requestCode.mutate(); }} className="form">
+              <label htmlFor="phone_input">Số điện thoại (Việt Nam)</label>
+              <div className="row">
+                <input
+                  id="phone_input"
+                  type="tel"
+                  placeholder="Ví dụ: 0912345678 hoặc +84912345678"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+                <button type="submit" className="btn primary" disabled={requestCode.isPending || !phone.trim()}>
+                  {requestCode.isPending ? "Đang gửi..." : "Gửi mã xác thực (SMS)"}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <form onSubmit={(e) => { e.preventDefault(); if (code.trim()) verifyCode.mutate(); }} className="form">
+              <p className="small">Mã xác thực 6 chữ số gửi tới <b>{masked}</b> (hết hạn sau 10 phút):</p>
+              {hint && (
+                <div className="alert info">
+                  Mã OTP thử nghiệm (Dev hint): <b>{hint}</b>
+                </div>
+              )}
+              <div className="row">
+                <input
+                  id="code_input"
+                  type="text"
+                  maxLength={6}
+                  placeholder="Nhập 6 chữ số"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  required
+                />
+                <button type="submit" className="btn primary" disabled={verifyCode.isPending || code.length < 6}>
+                  {verifyCode.isPending ? "Đang xác minh..." : "Xác nhận mã"}
+                </button>
+                <button type="button" className="btn ghost" onClick={() => { setStep("idle"); setErrorMsg(null); }}>
+                  Đổi số khác
+                </button>
+              </div>
+            </form>
+          )}
+          {errorMsg && <p className="field-error">{errorMsg}</p>}
+          {successMsg && <p className="alert success">{successMsg}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function ProfilePage() {
   const { user, setUser } = useAuth();
@@ -28,7 +136,7 @@ export function ProfilePage() {
       </PageHead>
       <div className="two-col">
         <section>
-          <h2>Thông báo</h2>
+          <h2 id="thong-bao" className="anchor">Thông báo</h2>
           {notes.data?.data.length ? (
             <ul className="list">
               {notes.data.data.map((n) => (
@@ -39,6 +147,7 @@ export function ProfilePage() {
               ))}
             </ul>
           ) : <p className="empty">Chưa có thông báo.</p>}
+          <PhoneVerificationSection user={user} onUpdated={setUser} />
         </section>
         <section>
           <h2>Strike</h2>

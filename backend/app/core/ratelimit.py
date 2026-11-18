@@ -9,12 +9,17 @@ from .errors import AppError
 
 LIMITS = {  # tên: (số lần, trong bao nhiêu giây)
     "auth": (10, 60),
+    "auth_phone": (10, 60),
+    "auth_phone_verify": (20, 60),
     "translate": (60, 60),
     "contribution": (20, 3600),
     "forum": (20, 3600),
     "report": (30, 3600),
     "feedback": (30, 3600),
+    "room_create": (30, 3600),
+    "culture_submit": (30, 3600),
 }
+
 
 _hits: dict[str, deque] = defaultdict(deque)
 _lock = threading.Lock()

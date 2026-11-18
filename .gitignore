@@ -1,5 +1,5 @@
 # Mô hình (tải lên Hugging Face, không đưa vào git) và kết quả train
-models/
+/models/
 runs/
 runs-smoke/
 

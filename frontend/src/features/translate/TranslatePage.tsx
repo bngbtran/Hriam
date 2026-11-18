@@ -45,9 +45,9 @@ export function TranslatePage() {
   const mtOn = caps.data?.[`${source}2${target}`]?.available;
 
   return (
-    <div className="hero tight">
+    <div className="studio">
       <div className="wrap">
-        <p className="eyebrow"><span className="pip" />Dịch hai chiều</p>
+        <p className="eyebrow dark"><span className="pip" />Dịch hai chiều</p>
         <h1 className="h-hero">Ê Đê ↔ tiếng Kinh</h1>
         <p className="lead">
           Hệ thống tra từ điển và câu đã được xác minh trước; nếu chưa có mới dùng mô hình dịch máy
@@ -55,9 +55,9 @@ export function TranslatePage() {
         </p>
         <section className="translator" aria-label="Khung dịch">
           <div className="lang-bar">
-            <div className="lang-tab">{NAMES[source]}</div>
+            <div className="lang-tab"><span className={`lang-dot ${source}`} />{NAMES[source]}</div>
             <button className="swap" onClick={swap} aria-label="Đổi chiều dịch" title="Đổi chiều dịch">⇄</button>
-            <div className="lang-tab">{NAMES[target]}</div>
+            <div className="lang-tab"><span className={`lang-dot ${target}`} />{NAMES[target]}</div>
           </div>
           <div className="panes">
             <div className="pane">
