@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EdeKeyboard } from "../../components/EdeKeyboard";
 import { Badge, Empty, ErrorBox, PageHead, Spinner } from "../../components/ui";
-import { api } from "../../lib/api";
+import { ApiError, api, errorText } from "../../lib/api";
+import { SPEECH_LANGS, SPEECH_NOTICE, useSpeechToText } from "../../lib/speech";
 import { useAuth } from "../../lib/auth";
 import type { ConversationRoom, Lang, Translation } from "../../lib/types";
 
@@ -30,7 +31,8 @@ interface LiveTurn {
 const WHO: Record<Lang, string> = { ede: "Người nói tiếng Ê Đê", vi: "Người nói tiếng Kinh" };
 
 function getWsUrl(roomId: string, token: string): string {
-  const base = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
+  // Vercel không chuyển tiếp WebSocket: khi deploy, đặt VITE_WS_BASE trỏ thẳng tới backend (vd. https://hriam-api.onrender.com)
+  const base = ((import.meta.env.VITE_WS_BASE ?? import.meta.env.VITE_API_BASE) as string | undefined) ?? "";
   let wsOrigin = "";
   if (base.startsWith("http://")) {
     wsOrigin = base.replace("http://", "ws://");
@@ -79,15 +81,15 @@ export function ConversationPage() {
         mode: "two_devices",
         endpointing_mode: endpointing,
         silence_threshold_ms: silenceThreshold,
-        save_transcript_enabled: saveTranscript,
+        save_transcript: saveTranscript,
       }),
     onSuccess: (room) => {
       navigate(`/conversation/room/${room.room_code}`);
     },
   });
 
-  function endTurn() {
-    const t = text.trim();
+  function endTurn(spoken?: string) {
+    const t = (spoken ?? text).trim();
     if (!t) return;
     const turn = { id: Date.now(), speaker, text: t };
     setTurns((all) => [...all, turn]);
@@ -95,6 +97,9 @@ export function ConversationPage() {
     setText("");
     setSpeaker(speaker === "vi" ? "ede" : "vi"); // luân phiên lượt nói
   }
+
+  // Nhấn giữ để nói (chỉ tiếng Kinh): thả nút là hoàn tất lượt nói
+  const sharedSpeech = useSpeechToText((spoken) => endTurn(spoken));
 
   return (
     <div className="wrap page">
@@ -172,13 +177,24 @@ export function ConversationPage() {
                 placeholder={speaker === "ede" ? "Nhập câu tiếng Ê Đê…" : "Nhập câu tiếng Kinh…"}
               />
               {speaker === "ede" && <EdeKeyboard target={ref} onChange={setText} compact />}
+              {sharedSpeech.listening && <p className="interim" aria-live="polite">{sharedSpeech.interim || "Đang nghe…"}</p>}
+              {sharedSpeech.error && <p className="field-error">{sharedSpeech.error}</p>}
               <ErrorBox error={translate.error} />
               <div className="row">
-                <button className="btn primary" onClick={endTurn} disabled={!text.trim()}>
+                <button className="btn primary" onClick={() => endTurn()} disabled={!text.trim()}>
                   Hoàn tất lượt nói
                 </button>
-                <button className="btn ghost" disabled title="Chưa có nhận dạng giọng nói tiếng Ê Đê">
-                  Nhấn giữ để nói
+                <button
+                  type="button"
+                  className={`btn mic${sharedSpeech.listening ? " live" : ""}`}
+                  disabled={!sharedSpeech.supported || !SPEECH_LANGS[speaker]}
+                  title={!SPEECH_LANGS[speaker] ? "Trình duyệt chưa nhận dạng được tiếng Ê Đê, hãy nhập bằng chữ" : SPEECH_NOTICE}
+                  onPointerDown={(e) => { e.preventDefault(); sharedSpeech.start(speaker); }}
+                  onPointerUp={() => sharedSpeech.stop()}
+                  onPointerLeave={() => sharedSpeech.listening && sharedSpeech.stop()}
+                >
+                  <span className="mic-dot" aria-hidden />
+                  {sharedSpeech.listening ? "Đang nghe… thả ra" : "Nhấn giữ để nói"}
                 </button>
                 <span className="spacer" />
                 {turns.length > 0 && (
@@ -311,16 +327,14 @@ export function RoomPage() {
 
   // Turn input
   const [inputText, setInputText] = useState("");
-  const [isRecording, setIsRecording] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const turnsEndRef = useRef<HTMLDivElement>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
   // Lấy thông tin phòng qua REST
   const roomQuery = useQuery({
     queryKey: ["room", roomCode],
-    queryFn: () => api.get<ConversationRoom>(`/conversations/code/${roomCode}`),
+    queryFn: () => api.get<ConversationRoom>(`/conversations/rooms/code/${roomCode}`),
     enabled: !!roomCode,
     retry: false,
   });
@@ -330,7 +344,7 @@ export function RoomPage() {
     mutationFn: () =>
       api.post<{ token: string; room_id: string }>(
         `/conversations/rooms/${roomQuery.data?.id}/join-token`,
-        { alias, language_preference: myLang }
+        { participant_alias: alias.trim() || "Khách", language_preference: myLang }
       ),
     onSuccess: (data) => {
       setTicket(data.token);
@@ -421,55 +435,26 @@ export function RoomPage() {
     };
   }, [ticket, roomQuery.data?.id]);
 
-  // Gửi lượt nói
-  const sendTurn = useCallback(() => {
-    const textToSend = inputText.trim();
+  // Gửi một lượt nói qua WebSocket
+  const sendText = useCallback((value: string) => {
+    const textToSend = value.trim();
     if (!textToSend || !wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return;
-
-    wsRef.current.send(
-      JSON.stringify({
-        type: "turn.text",
-        payload: {
-          text: textToSend,
-          language: myLang,
-        },
-      })
-    );
+    wsRef.current.send(JSON.stringify({ type: "turn.text", payload: { text: textToSend, language: myLang } }));
     setInputText("");
-  }, [inputText, myLang]);
+  }, [myLang]);
+  const sendTurn = useCallback(() => sendText(inputText), [sendText, inputText]);
 
-  // Push-to-Talk bằng Web Audio / MediaRecorder
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = recorder;
-      recorder.start();
-      setIsRecording(true);
-
-      if (wsRef.current?.readyState === WebSocket.OPEN) {
-        wsRef.current.send(
-          JSON.stringify({
-            type: "turn.start",
-            payload: { language: myLang },
-          })
-        );
-      }
-    } catch {
-      // Thiết bị không có mic hoặc từ chối quyền -> vẫn dùng bàn phím nhập
-      setIsRecording(false);
+  // Nhấn giữ để nói: nhận dạng giọng nói của trình duyệt, thả nút thì gửi câu đã nhận dạng
+  const speech = useSpeechToText(sendText);
+  const canSpeak = speech.supported && !!SPEECH_LANGS[myLang] && wsConnected;
+  const startRecording = () => {
+    if (!canSpeak) return;
+    speech.start(myLang);
+    if (wsRef.current?.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({ type: "turn.start", payload: { language: myLang } }));
     }
   };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
-      setIsRecording(false);
-      // Kết thúc lượt nói
-      sendTurn();
-    }
-  };
+  const stopRecording = () => speech.stop();
 
   // Đọc to bản dịch qua Web Speech API
   const speakText = (text: string, lang: string) => {
@@ -491,9 +476,15 @@ export function RoomPage() {
   if (roomQuery.error || !roomQuery.data) {
     return (
       <div className="wrap page narrow">
-        <PageHead eyebrow="Lỗi phòng" title="Không tìm thấy phòng">
-          Mã phòng <b>{roomCode}</b> không tồn tại hoặc đã hết hạn sau 60 phút.
-        </PageHead>
+        {roomQuery.error instanceof ApiError && roomQuery.error.status !== 404 ? (
+          <PageHead eyebrow="Lỗi phòng" title="Không mở được phòng">
+            {errorText(roomQuery.error)}
+          </PageHead>
+        ) : (
+          <PageHead eyebrow="Lỗi phòng" title="Không tìm thấy phòng">
+            Mã phòng <b>{roomCode}</b> không tồn tại, đã kết thúc hoặc đã hết hạn (phòng tồn tại 24 giờ).
+          </PageHead>
+        )}
         <button className="btn primary mt" onClick={() => navigate("/conversation")}>
           Quay lại tạo phòng mới
         </button>
@@ -712,19 +703,26 @@ export function RoomPage() {
         />
 
         {myLang === "ede" && <EdeKeyboard target={inputRef} onChange={setInputText} compact />}
+        {speech.listening && <p className="interim" aria-live="polite">{speech.interim || "Đang nghe…"}</p>}
+        {speech.error && <p className="field-error">{speech.error}</p>}
+        <p className="muted small speech-note">
+          {SPEECH_LANGS[myLang] ? SPEECH_NOTICE : "Nhận dạng giọng nói chưa hỗ trợ tiếng Ê Đê; hãy nhập bằng chữ."}
+        </p>
 
         <div className="row mt" style={{ justifyContent: "space-between", alignItems: "center" }}>
           {/* Nút Push-to-talk */}
           <button
             type="button"
-            className={`btn ${isRecording ? "danger" : "ghost"}`}
-            onMouseDown={startRecording}
-            onMouseUp={stopRecording}
-            onTouchStart={startRecording}
-            onTouchEnd={stopRecording}
-            style={{ minWidth: "160px" }}
+            className={`btn mic${speech.listening ? " live" : ""}`}
+            disabled={!canSpeak}
+            title={!SPEECH_LANGS[myLang] ? "Trình duyệt chưa nhận dạng được tiếng Ê Đê, hãy nhập bằng chữ" :
+              !speech.supported ? "Trình duyệt này không hỗ trợ nhận dạng giọng nói (dùng Chrome hoặc Edge)" : SPEECH_NOTICE}
+            onPointerDown={(e) => { e.preventDefault(); startRecording(); }}
+            onPointerUp={stopRecording}
+            onPointerLeave={() => speech.listening && stopRecording()}
           >
-            {isRecording ? "🔴 Đang lắng nghe..." : "🎙️ Nhấn giữ để nói"}
+            <span className="mic-dot" aria-hidden />
+            {speech.listening ? "Đang nghe… thả ra để gửi" : "Nhấn giữ để nói"}
           </button>
 
           <button

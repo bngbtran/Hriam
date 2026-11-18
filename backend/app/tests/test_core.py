@@ -434,3 +434,30 @@ def test_phone_verification_flow(client):
     assert verify_res.status_code == 200
     assert verify_res.json()["data"]["verified"] is True
 
+
+
+# ---------- Phòng hội thoại hai thiết bị ----------
+
+def test_room_flow_by_code_join_and_websocket(client):
+    room = client.post("/api/v1/conversations/rooms", json={"mode": "two_devices", "save_transcript": True}).json()["data"]
+    assert room["save_transcript"] is True
+    found = client.get(f"/api/v1/conversations/rooms/code/{room['room_code'].lower()}")
+    assert found.status_code == 200 and found.json()["data"]["id"] == room["id"]
+    assert client.get("/api/v1/conversations/rooms/code/ZZZZZZ").status_code == 404
+    ticket = client.post(f"/api/v1/conversations/rooms/{room['id']}/join-token",
+                         json={"participant_alias": "Lan", "language_preference": "ede"}).json()["data"]["token"]
+    with client.websocket_connect(f"/api/v1/realtime/rooms/{room['id']}?token={ticket}") as ws:
+        assert ws.receive_json()["type"] == "room.joined"
+        assert ws.receive_json()["type"] == "participant.joined"
+        ws.send_json({"type": "turn.text", "payload": {"text": "Adŭ", "language": "ede"}})
+        types = [ws.receive_json()["type"] for _ in range(3)]
+        assert types == ["transcript.final", "translation.final", "turn.completed"]
+
+
+def test_room_websocket_rejects_bad_ticket(client):
+    room = client.post("/api/v1/conversations/rooms", json={"mode": "two_devices"}).json()["data"]
+    from starlette.websockets import WebSocketDisconnect
+    import pytest
+    with pytest.raises(WebSocketDisconnect):
+        with client.websocket_connect(f"/api/v1/realtime/rooms/{room['id']}?token=sai") as ws:
+            ws.receive_json()

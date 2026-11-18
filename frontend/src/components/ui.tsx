@@ -75,5 +75,9 @@ export function LoginPrompt({ action }: { action: string }) {
 }
 
 export function LoadMore({ hasMore, onClick, loading }: { hasMore: boolean; onClick: () => void; loading?: boolean }) {
-  return hasMore ? <button className="btn ghost" onClick={onClick} disabled={loading}>{loading ? "Đang tải…" : "Xem thêm"}</button> : null;
+  return hasMore ? (
+    <div className="load-more">
+      <button className="btn ghost" onClick={onClick} disabled={loading}>{loading ? "Đang tải…" : "Xem thêm"}</button>
+    </div>
+  ) : null;
 }

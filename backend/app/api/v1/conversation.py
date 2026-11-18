@@ -5,6 +5,7 @@ import json
 import uuid
 
 from fastapi import APIRouter, Depends, Query, Request, WebSocket, WebSocketDisconnect
+from starlette.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from ...core import ratelimit
@@ -81,7 +82,7 @@ def end_room(room_id: uuid.UUID, user: User = Depends(current_user), db: Session
 
 # ---------- WebSocket Realtime Gateway ----------
 
-@router.websocket("/api/v1/realtime/rooms/{room_id}")
+@router.websocket("/realtime/rooms/{room_id}")  # prefix /api/v1 thêm ở main.py
 async def websocket_room_endpoint(websocket: WebSocket, room_id: str, token: str = Query(...),
                                   db: Session = Depends(get_db)):
     """Kênh WebSocket điều phối sự kiện hội thoại thời gian thực (docs/06 §7, docs/07 §10)."""
@@ -143,7 +144,8 @@ async def websocket_room_endpoint(websocket: WebSocket, room_id: str, token: str
                 text = payload.get("text", "")
                 speaker = payload.get("language", participant_lang)
                 if text:
-                    turn_result = conversation.execute_turn(db, room, speaker, text)
+                    # Dịch máy chạy CPU nặng: đưa sang luồng phụ để không chặn các kết nối khác
+                    turn_result = await run_in_threadpool(conversation.execute_turn, db, room, speaker, text)
                     await room_manager.broadcast(room_id, {
                         "type": "transcript.final",
                         "room_id": room_id,

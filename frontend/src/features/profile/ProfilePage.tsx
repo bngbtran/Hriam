@@ -136,7 +136,7 @@ export function ProfilePage() {
       </PageHead>
       <div className="two-col">
         <section>
-          <h2>Thông báo</h2>
+          <h2 id="thong-bao" className="anchor">Thông báo</h2>
           {notes.data?.data.length ? (
             <ul className="list">
               {notes.data.data.map((n) => (
