@@ -10,6 +10,7 @@ _tmp = Path(tempfile.mkdtemp(prefix="hriam-test-"))
 os.environ["DATABASE_URL"] = f"sqlite:///{_tmp / 'test.db'}"
 os.environ["STORAGE_DIR"] = str(_tmp / "storage")
 os.environ["MT_ENABLED"] = "false"
+os.environ["GEMINI_API_KEY"] = ""  # test không bao giờ gọi dịch vụ ngoài, kể cả khi backend/.env có key
 os.environ["SECRET_KEY"] = "test-secret-key-test-secret-key-0123456789"
 os.environ["PHONE_HMAC_KEY"] = "test-phone-key"
 

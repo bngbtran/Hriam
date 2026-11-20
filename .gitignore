@@ -1,6 +1,7 @@
 # Mô hình (tải lên Hugging Face, không đưa vào git) và kết quả train
 /models/
 runs/
+runs-edeToVietNam/
 runs-smoke/
 
 __pycache__/
@@ -14,3 +15,7 @@ backend/storage/
 backend/.env
 frontend/node_modules/
 frontend/dist/
+
+# Gói nén mô hình/dữ liệu ở thư mục gốc và cache Hugging Face
+/*.zip
+__huggingface_repos__.json

@@ -39,6 +39,9 @@ class TranslateIn(BaseModel):
     dialect_id: uuid.UUID | None = None
     context: str | None = Field(default=None, max_length=200)
     use_verified_memory: bool = True
+    # Bộ dịch máy cho lần này: "local" chỉ mô hình Hriăm (không gửi dữ liệu ra ngoài); "gemini" ưu tiên Gemini
+    # (lỗi thì rơi về mô hình); bỏ trống thì theo cấu hình máy chủ (MT_PROVIDER).
+    engine: Literal["local", "gemini"] | None = None
 
 
 class FeedbackIn(BaseModel):

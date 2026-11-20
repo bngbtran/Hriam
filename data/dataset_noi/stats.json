@@ -1,0 +1,19 @@
+{
+  "base": "data\\dataset",
+  "train": {
+    "pairs": 9923,
+    "dict_word": 4316,
+    "bible": 3000,
+    "dict_example": 2602,
+    "paper": 5
+  },
+  "dev_dict": 182,
+  "test_dict": 297,
+  "test_bible": 665,
+  "hoi_thoai": {
+    "tong": 0,
+    "train": 0,
+    "dev": 0,
+    "test": 0
+  }
+}

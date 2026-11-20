@@ -14,6 +14,10 @@ const SAMPLES: Record<Lang, string[]> = {
   ede: ["Adŭ hriăm", "Kâo čiăng ƀơ̆ng êsei", "Ti sang ih?"],
 };
 
+type Engine = "local" | "gemini";
+interface Engines { default: string; local: { available: Record<string, boolean> }; gemini: { available: boolean; model: string | null } }
+const ENGINE_KEY = "hriam.engine";
+
 export function TranslatePage() {
   const [params, setParams] = useSearchParams();
   const [source, setSource] = useState<Lang>(params.get("from") === "ede" ? "ede" : "vi");
@@ -23,18 +27,32 @@ export function TranslatePage() {
   const input = useRef<HTMLTextAreaElement>(null);
   const target: Lang = source === "ede" ? "vi" : "ede";
   const caps = useQuery({ queryKey: ["mt-caps"], queryFn: () => api.get<Record<string, { available: boolean; model_version: string | null }>>("/translations/capabilities") });
+  const engines = useQuery({ queryKey: ["mt-engines"], queryFn: () => api.get<Engines>("/translations/engines") });
+  const [chosen, setChosen] = useState<Engine | null>(() => {
+    try { const v = localStorage.getItem(ENGINE_KEY); return v === "local" || v === "gemini" ? v : null; } catch { return null; }
+  });
+  const geminiOk = !!engines.data?.gemini.available;
+  // Chưa chọn thì theo cấu hình máy chủ; Gemini không dùng được thì luôn là mô hình Hriăm.
+  const engine: Engine = geminiOk && (chosen ?? (engines.data?.default === "gemini" ? "gemini" : "local")) === "gemini" ? "gemini" : "local";
   const run = useMutation({
-    mutationFn: (t: string) => api.post<Translation>("/translations", { text: t, source_language: source, target_language: target }),
+    mutationFn: ({ t, e }: { t: string; e: Engine }) =>
+      api.post<Translation>("/translations", { text: t, source_language: source, target_language: target, engine: e }),
   });
 
-  useEffect(() => { if (params.get("text")) run.mutate(params.get("text")!); /* eslint-disable-next-line */ }, []);
+  useEffect(() => { if (params.get("text")) run.mutate({ t: params.get("text")!, e: engine }); /* eslint-disable-next-line */ }, [engines.isSuccess]);
+
+  function pick(e: Engine) {
+    setChosen(e);
+    try { localStorage.setItem(ENGINE_KEY, e); } catch { /* chế độ riêng tư: bỏ qua */ }
+    if (run.data && text.trim()) run.mutate({ t: text.trim(), e });  // đổi bộ dịch thì dịch lại ngay
+  }
 
   function submit() {
     const t = text.trim();
     if (!t) return;
     setFeedback(false);
     setParams({ from: source, text: t }, { replace: true });
-    run.mutate(t);
+    run.mutate({ t, e: engine });
   }
   function swap() {
     setSource(target);
@@ -53,6 +71,18 @@ export function TranslatePage() {
           Hệ thống tra từ điển và câu đã được xác minh trước; nếu chưa có mới dùng mô hình dịch máy
           {caps.data && !mtOn && " (chiều này chưa có mô hình, chỉ ghép nghĩa theo từ điển)"}.
         </p>
+        <div className="engine-switch" role="group" aria-label="Bộ dịch máy">
+          <span className="engine-label">Dịch máy bằng</span>
+          <button type="button" aria-pressed={engine === "local"} className={engine === "local" ? "on" : ""}
+            onClick={() => pick("local")}>Mô hình Hriăm</button>
+          <button type="button" aria-pressed={engine === "gemini"} className={engine === "gemini" ? "on" : ""}
+            disabled={!geminiOk} title={geminiOk ? undefined : "Máy chủ chưa cấu hình GEMINI_API_KEY"}
+            onClick={() => pick("gemini")}>Gemini</button>
+          <span className="muted small engine-note">
+            {engine === "gemini" ? "Văn bản được gửi tới Google để dịch. Chậm hơn nhưng thường chính xác hơn."
+              : "Chạy trên máy chủ dự án, không gửi dữ liệu ra ngoài. Nhanh nhưng còn yếu với câu đời thường."}
+          </span>
+        </div>
         <section className="translator" aria-label="Khung dịch">
           <div className="lang-bar">
             <div className="lang-tab"><span className={`lang-dot ${source}`} />{NAMES[source]}</div>
@@ -94,11 +124,14 @@ export function TranslatePage() {
               )}
             </div>
           </div>
+          {engine === "gemini" && result?.translation_status === "machine_draft" && result.provenance?.adapter === "nllb" && (
+            <p className="alert warn">Gemini không phản hồi nên bản dịch này do mô hình Hriăm tạo ra.</p>
+          )}
           <ErrorBox error={run.error} />
         </section>
         <div className="samples">
           <span>Thử:</span>
-          {SAMPLES[source].map((s) => <button key={s} onClick={() => { setText(s); run.mutate(s); }}>{s}</button>)}
+          {SAMPLES[source].map((s) => <button key={s} onClick={() => { setText(s); run.mutate({ t: s, e: engine }); }}>{s}</button>)}
         </div>
       </div>
       {result && (
@@ -159,10 +192,13 @@ function Details({ result }: { result: Translation }) {
         <section className="block">
           <h2>Nguồn bản dịch</h2>
           <p className="hint">
-            {result.translation_status === "machine_draft" && <>Mô hình {result.model_version}, chạy trên máy chủ dự án, không gửi dữ liệu ra ngoài.</>}
+            {result.translation_status === "machine_draft" && (result.provenance?.sends_data_externally
+              ? <>Dịch bởi {result.model_version}: văn bản của bạn được gửi tới dịch vụ bên ngoài (Google) để dịch.</>
+              : <>Mô hình {result.model_version}, chạy trên máy chủ dự án, không gửi dữ liệu ra ngoài.</>)}
             {result.translation_status === "verified_memory" && <>Câu đã được duyệt trong kho câu song ngữ.</>}
             {result.translation_status === "expert_verified" && <>Mục từ đã được chuyên gia ngôn ngữ xác minh.</>}
-            {result.translation_status === "needs_review" && <>Ghép nghĩa từng từ theo từ điển, chưa theo ngữ pháp.</>}
+            {result.translation_status === "dictionary_example" && <>Câu ví dụ trong từ điển nguồn, chưa được chuyên gia ngôn ngữ xác minh.</>}
+            {result.translation_status === "needs_review" &&<>Ghép nghĩa từng từ theo từ điển, chưa theo ngữ pháp.</>}
           </p>
         </section>
       </aside>

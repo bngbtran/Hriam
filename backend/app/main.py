@@ -14,6 +14,7 @@ from .core.config import settings
 from .core.db import engine
 from .core.errors import AppError, ok
 from .integrations import mt as mt_module
+from .integrations.gemini import gemini
 from .integrations.mt import mt
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -49,4 +50,5 @@ def health():
     except Exception as exc:
         raise AppError(503, "DB_UNAVAILABLE", "Không kết nối được cơ sở dữ liệu.") from exc
     return ok({"status": "ok", "database": "ok",
-               "translation": {d: mt.info(d).available for d in ("ede2vi", "vi2ede")}})
+               "translation": {**{d: mt.info(d).available for d in ("ede2vi", "vi2ede")},
+                               "gemini": gemini.available(), "provider": settings.mt_provider}})

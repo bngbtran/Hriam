@@ -54,6 +54,13 @@ class Settings:
     mt_enabled: bool = _env("MT_ENABLED", "true").lower() == "true"
     mt_beams: int = int(_env("MT_BEAMS", "4"))
     max_translate_chars: int = int(_env("MAX_TRANSLATE_CHARS", "1000"))
+    # Gemini (tuỳ chọn, gửi văn bản ra ngoài). MT_PROVIDER: local | auto (local trước, lỗi/thiếu thì Gemini) | gemini
+    mt_provider: str = _env("MT_PROVIDER", "auto").lower()
+    gemini_api_key: str = _env("GEMINI_API_KEY", "")
+    gemini_model: str = _env("GEMINI_MODEL", "gemini-4-hydrogen")
+    gemini_timeout_ms: int = int(_env("GEMINI_TIMEOUT_MS", "30000"))
+    # Mức "suy nghĩ" của Gemini: minimal | low | medium | high. Để trống = mặc định của model. Thấp hơn thì nhanh hơn.
+    gemini_thinking_level: str = _env("GEMINI_THINKING_LEVEL", "")
     moderation_policy_version: str = _env("MODERATION_POLICY_VERSION", "2026.11-rules-v1")
 
 

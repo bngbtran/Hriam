@@ -11,7 +11,7 @@ export interface TermMatch { term: string; senses: SenseHit[]; verified: boolean
 export interface Note { code: string; message: string; terms?: string[] }
 export interface Translation {
   id: string | null; source_text: string; translated_text: string; source_language: Lang; target_language: Lang;
-  translation_status: "verified_memory" | "expert_verified" | "machine_draft" | "needs_review";
+  translation_status: "verified_memory" | "expert_verified" | "dictionary_example" | "machine_draft" | "needs_review";
   verified_matches: TermMatch[]; lexicon_matches: TermMatch[]; uncertainty_notes: Note[];
   similar_examples: { ede: string; vi: string; exact: boolean; verification_status: string }[];
   model_version: string | null; provenance: Record<string, unknown>; seconds: number; detected_language: Lang | null;

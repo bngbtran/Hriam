@@ -11,8 +11,8 @@ frontend/            Giao diện React + TypeScript (Vite, React Router, TanStac
 backend/             API FastAPI + SQLAlchemy + Alembic (SQLite khi dev, PostgreSQL/Supabase khi deploy)
   app/api/v1/        auth, translation, forum, contributions, admin
   app/services/      pipeline dịch, từ điển, đóng góp, kiểm duyệt, strike, dataset release
-  app/integrations/  adapter dịch máy (NLLB) và kiểm duyệt theo quy tắc
-  app/tests/         27 test
+  app/integrations/  adapter dịch máy (NLLB cục bộ, Gemini tuỳ chọn) và kiểm duyệt theo quy tắc
+  app/tests/         38 test
   migrations/        Alembic
 models/              Mô hình chính thức, không đưa lên git (tải lên Hugging Face)
   ede2vi/, vi2ede/   File mô hình; eval/ chứa kết quả đánh giá
@@ -47,6 +47,8 @@ npm run dev                             # http://127.0.0.1:5173 (tự chuyển /
 ```
 
 - Dịch máy dùng `models/ede2vi` và `models/vi2ede`; thiếu mô hình thì trả bản ghép nghĩa kèm nhãn "Cần xem lại".
+- Câu khớp nguyên văn với ví dụ trong từ điển được trả luôn, nhãn "Ví dụ trong từ điển" (chưa chuyên gia xác minh).
+- Gemini (tuỳ chọn): đặt `GEMINI_API_KEY` trong `backend/.env`. `MT_PROVIDER=local` chỉ dùng mô hình cục bộ; `auto` dùng mô hình cục bộ trước, thiếu hoặc lỗi thì Gemini; `gemini` dùng Gemini trước, lỗi thì rơi về mô hình cục bộ. Khi dùng Gemini, văn bản được gửi ra ngoài (Google) và giao diện ghi rõ điều này.
 - Gán vai trò: `python -m app.cli grant --username lan --role language_expert`, hoặc trong Quản trị → Người dùng.
 
 ## Deploy

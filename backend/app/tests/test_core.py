@@ -267,6 +267,155 @@ def test_verified_memory_takes_precedence(client):
     assert d["translation_status"] == "verified_memory" and d["translated_text"] == "Kâo čiăng ƀơ̆ng êsei"
 
 
+def test_dictionary_example_used_for_exact_sentence(client):
+    from app.core.db import SessionLocal
+    from app.models import CorpusExample
+    from app.services.lexicon import term_index
+    with SessionLocal() as db:
+        db.add(CorpusExample(text_ede="Jŭ msĕ si ak", text_vi="Đen như quạ"))
+        db.commit()
+    term_index.invalidate()
+    d = client.post("/api/v1/translations", json={"text": "Jŭ msĕ si ak", "source_language": "ede"}).json()["data"]
+    assert d["translation_status"] == "dictionary_example" and d["translated_text"] == "Đen như quạ"
+    d = client.post("/api/v1/translations", json={"text": "Đen như quạ", "source_language": "vi"}).json()["data"]
+    assert d["translation_status"] == "dictionary_example" and d["translated_text"] == "Jŭ msĕ si ak"
+    d = client.post("/api/v1/translations", json={"text": "Jŭ msĕ si ak", "source_language": "ede",
+                                                  "use_verified_memory": False}).json()["data"]
+    assert d["translation_status"] == "needs_review"  # tắt tra bộ nhớ thì không dùng câu ví dụ
+
+
+import pytest
+
+
+@pytest.fixture
+def set_setting():
+    """Settings là dataclass đóng băng: đổi bằng object.__setattr__ và trả lại giá trị cũ sau test."""
+    from app.core.config import settings
+    old: dict = {}
+
+    def apply(name: str, value) -> None:
+        old.setdefault(name, getattr(settings, name))
+        object.__setattr__(settings, name, value)
+    yield apply
+    for name, value in old.items():
+        object.__setattr__(settings, name, value)
+
+
+def test_gemini_used_when_no_local_model_and_marked_external(client, monkeypatch, set_setting):
+    from app.integrations.gemini import gemini
+    seen = {}
+
+    def fake(lines, source, target, glossary=None, examples=None):
+        seen.update(lines=lines, glossary=glossary)
+        return ["Tôi muốn ăn cơm"]
+    set_setting("gemini_api_key", "test-key")
+    monkeypatch.setattr(gemini, "translate", fake)
+    d = client.post("/api/v1/translations", json={"text": "Êsei Ƀŏng", "source_language": "ede"}).json()["data"]
+    assert d["translation_status"] == "machine_draft" and d["translated_text"] == "Tôi muốn ăn cơm"
+    assert d["provenance"] == {"type": "machine_translation", "adapter": "gemini", "sends_data_externally": True}
+    assert any(n["code"] == "EXTERNAL_MT" for n in d["uncertainty_notes"])
+    assert "Êsei = Cơm" in seen["glossary"]  # nghĩa từ điển được đưa vào prompt làm ngữ cảnh
+
+
+def test_provider_local_never_calls_gemini(client, monkeypatch, set_setting):
+    from app.integrations.gemini import gemini
+    set_setting("gemini_api_key", "test-key")
+    set_setting("mt_provider", "local")
+    monkeypatch.setattr(gemini, "translate", lambda *a, **k: (_ for _ in ()).throw(AssertionError("không được gọi")))
+    d = client.post("/api/v1/translations", json={"text": "Êsei", "source_language": "ede"}).json()["data"]
+    assert d["translation_status"] == "needs_review"
+
+
+def test_gemini_failure_returns_502(client, monkeypatch, set_setting):
+    from app.integrations.gemini import gemini
+    set_setting("gemini_api_key", "test-key")
+    monkeypatch.setattr(gemini, "translate", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("mạng lỗi")))
+    r = client.post("/api/v1/translations", json={"text": "Êsei", "source_language": "ede"})
+    assert r.status_code == 502
+
+
+def test_gemini_mode_falls_back_to_local_model(client, monkeypatch, set_setting):
+    from app.integrations.gemini import gemini
+    from app.integrations.mt import mt
+    set_setting("gemini_api_key", "test-key")
+    set_setting("mt_provider", "gemini")
+    monkeypatch.setattr(gemini, "translate", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("mất mạng")))
+    monkeypatch.setattr(mt, "available", lambda s, t: True)
+    monkeypatch.setattr(mt, "translate", lambda lines, s, t: ["Phòng ăn cơm"])
+    d = client.post("/api/v1/translations", json={"text": "Adŭ Ƀŏng Êsei", "source_language": "ede"}).json()["data"]
+    assert d["translated_text"] == "Phòng ăn cơm" and d["provenance"]["adapter"] == "nllb"
+    assert d["provenance"]["sends_data_externally"] is False
+
+
+def test_engine_switch_per_request(client, monkeypatch, set_setting):
+    from app.integrations.gemini import gemini
+    from app.integrations.mt import mt
+    set_setting("gemini_api_key", "test-key")
+    set_setting("mt_provider", "gemini")  # mặc định máy chủ: Gemini trước
+    calls = []
+    monkeypatch.setattr(gemini, "translate", lambda *a, **k: calls.append("gemini") or ["Bản Gemini"])
+    monkeypatch.setattr(mt, "available", lambda s, t: True)
+    monkeypatch.setattr(mt, "translate", lambda lines, s, t: calls.append("local") or ["Bản mô hình"])
+    post = lambda **extra: client.post("/api/v1/translations", json={"text": "Êsei Ƀŏng", "source_language": "ede", **extra}).json()["data"]
+    d = post(engine="local")
+    assert d["translated_text"] == "Bản mô hình" and calls == ["local"]  # chọn local thì không gọi Gemini
+    d = post(engine="gemini")
+    assert d["translated_text"] == "Bản Gemini" and d["provenance"]["sends_data_externally"] is True
+    d = post()  # không chọn: theo cấu hình máy chủ (gemini)
+    assert d["translated_text"] == "Bản Gemini"
+    assert client.post("/api/v1/translations", json={"text": "x", "source_language": "ede", "engine": "abc"}).status_code == 422
+
+
+def test_engines_endpoint(client, set_setting):
+    d = client.get("/api/v1/translations/engines").json()["data"]
+    assert d["gemini"]["available"] is False and d["gemini"]["sends_data_externally"] is True
+    set_setting("gemini_api_key", "test-key")
+    d = client.get("/api/v1/translations/engines").json()["data"]
+    assert d["gemini"]["available"] is True and d["local"]["sends_data_externally"] is False
+    assert "test-key" not in str(d)  # không lộ key
+
+
+def test_gemini_adapter_caches_and_sends_thinking_level(set_setting, monkeypatch):
+    from app.integrations.gemini import GeminiAdapter
+    set_setting("gemini_api_key", "test-key")
+    set_setting("gemini_thinking_level", "minimal")
+    calls = []
+
+    class Fake:
+        class interactions:
+            @staticmethod
+            def create(**kw):
+                calls.append(kw)
+                return type("R", (), {"output_text": "Đen như quạ"})()
+    adapter = GeminiAdapter()
+    adapter._client = Fake
+    assert adapter.translate(["Jŭ msĕ si ak"], "ede", "vi") == ["Đen như quạ"]
+    assert adapter.translate(["Jŭ msĕ si ak"], "ede", "vi") == ["Đen như quạ"]
+    assert len(calls) == 1 and calls[0]["generation_config"] == {"thinking_level": "minimal"}  # lần 2 lấy từ cache
+
+
+def test_gemini_billing_error_is_not_retried(set_setting):
+    import pytest
+    from app.integrations.gemini import GeminiAdapter
+    set_setting("gemini_api_key", "test-key")
+    calls = []
+
+    class Billing(Exception):
+        status_code = 402
+
+    class Fake:
+        class interactions:
+            @staticmethod
+            def create(**kw):
+                calls.append(1)
+                raise Billing("credits depleted")
+    adapter = GeminiAdapter()
+    adapter._client = Fake
+    with pytest.raises(Billing):
+        adapter.translate(["Jŭ msĕ si ak"], "ede", "vi")
+    assert len(calls) == 1
+
+
 def test_history_saved_only_when_enabled(client):
     u = make_user(client, "lan")
     client.post("/api/v1/translations", headers=u["headers"], json={"text": "Adŭ", "source_language": "ede"})

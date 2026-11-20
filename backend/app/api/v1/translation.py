@@ -12,6 +12,8 @@ from ...core.db import get_db
 from ...core.deps import client_key, current_user, optional_user, paginate, require
 from ...core.errors import AppError, not_found, ok
 from ...core.text import guess_language
+from ...core.config import settings
+from ...integrations.gemini import gemini
 from ...integrations.mt import mt
 from ...models import (LexicalEntry, OrthographyProfile, TranslationFeedback, TranslationRecord, User)
 from ...schemas.requests import FeedbackIn, TranslateIn
@@ -26,13 +28,23 @@ def capabilities():
     return ok({d: {k: v for k, v in vars(mt.info(d)).items() if k != "path"} for d in ("ede2vi", "vi2ede")})
 
 
+@router.get("/translations/engines")
+def engines():
+    """Bộ dịch máy nào dùng được, để giao diện bật/tắt công tắc Gemini ↔ mô hình Hriăm."""
+    return ok({"default": settings.mt_provider,
+               "local": {"available": {d: mt.info(d).available for d in ("ede2vi", "vi2ede")},
+                         "sends_data_externally": False},
+               "gemini": {"available": gemini.available(), "model": settings.gemini_model if gemini.available() else None,
+                          "sends_data_externally": True}})
+
+
 @router.post("/translations")
 def translate(body: TranslateIn, request: Request, user: User | None = Depends(optional_user),
               db: Session = Depends(get_db)):
     ratelimit.check("translate", client_key(request, user))
     source = guess_language(body.text) if body.source_language == "auto" else body.source_language
     target = body.target_language or ("vi" if source == "ede" else "ede")
-    result = translation.translate(db, body.text, source, target, body.use_verified_memory)
+    result = translation.translate(db, body.text, source, target, body.use_verified_memory, body.engine)
     data = translation.as_dict(result) | {"detected_language": source if body.source_language == "auto" else None,
                                           "id": None}
     if user and user.save_translation_history:

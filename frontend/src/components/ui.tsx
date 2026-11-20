@@ -26,6 +26,7 @@ export function Empty({ children, motif = "qua-tram" }: { children: ReactNode; m
 const STATUS: Record<string, [string, string]> = {
   // Trạng thái bản dịch (docs/07 §3)
   verified_memory: ["Đã xác minh", "ok"], expert_verified: ["Chuyên gia xác minh", "ok"],
+  dictionary_example: ["Ví dụ trong từ điển", "info"],
   machine_draft: ["Bản nháp máy dịch", "warn"], needs_review: ["Cần xem lại", "warn"],
   // Nghĩa trong từ điển
   verified: ["Đã xác minh", "ok"], draft: ["Chưa xác minh", "muted"], deprecated: ["Ngừng dùng", "muted"],

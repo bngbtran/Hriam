@@ -72,6 +72,8 @@ def parse_args() -> argparse.Namespace:
                         help="nhân kích thước batch; mặc định tự tính theo bộ nhớ GPU NVIDIA, 1 trên Mac")
     parser.add_argument("--allow-cpu", action="store_true", help="cho phép chạy CPU khi không có GPU (rất chậm)")
     parser.add_argument("--init-from", help="bắt đầu từ mô hình này thay vì NLLB gốc, ví dụ runs/ede2vi-nen/best")
+    parser.add_argument("--optimizer", choices=["adamw", "adafactor"], default="adamw",
+                        help="adafactor tiết kiệm khoảng 5 GB bộ nhớ so với adamw, dùng cho card 8 GB")
     parser.add_argument("--limit", type=int, help="chỉ dùng N cặp mỗi tập, để thử nhanh")
     parser.add_argument("--stop-after", type=int, help="dừng sau N bước tổng cộng, để thử nhanh")
     return parser.parse_args()
@@ -239,7 +241,12 @@ class Trainer:
             self.log(f"Bắt đầu từ mô hình {source}")
         self.model = AutoModelForSeq2SeqLM.from_pretrained(source).to(self.device)
         self.model.generation_config.max_length = None
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=self.args.lr, weight_decay=0.01)
+        if self.args.optimizer == "adafactor":
+            from transformers.optimization import Adafactor  # noqa: PLC0415
+            self.optimizer = Adafactor(self.model.parameters(), lr=self.args.lr, scale_parameter=False,
+                                       relative_step=False, warmup_init=False, weight_decay=0.01)
+        else:
+            self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=self.args.lr, weight_decay=0.01)
         warmup = max(1, int(0.05 * total))
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(
             self.optimizer,
