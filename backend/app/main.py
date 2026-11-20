@@ -5,12 +5,13 @@ import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.v1 import admin, auth, contributions, conversation, culture, forum, translation
 from .core import errors
-from .core.config import settings
+from .core.config import ROOT, settings
 from .core.db import engine
 from .core.errors import AppError, ok
 from .integrations import mt as mt_module
@@ -52,3 +53,17 @@ def health():
     return ok({"status": "ok", "database": "ok",
                "translation": {**{d: mt.info(d).available for d in ("ede2vi", "vi2ede")},
                                "gemini": gemini.available(), "provider": settings.mt_provider}})
+
+
+# Phục vụ luôn bản build giao diện (npm run build trong frontend/) để chạy một cổng duy nhất, ví dụ sau tunnel.
+# Không có frontend/dist thì bỏ qua; khi dev, giao diện chạy riêng bằng npm run dev.
+DIST = (ROOT / "frontend" / "dist").resolve()
+if (DIST / "index.html").is_file():
+    @app.get("/{path:path}", include_in_schema=False)
+    def spa(path: str):
+        if path == "api" or path.startswith("api/"):
+            raise AppError(404, "NOT_FOUND", "Không tìm thấy đường dẫn API.")
+        file = (DIST / path).resolve()
+        if path and file.is_file() and DIST in file.parents:
+            return FileResponse(file)
+        return FileResponse(DIST / "index.html")  # route phía client (React Router)

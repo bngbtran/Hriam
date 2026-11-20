@@ -78,7 +78,7 @@ export function TranslatePage() {
           <button type="button" aria-pressed={engine === "gemini"} className={engine === "gemini" ? "on" : ""}
             disabled={!geminiOk} title={geminiOk ? undefined : "Máy chủ chưa cấu hình GEMINI_API_KEY"}
             onClick={() => pick("gemini")}>Gemini</button>
-          <span className="muted small engine-note">
+          <span className="engine-note">
             {engine === "gemini" ? "Văn bản được gửi tới Google để dịch. Chậm hơn nhưng thường chính xác hơn."
               : "Chạy trên máy chủ dự án, không gửi dữ liệu ra ngoài. Nhanh nhưng còn yếu với câu đời thường."}
           </span>

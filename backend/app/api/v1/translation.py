@@ -42,6 +42,8 @@ def engines():
 def translate(body: TranslateIn, request: Request, user: User | None = Depends(optional_user),
               db: Session = Depends(get_db)):
     ratelimit.check("translate", client_key(request, user))
+    if (body.engine or settings.mt_provider) == "gemini" and gemini.available():
+        ratelimit.check("translate_gemini", client_key(request, user))
     source = guess_language(body.text) if body.source_language == "auto" else body.source_language
     target = body.target_language or ("vi" if source == "ede" else "ede")
     result = translation.translate(db, body.text, source, target, body.use_verified_memory, body.engine)

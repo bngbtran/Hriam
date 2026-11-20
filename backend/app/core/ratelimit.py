@@ -12,6 +12,7 @@ LIMITS = {  # tên: (số lần, trong bao nhiêu giây)
     "auth_phone": (10, 60),
     "auth_phone_verify": (20, 60),
     "translate": (60, 60),
+    "translate_gemini": (12, 60),  # mỗi lượt Gemini tốn credit: chặt hơn dịch bằng mô hình cục bộ
     "contribution": (20, 3600),
     "forum": (20, 3600),
     "report": (30, 3600),
