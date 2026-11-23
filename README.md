@@ -12,21 +12,21 @@ backend/             API FastAPI + SQLAlchemy + Alembic (SQLite khi dev, Postgre
   app/api/v1/        auth, translation, forum, contributions, admin
   app/services/      pipeline dịch, từ điển, đóng góp, kiểm duyệt, strike, dataset release
   app/integrations/  adapter dịch máy (NLLB cục bộ, Gemini tuỳ chọn) và kiểm duyệt theo quy tắc
-  app/tests/         38 test
+  app/tests/         42 test
   migrations/        Alembic
-models/              Mô hình chính thức, không đưa lên git (tải lên Hugging Face)
+models/              Mô hình chính thức, không đưa lên git (chép tay sang máy host)
   ede2vi/, vi2ede/   File mô hình; eval/ chứa kết quả đánh giá
-deploy/huggingface/  Dockerfile và README cho Hugging Face Space
-scripts/             Dữ liệu, train, dịch, deploy
+scripts/             Dữ liệu, train, dịch, chạy server
   bible_scraper.py, realign.py               Cào và căn câu Kinh Thánh
   parse_ac.py, validate_ac.py, build_ac.py, dict_xlsx.py, split_dict.py   Dựng từ điển
   build_dataset.py, build_daily.py           Dựng bộ dữ liệu (chung và văn nói)
   train.py, train_daily.py                   Train (cần card NVIDIA)
   translate.py                               Dịch bằng mô hình (backend dùng lại file này)
-  deploy_hf.py                               Đưa mô hình và backend lên Hugging Face
+  serve_public.ps1, serve_public.bat         Bật backend + Cloudflare Tunnel một lệnh (Windows)
   make_brand.py                              Sinh bộ nhận diện
 data/                raw/ (PDF, HTML đã cào, câu hội thoại), verified/, dictionary/, interim/, dataset/
-docs/                HUONG_DAN.md, DEPLOY.md, BRAND.md, DOI_CHIEU_TAI_LIEU.md, BAN_GIAO_Hriam.docx
+docs/                HUONG_DAN.md, DEPLOY.md, BRAND.md, DOI_CHIEU_TAI_LIEU.md
+  bao-cao/           Báo cáo, slide và kịch bản thuyết trình
 runs/                Kết quả train tạm, không đưa lên git
 ```
 
@@ -53,7 +53,7 @@ npm run dev                             # http://127.0.0.1:5173 (tự chuyển /
 
 ## Deploy
 
-Vercel (giao diện) + Hugging Face Space (backend và mô hình) + Supabase (database) + UptimeRobot, đều miễn phí: [docs/DEPLOY.md](docs/DEPLOY.md).
+Vercel (giao diện) + backend và mô hình chạy trên máy một thành viên, mở ra Internet qua Cloudflare Tunnel + Supabase (database): [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Train mô hình
 

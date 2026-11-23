@@ -31,7 +31,7 @@ interface LiveTurn {
 const WHO: Record<Lang, string> = { ede: "Người nói tiếng Ê Đê", vi: "Người nói tiếng Kinh" };
 
 function getWsUrl(roomId: string, token: string): string {
-  // Vercel không chuyển tiếp WebSocket: khi deploy, đặt VITE_WS_BASE trỏ thẳng tới backend (vd. https://hriam-api.onrender.com)
+  // Vercel không chuyển tiếp WebSocket: khi deploy, đặt VITE_WS_BASE trỏ thẳng tới backend (vd. https://abc-xyz.trycloudflare.com)
   const base = ((import.meta.env.VITE_WS_BASE ?? import.meta.env.VITE_API_BASE) as string | undefined) ?? "";
   let wsOrigin = "";
   if (base.startsWith("http://")) {

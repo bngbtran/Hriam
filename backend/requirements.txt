@@ -10,4 +10,4 @@ httpx==0.28.1
 psycopg[binary]==3.3.9
 pytest==8.4.2
 google-genai
-# Dịch máy: thêm requirements-ml.txt (torch cài riêng, xem deploy/huggingface/Dockerfile)
+# Dịch máy: thêm requirements-ml.txt (torch cài theo máy: https://pytorch.org/get-started/locally/)
